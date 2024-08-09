@@ -1,0 +1,6 @@
+<h1 class="text-center">Get All de los Tipos de Juegos</h1>
+<ul>
+    @for (gameType of gameTypesList; track gameType.id) {
+    <li>{{gameType.title}}</li>
+    }
+</ul>
