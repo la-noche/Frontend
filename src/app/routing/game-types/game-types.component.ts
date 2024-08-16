@@ -9,6 +9,7 @@ import { gameTypeInterface } from '../../interfaces/gameType.interface.js';
   templateUrl: './game-types.component.html',
   styleUrl: './game-types.component.css'
 })
+
 export class GameTypesComponent implements OnInit{
 
   gameTypesList: gameTypeInterface[]=[];

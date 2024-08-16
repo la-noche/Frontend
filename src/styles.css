@@ -1,5 +1,11 @@
-h1 {
-  background-color: snow;
+.titulo-principal {
+  background: grey;
   color: black;
-  font-size: x-large;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  line-height: 100%;
+  text-transform: uppercase;
+  padding: 40px;
+  font-size: 50px;
 }
