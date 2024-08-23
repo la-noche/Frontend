@@ -16,13 +16,13 @@ export class GameTypesComponent implements OnInit{
   constructor(private gameTypesService: GameTypesService) {}
 
   ngOnInit(): void {
-    this.getProducts()
+    this.getGames()
   }
 
-  getProducts(){
+  getGames(){
     this.gameTypesService.getGameTypes().subscribe({
       next: (result) =>{
-        this.gameTypesList = result.data;
+        this.gameTypesList = result;
       },
       error: (err) =>{
         console.log(err);
