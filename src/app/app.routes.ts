@@ -1,35 +1,32 @@
 import { Routes } from '@angular/router';
 import { StartComponent } from './routing/start/start.component.js';
 import { SecondComponent } from './routing/second/second.component.js';
-import { PageNotFoundComponent } from './routing/page-not-found/page-not-found.component.js';
 import { GameTypesComponent } from './routing/game-types/game-types.component.js';
+import { GameTypeFormComponent } from './routing/game-type-form/game-type-form.component.js';
 
 export const routes: Routes = [
-
   {
-    path:'start',
-    component:StartComponent
-  }
-  ,
+    path: '',
+    component: StartComponent,
+    title: 'Página de inicio',
+  },
   {
-    path:'gameTypes',
-    component:GameTypesComponent
-  }
-  ,
+    path: 'gameTypes',
+    component: GameTypesComponent,
+    title: 'Tipos de Juego',
+  },
   {
-    path:'second',
-    component:SecondComponent
-  }
-  ,
+    path: 'gameType-form/:id',
+    component: GameTypeFormComponent,
+    title: 'Formulario de Tipos de Juego',
+  },
   {
-    path:'',
-    redirectTo:'start',
-    pathMatch: 'full'
-  }
-  ,
+    path: 'second',
+    component: SecondComponent,
+  },
   {
-    path:'**',
-    component:PageNotFoundComponent
-  }
-
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full',
+  },
 ];

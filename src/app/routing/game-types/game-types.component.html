@@ -1,6 +1,44 @@
-<h1 class="text-center">Get All de los Tipos de Juegos</h1>
-<ul>
+<h1 class="text-center">Tipos de Juegos</h1>
+<div class="flex flex-column gap-2">
+  <a [routerLink]="['/gameType-form', 'new']" class="p-button font-bold w-max"
+    >Crear nuevo Tipo de Juego</a
+  >
+  <div class="flex gap-4 flex-wrap">
     @for (gameType of gameTypesList; track gameType.id) {
-    <li>{{gameType.name}} - {{gameType.description}}</li>
+    <p-card
+      header="{{ gameType.name }}"
+      subheader="{{ gameType.id }}"
+      [style]="{ width: '360px' }"
+    >
+      <ng-template pTemplate="header">
+        <img
+          alt="Card"
+          src="https://primefaces.org/cdn/primeng/images/card-ng.jpg"
+        />
+      </ng-template>
+      <p>
+        {{ gameType.description }}
+      </p>
+      <ng-template pTemplate="footer">
+        <div class="flex gap-2 mt-1">
+          <p-button
+            (onClick)="deleteGameType(gameType.id)"
+            label="Borrar"
+            severity="secondary"
+          />
+          <a
+            [routerLink]="['/gameType-form', gameType.id]"
+            class="p-button font-bold"
+          >
+            Editar
+          </a>
+        </div>
+      </ng-template>
+    </p-card>
+    }@empty {
+    <p>No existen Tipos de Juego</p>
     }
-</ul>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
