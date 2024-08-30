@@ -1,11 +1,11 @@
-.titulo-principal {
-  background: grey;
-  color: black;
-  height: 100%;
-  width: 100%;
-  text-align: center;
-  line-height: 100%;
-  text-transform: uppercase;
-  padding: 40px;
-  font-size: 50px;
+.header{
+  font-family: monospace;
+  font-size:xx-large;
+  color: aqua;
+  border-width: 0.5px;
+  border-bottom-color: aqua;
+}
+
+body{
+  background-color: #212121;
 }

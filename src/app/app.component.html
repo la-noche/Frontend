@@ -1,14 +1,18 @@
 <p-toast />
-<nav>
-  <a routerLink="" routerLinkActive="activebutton" class="button">Inicio</a>
-  |
-  <a routerLink="gameTypes" routerLinkActive="activebutton" class="button"
-    >GameTypes</a
-  >
-  |
-  <a routerLink="second" routerLinkActive="activebutton" class="button"
-    >Segundo</a
-  >
-</nav>
+<div class="navigator">
+  <nav>
+    <button routerLink="" routerLinkActive="activebutton" class="button">
+      Inicio
+    </button>
+    |
+    <button routerLink="gameTypes" routerLinkActive="activebutton" class="button">
+      GameTypes
+    </button>
+    |
+    <button routerLink="second" routerLinkActive="activebutton" class="button">
+      Segundo
+    </button>
+  </nav>
+</div>
 
 <router-outlet />
