@@ -6,7 +6,6 @@
     @for (gameType of gameTypesList; track gameType.id) {
     <p-card
       header="{{ gameType.name }}"
-      subheader="{{ gameType.id }}"
       [style]="{ width: '360px'}"
     >
       <ng-template pTemplate="header">
