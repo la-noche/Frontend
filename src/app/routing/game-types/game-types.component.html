@@ -1,14 +1,13 @@
-<h1 class="text-center">Tipos de Juegos</h1>
 <div class="flex flex-column gap-2">
-  <a [routerLink]="['/gameType-form', 'new']" class="p-button font-bold w-max"
-    >Crear nuevo Tipo de Juego</a
-  >
+  <button [routerLink]="['/gameType-form', 'new']" class="button">
+    Crear nuevo Tipo de Juego
+  </button>
   <div class="flex gap-4 flex-wrap">
     @for (gameType of gameTypesList; track gameType.id) {
     <p-card
       header="{{ gameType.name }}"
       subheader="{{ gameType.id }}"
-      [style]="{ width: '360px' }"
+      [style]="{ width: '360px'}"
     >
       <ng-template pTemplate="header">
         <img
@@ -26,12 +25,12 @@
             label="Borrar"
             severity="secondary"
           />
-          <a
+          <button
             [routerLink]="['/gameType-form', gameType.id]"
-            class="p-button font-bold"
+            class="button"
           >
             Editar
-          </a>
+          </button>
         </div>
       </ng-template>
     </p-card>
