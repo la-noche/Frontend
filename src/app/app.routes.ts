@@ -6,7 +6,7 @@ import { GameTypeFormComponent } from './routing/game-type-form/game-type-form.c
 
 export const routes: Routes = [
   {
-    path: '',
+    path: 'inicio',
     component: StartComponent,
     title: 'Página de inicio',
   },
@@ -26,7 +26,7 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '',
+    redirectTo: 'inicio',
     pathMatch: 'full',
   },
 ];

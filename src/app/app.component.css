@@ -2,6 +2,25 @@
   padding: 20px;
 }
 
+.header {
+  font-family: monospace;
+  font-size: xx-large;
+  color: aqua;
+  border-width: 1cap;
+  border-bottom-color: aqua;
+}
+
+.logo {
+  text-decoration: none;
+  color: #00ffff;
+  font-size: 24px;
+
+}
+
+.logo:hover {
+  color: #00d1d1;
+}
+
 .button {
   background: linear-gradient(140.14deg, #b10eec 15.05%, #531fd6 114.99%) padding-box,
     linear-gradient(142.51deg, #fa64e8 8.65%, #530385 88.82%) border-box;

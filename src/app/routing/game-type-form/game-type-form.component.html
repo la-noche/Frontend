@@ -1,5 +1,6 @@
 <div class="flex justify-content-center align-items-center w-ful">
-  <p-card header="Formulario Tipo de Juego" class="w-10">
+  <div class="custom-background">
+    <header class="header">Crear un tipo de juego</header>
     <form
       [formGroup]="formGameType"
       (ngSubmit)="edit ? updateGameType() : createGameType()"
@@ -14,8 +15,8 @@
         <input type="text" pInputText formControlName="description" />
       </div>
       <div class="flex gap-2">
-        <p-button label="Guardar" [loading]="isSaveInProgress" type="submit" />
+        <p-button label="Guardar" [loading]="isSaveInProgress" type="submit"/>
       </div>
     </form>
-  </p-card>
+  </div>
 </div>

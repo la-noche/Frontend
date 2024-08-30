@@ -81,7 +81,7 @@ export class GameTypeFormComponent {
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
-        detail: 'Revise los campos e intente nuevamente',
+        detail: 'Por favor, complete los campos',
       });
       return;
     }
