@@ -1,0 +1,32 @@
+<div class="flex justify-content-center align-items-center w-ful">
+  <div class="custom-background">
+    <header class="header">Crear un Juego</header>
+    <form
+      [formGroup]="formGame"
+      (ngSubmit)="edit ? updateGame() : createGame()"
+      class="flex flex-column gap-2"
+    >
+      <div class="field flex flex-column gap-1">
+        <label for="name">Nombre</label>
+        <input type="text" pInputText formControlName="name" />
+      </div>
+      <div class="field flex flex-column gap-1">
+        <label for="description">Descripcion</label>
+        <input type="text" pInputText formControlName="description" />
+      </div>
+      <div class="field flex flex-column gap-1">
+        <label for="gameType">Tipo de Juego</label>
+        <p-dropdown
+          formControlName="gameType"
+          [options]="gameTypesList"
+          optionLabel="name"
+          optionValue="id"
+          placeholder="Seleccione un tipo de juego"
+        ></p-dropdown>
+      </div>
+      <div class="flex gap-2">
+        <p-button label="Guardar" [loading]="isSaveInProgress" type="submit" />
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="flex flex-column gap-2">
+  <button [routerLink]="['/game-form', 'new']" class="button">
+    Crear nuevo Juego
+  </button>
+  <div class="flex gap-4 flex-wrap">
+    @for (game of gameList; track game.id) {
+    <p-card header="{{ game.name }}" [style]="{ width: '360px' }">
+      <ng-template pTemplate="header">
+        <img
+          alt="Card"
+          src="https://primefaces.org/cdn/primeng/images/card-ng.jpg"
+        />
+      </ng-template>
+      <p>
+        {{ game.description }}
+      </p>
+      <ng-template pTemplate="footer">
+        <div class="flex gap-2 mt-1">
+          <p-button
+            (onClick)="deleteGame(game.id)"
+            label="Borrar"
+            severity="secondary"
+          />
+          <button [routerLink]="['/game-form', game.id]" class="button">
+            Editar
+          </button>
+        </div>
+      </ng-template>
+    </p-card>
+    }@empty {
+    <p>No existen Juegos</p>
+    }
+  </div>
+</div>
+
+<router-outlet></router-outlet>
