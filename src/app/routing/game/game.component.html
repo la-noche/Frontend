@@ -4,7 +4,7 @@
   </button>
   <div class="flex gap-4 flex-wrap">
     @for (game of gameList; track game.id) {
-    <p-card header="{{ game.name }}" [style]="{ width: '360px' }">
+    <p-card header="{{ game.name }}" [style]="{ width: '360px'}">
       <ng-template pTemplate="header">
         <img
           alt="Card"
