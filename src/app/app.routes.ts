@@ -1,14 +1,22 @@
 import { Routes } from '@angular/router';
 import { StartComponent } from './routing/start/start.component.js';
+import { Login } from './routing/login/login.component.js';
 import { SecondComponent } from './routing/second/second.component.js';
 import { GameTypesComponent } from './routing/game-types/game-types.component.js';
 import { GameTypeFormComponent } from './routing/game-type-form/game-type-form.component.js';
+import { authGuard } from './guards/auth.guard.js';
 
 export const routes: Routes = [
+  {
+    path: 'login',
+    component: Login,                   /* FALTA DESARROLLAR EL CRUD DE LOGIN EN COMPONENT */
+    title: 'Inicio de sesión',
+  },
   {
     path: '',
     component: StartComponent,
     title: 'Página de inicio',
+    canActivate: [authGuard],           /* Coloco el canActivate para restringir que cualquiera inicie a la página de inicio */
   },
   {
     path: 'gameTypes',
