@@ -33,7 +33,7 @@
   font-size: 18px;
 }
 
-.header{
+.header {
   color: #e912c9;
   padding: 10px;
   text-align: center;
@@ -80,4 +80,3 @@
   display: flex;
   justify-content: space-between;
 }
-

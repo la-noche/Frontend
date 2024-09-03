@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -6,8 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { GameTypesService } from '../../services/game-types.service.js';
-import { ButtonModule } from 'primeng/button';
+import { GameService } from '../../services/game.service.js';
 import {
   ActivatedRoute,
   Router,
@@ -15,11 +14,15 @@ import {
   RouterOutlet,
 } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
+import { gameTypeInterface } from '../../interfaces/gameType.interface.js';
+import { GameTypesService } from '../../services/game-types.service.js';
+import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
-  selector: 'app-game-type-form',
+  selector: 'app-game-form',
   standalone: true,
   imports: [
     ReactiveFormsModule,
@@ -29,26 +32,31 @@ import { CardModule } from 'primeng/card';
     InputTextModule,
     CardModule,
     RouterOutlet,
+    DropdownModule,
   ],
-  templateUrl: './game-type-form.component.html',
-  styleUrl: './game-type-form.component.css',
+  templateUrl: './game-form.component.html',
+  styleUrl: './game-form.component.css',
 })
-export class GameTypeFormComponent {
-  formGameType!: FormGroup;
+export class GameFormComponent implements OnInit {
+  formGame!: FormGroup;
   isSaveInProgress: boolean = false;
   edit: boolean = false;
+  gameTypesList: gameTypeInterface[] = [];
+  gameTypesLoaded: boolean = false;
 
   constructor(
     private fb: FormBuilder,
-    private gameTypesService: GameTypesService,
+    private gameService: GameService,
+    private gameTypeService: GameTypesService,
     private activatedRoute: ActivatedRoute,
     private messageService: MessageService,
     private router: Router
   ) {
-    this.formGameType = this.fb.group({
+    this.formGame = this.fb.group({
       id: [null],
       name: ['', Validators.required],
       description: ['', Validators.required],
+      gameType: [null, Validators.required],
     });
   }
 
@@ -56,14 +64,15 @@ export class GameTypeFormComponent {
     let id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id !== 'new') {
       this.edit = true;
-      this.getGameTypeById(+id!);
+      this.getGameById(+id!);
     }
+    this.loadGameTypes();
   }
 
-  getGameTypeById(id: number) {
-    this.gameTypesService.getGameTypeById(id).subscribe({
-      next: (foundGameType) => {
-        this.formGameType.patchValue(foundGameType);
+  getGameById(id: number) {
+    this.gameService.getGameById(id).subscribe({
+      next: (foundGame) => {
+        this.formGame.patchValue(foundGame);
       },
       error: () => {
         this.messageService.add({
@@ -76,8 +85,35 @@ export class GameTypeFormComponent {
     });
   }
 
-  createGameType() {
-    if (this.formGameType.invalid) {
+  loadGameTypes() {
+    this.gameTypeService.getGameTypes().subscribe({
+      next: (data) => {
+        this.gameTypesList = data;
+        this.gameTypesLoaded = this.gameTypesList.length > 0;
+        if (!this.gameTypesLoaded) {
+          this.messageService.add({
+            severity: 'warn',
+            summary: 'Advertencia',
+            detail:
+              'No hay tipos de juego disponibles. Por favor, cargue al menos un tipo de juego antes de crear o editar juegos.',
+          });
+          this.router.navigateByUrl('/gameTypes');
+        }
+      },
+      error: () => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'No se pudieron cargar los tipos de juego',
+        });
+        this.gameTypesLoaded = false;
+        this.router.navigateByUrl('/');
+      },
+    });
+  }
+
+  createGame() {
+    if (this.formGame.invalid) {
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
@@ -86,15 +122,15 @@ export class GameTypeFormComponent {
       return;
     }
     this.isSaveInProgress = true;
-    this.gameTypesService.createGameType(this.formGameType.value).subscribe({
+    this.gameService.createGame(this.formGame.value).subscribe({
       next: () => {
         this.messageService.add({
           severity: 'success',
           summary: 'Creado',
-          detail: 'Tipo de Juego guardado correctamente',
+          detail: 'Juego guardado correctamente',
         });
         this.isSaveInProgress = false;
-        this.router.navigateByUrl('/gameTypes');
+        this.router.navigateByUrl('/game');
       },
       error: () => {
         this.isSaveInProgress = false;
@@ -107,8 +143,8 @@ export class GameTypeFormComponent {
     });
   }
 
-  updateGameType() {
-    if (this.formGameType.invalid) {
+  updateGame() {
+    if (this.formGame.invalid) {
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
@@ -117,15 +153,15 @@ export class GameTypeFormComponent {
       return;
     }
     this.isSaveInProgress = true;
-    this.gameTypesService.updateGameType(this.formGameType.value).subscribe({
+    this.gameService.updateGame(this.formGame.value).subscribe({
       next: () => {
         this.messageService.add({
           severity: 'success',
           summary: 'Guardado',
-          detail: 'Tipo de Juego actualizado correctamente',
+          detail: 'Juego actualizado correctamente',
         });
         this.isSaveInProgress = false;
-        this.router.navigateByUrl('/gameTypes');
+        this.router.navigateByUrl('/game');
       },
       error: () => {
         this.isSaveInProgress = false;
