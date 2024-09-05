@@ -7,6 +7,8 @@ import { GameComponent } from './routing/game/game.component.js';
 import { GameFormComponent } from './routing/game-form/game-form.component.js';
 import { authGuard } from './utils/auth.guard.js';
 import { SignUpComponent } from './routing/sign-up/sign-up.component.js';
+import { RegionComponent } from './routing/region/region.component.js';
+import { RegionFormComponent } from './routing/region-form/region-form.component.js';
 
 export const routes: Routes = [
   {
@@ -43,7 +45,17 @@ export const routes: Routes = [
   {
     path: 'game-form/:id',
     component: GameFormComponent,
-    title: 'Formulario de Juego',
+    title: 'Formulario de Juegos',
+  },
+  {
+  path: 'region',
+  component: RegionComponent,
+  title: 'Regiones',
+  },
+  {
+  path: 'region-form/:id',
+  component: RegionFormComponent,
+  title: 'Formulario de Regiones',
   },
   {
     path: '**',
