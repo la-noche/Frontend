@@ -4,21 +4,11 @@
 </header>
 <div class="navigator">
   <nav>
-    <!-- <button routerLink="start" routerLinkActive="activebutton" class="button">
-      Home
-    </button>
-    |-->
-    <button
-      routerLink="gameTypes"
-      routerLinkActive="activebutton"
-      class="button"
-    >
-      GameTypes
-    </button>
+    <button routerLink="gameTypes" routerLinkActive="activebutton" class="button">GameTypes</button>
     |
-    <button routerLink="game" routerLinkActive="activebutton" class="button">
-      Games
-    </button>
+    <button routerLink="game" routerLinkActive="activebutton" class="button">Games</button>
+    |
+    <button (click)="logOut()" routerLinkActive="activebutton" class="button">LogOut</button> <!-- mejorar este boton-->
   </nav>
 </div>
 

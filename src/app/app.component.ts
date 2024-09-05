@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
 
 @Component({
@@ -11,4 +11,11 @@ import { ToastModule } from 'primeng/toast';
 })
 export class AppComponent {
   title = 'Frontend';
+
+  constructor( private router: Router){}
+
+  logOut() {
+    localStorage.removeItem('token');
+    this.router.navigateByUrl('/login');
+  }
 }

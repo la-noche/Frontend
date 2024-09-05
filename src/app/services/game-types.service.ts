@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { gameTypeInterface } from '../interfaces/gameType.interface.js';
@@ -12,6 +12,8 @@ export class GameTypesService {
   constructor(private http: HttpClient) {}
 
   getGameTypes(): Observable<gameTypeInterface[]> {
+    /*const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);*/ //esto es por si quiero restrigir esto solo
     return this.http.get<gameTypeInterface[]>(this.apiUrl);
   }
 
