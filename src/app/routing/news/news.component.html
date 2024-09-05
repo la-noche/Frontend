@@ -1,0 +1,29 @@
+<div class="flex flex-column gap-2">
+    <button [routerLink]="['/news-form', 'new']" class="button">
+        Crear nueva Noticia
+    </button>
+    <div class="flex gap-4 flex-wrap">
+        @for (news of newsList; track news.id) {
+        <p-card header="{{ news.title }}" [style]="{ width: '360px'}">
+            <ng-template pTemplate="header">
+                <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
+            </ng-template>
+            <p>
+                {{ news.body }}
+            </p>
+            <ng-template pTemplate="footer">
+                <div class="flex gap-2 mt-1">
+                    <p-button (onClick)="deleteNews(news.id)" label="Borrar" severity="secondary" />
+                    <button [routerLink]="['/news-form', news.id]" class="button">
+                        Editar
+                    </button>
+                </div>
+            </ng-template>
+        </p-card>
+        }@empty {
+        <p>No existen Noticias</p>
+        }
+    </div>
+</div>
+
+<router-outlet></router-outlet>

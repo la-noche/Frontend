@@ -9,6 +9,8 @@ import { authGuard } from './utils/auth.guard.js';
 import { SignUpComponent } from './routing/sign-up/sign-up.component.js';
 import { RegionComponent } from './routing/region/region.component.js';
 import { RegionFormComponent } from './routing/region-form/region-form.component.js';
+import { NewsFormComponent } from './routing/news-form/news-form.component.js';
+import { NewsComponent } from './routing/news/news.component.js';
 
 export const routes: Routes = [
   {
@@ -56,6 +58,16 @@ export const routes: Routes = [
   path: 'region-form/:id',
   component: RegionFormComponent,
   title: 'Formulario de Regiones',
+  },
+  {
+  path: 'news',
+  component: NewsComponent,
+  title: 'Noticias',
+  },
+  {
+  path: 'news-form/:id',
+  component: NewsFormComponent,
+  title: 'Formulario de Noticias',
   },
   {
     path: '**',
