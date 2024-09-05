@@ -48,7 +48,7 @@ export class GameTypesComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'No se pudo eliminar el Tipo de Juego',
+          detail: 'No se pudo eliminar el Tipo de Juego, porque hay un Juego de este tipo',
         });
       },
     });

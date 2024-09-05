@@ -37,7 +37,7 @@ export class LoginComponent {
 
     this.userService.login(user).subscribe({
       next: (token) => {
-        this.router.navigateByUrl('/gameTypes');
+        this.router.navigateByUrl('/inicio');
         console.log(token);
         localStorage.setItem('token', token);
       },

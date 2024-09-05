@@ -16,6 +16,8 @@ export const addTokenInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
+
+      // Verificamos si es un error 401
       if(error.status === 401){
         messageService.add({
           severity: 'error',
@@ -23,6 +25,9 @@ export const addTokenInterceptor: HttpInterceptorFn = (req, next) => {
           detail: error.error.message,
         });
         router.navigateByUrl('/login') 
+      } else {
+        // Si no es un error 401, simplemente devolvemos el error sin modificar
+        return throwError(() => error);
       }
       return throwError(() => new Error('Error'))
     })
