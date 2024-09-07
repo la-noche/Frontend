@@ -11,6 +11,8 @@ import { RegionComponent } from './routing/region/region.component.js';
 import { RegionFormComponent } from './routing/region-form/region-form.component.js';
 import { NewsFormComponent } from './routing/news-form/news-form.component.js';
 import { NewsComponent } from './routing/news/news.component.js';
+import { competitionComponent } from './routing/competitionn/competitionn.component.js';
+import { CompetitionnFormComponent } from './routing/competitionn-form/competitionn-form.component.js';
 
 export const routes: Routes = [
   {
@@ -50,6 +52,18 @@ export const routes: Routes = [
     title: 'Formulario de Juegos',
   },
   {
+  path: 'competitionn',
+  component: competitionComponent,
+  title: 'competiciones',
+  },
+
+  {
+  path: 'competitionn-form/:id',
+  component: CompetitionnFormComponent,
+  title: 'Formulario de competiciones',
+  },
+
+  {
   path: 'region',
   component: RegionComponent,
   title: 'Regiones',
@@ -74,4 +88,7 @@ export const routes: Routes = [
     redirectTo: 'inicio',
     pathMatch: 'full',
   },
+
+
+
 ];
