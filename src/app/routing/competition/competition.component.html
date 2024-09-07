@@ -1,0 +1,36 @@
+<div class="flex flex-column gap-2">
+    <button [routerLink]="['/competition', 'new']" class="button">
+      Crear nueva competicion
+    </button>
+    <div class="flex gap-4 flex-wrap">
+      @for (competition of competitionList; track competition.id) {
+      <p-card header="{{ competition.name }}" [style]="{ width: '360px'}">
+        <ng-template pTemplate="header">
+          <img
+            alt="Card"
+            src="https://primefaces.org/cdn/primeng/images/card-ng.jpg"
+          />
+        </ng-template>
+        <p>
+          {{ competition.description }}
+        </p>
+        <ng-template pTemplate="footer">
+          <div class="flex gap-2 mt-1">
+            <p-button
+              (onClick)="deletecompetition(competition.id)"
+              label="Borrar"
+              severity="secondary"
+            />
+            <button [routerLink]="['/competition', competition.id]" class="button">
+              Editar
+            </button>
+          </div>
+        </ng-template>
+      </p-card>
+      }@empty {
+      <p>No existen competiciones</p>
+      }
+    </div>
+  </div>
+  
+  <router-outlet></router-outlet>

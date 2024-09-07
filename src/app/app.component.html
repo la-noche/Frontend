@@ -1,25 +1,25 @@
 <p-toast />
-<header class="header">
-  <a routerLink="start" class="logo"> <img src="https://imgtr.ee/images/2024/09/02/626b60ae425a1590ef9dcb9e0966253a.png"> </a>
-</header>
 <div class="navigator">
-  <nav>
+  <nav class="navigator">
+    <a routerLink="start" class="logo"> <img src="https://imgtr.ee/images/2024/09/02/626b60ae425a1590ef9dcb9e0966253a.png"> </a>
     <button routerLink="gameTypes" routerLinkActive="activebutton" class="button">GameTypes</button>
-    |
+    <p class="separador">|</p>
     <button routerLink="game" routerLinkActive="activebutton" class="button">Games</button>
-    |
+    <p class="separador">|</p>
     <button 
       routerLink="region" 
       routerLinkActive="activebutton" 
       class="button">
       Regions
     </button>
-    |
+    <p class="separador">|</p>
     <button routerLink="news" routerLinkActive="activebutton" class="button">
       News
     </button>
-    |
+    <p class="separador">|</p>
     <button (click)="logOut()" routerLinkActive="activebutton" class="button">LogOut</button> <!-- mejorar este boton-->
+    <p class="separador">|</p>
+    <button routerLinkActive="activebutton" class="button">competition</button>
   </nav>
 </div>
 
