@@ -13,6 +13,7 @@ import { NewsFormComponent } from './routing/news-form/news-form.component.js';
 import { NewsComponent } from './routing/news/news.component.js';
 import { CompetitionComponent } from './routing/competition/competition.component.js';
 import { CompetitionFormComponent } from './routing/competition-form/competition-form.component.js';
+import { UserComponent } from './routing/user/user.component.js';
 
 export const routes: Routes = [
   {
@@ -32,6 +33,11 @@ export const routes: Routes = [
     canActivate: [
       authGuard,
     ] /* Coloco el canActivate para restringir que cualquiera inicie a la página de inicio */,
+  },
+  {
+    path: 'user',
+    component: UserComponent,
+    title: 'Perfil de Usuario',
   },
   {
     path: 'gameTypes',

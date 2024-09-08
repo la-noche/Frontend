@@ -1,0 +1,29 @@
+<div class="flex gap-4 flex-wrap">
+    <p-card
+      header="{{ user?.userName }}"
+      [style]="{ width: '360px'}"
+    >
+      <ng-template pTemplate="header">
+        <img
+          alt="Card"
+          src="https://primefaces.org/cdn/primeng/images/card-ng.jpg"
+        />
+      </ng-template>
+      <p>
+        Nombre: {{ user?.name }} {{ user?.lastName }}
+      </p>
+      <p>
+        Email: {{ user?.email }}
+      </p>
+      <ng-template pTemplate="footer">
+        <div class="flex gap-2 mt-1">
+          <button
+            [routerLink]="['/gameType-form', gameType.id]"
+            class="button"
+          >
+            Editar
+          </button>
+        </div>
+      </ng-template>
+    </p-card>
+</div>
