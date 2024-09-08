@@ -22,6 +22,7 @@ import { GameService } from '../../services/game.service.js';
 import { RegionInterface } from '../../interfaces/region.interface.js';
 import { RegionService } from '../../services/region.service.js';
 import { DropdownModule } from 'primeng/dropdown';
+import {jwtDecode} from 'jwt-decode';
 
 @Component({
   selector: 'app-competition-form',
@@ -148,7 +149,18 @@ export class CompetitionFormComponent implements OnInit {
     });
   }
 
+  getUserIdFromToken(): number | null {
+    const token = localStorage.getItem('token');  // Obtén el token del localStorage
+    if (token) {
+      const decodedToken: any = jwtDecode(token); 
+      console.log(decodedToken.id) // Decodifica el token
+      return decodedToken.id || null;  // Devuelve el ID del usuario (puede llamarse 'id' o 'sub', según cómo lo hayas configurado)
+    }
+    return null;
+  }
+
   createCompetition() {
+    const userId = this.getUserIdFromToken();
     if (this.formCompetition.invalid) {
       this.messageService.add({
         severity: 'error',
@@ -157,8 +169,18 @@ export class CompetitionFormComponent implements OnInit {
       });
       return;
     }
+    const competitionData = {
+      id: this.formCompetition.value.id,
+      name: this.formCompetition.value.name,
+      type: this.formCompetition.value.type,
+      dateStart: this.formCompetition.value.dateStart,
+      dateEnding: this.formCompetition.value.dateEnding,
+      game: this.formCompetition.value.game,
+      region: this.formCompetition.value.region,
+      userCreator: userId,
+    };
     this.isSaveInProgress = true;
-    this.competitionService.createCompetition(this.formCompetition.value).subscribe({
+    this.competitionService.createCompetition(competitionData).subscribe({
         next: () => {
           this.messageService.add({
             severity: 'success',
