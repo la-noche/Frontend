@@ -11,8 +11,8 @@ import { RegionComponent } from './routing/region/region.component.js';
 import { RegionFormComponent } from './routing/region-form/region-form.component.js';
 import { NewsFormComponent } from './routing/news-form/news-form.component.js';
 import { NewsComponent } from './routing/news/news.component.js';
-import { competitionComponent } from './routing/competitionn/competitionn.component.js';
-import { CompetitionnFormComponent } from './routing/competitionn-form/competitionn-form.component.js';
+import { CompetitionComponent } from './routing/competition/competition.component.js';
+import { CompetitionFormComponent } from './routing/competition-form/competition-form.component.js';
 
 export const routes: Routes = [
   {
@@ -29,7 +29,9 @@ export const routes: Routes = [
     path: 'inicio',
     component: StartComponent,
     title: 'Página de inicio',
-    canActivate: [authGuard],           /* Coloco el canActivate para restringir que cualquiera inicie a la página de inicio */
+    canActivate: [
+      authGuard,
+    ] /* Coloco el canActivate para restringir que cualquiera inicie a la página de inicio */,
   },
   {
     path: 'gameTypes',
@@ -52,43 +54,38 @@ export const routes: Routes = [
     title: 'Formulario de Juegos',
   },
   {
-  path: 'competitionn',
-  component: competitionComponent,
-  title: 'competiciones',
-  },
-
-  {
-  path: 'competitionn-form/:id',
-  component: CompetitionnFormComponent,
-  title: 'Formulario de competiciones',
-  },
-
-  {
-  path: 'region',
-  component: RegionComponent,
-  title: 'Regiones',
+    path: 'competition',
+    component: CompetitionComponent,
+    title: 'Competiciones',
   },
   {
-  path: 'region-form/:id',
-  component: RegionFormComponent,
-  title: 'Formulario de Regiones',
+    path: 'competition-form/:id',
+    component: CompetitionFormComponent,
+    title: 'Formulario de competiciones',
   },
   {
-  path: 'news',
-  component: NewsComponent,
-  title: 'Noticias',
+    path: 'region',
+    component: RegionComponent,
+    title: 'Regiones',
   },
   {
-  path: 'news-form/:id',
-  component: NewsFormComponent,
-  title: 'Formulario de Noticias',
+    path: 'region-form/:id',
+    component: RegionFormComponent,
+    title: 'Formulario de Regiones',
+  },
+  {
+    path: 'news',
+    component: NewsComponent,
+    title: 'Noticias',
+  },
+  {
+    path: 'news-form/:id',
+    component: NewsFormComponent,
+    title: 'Formulario de Noticias',
   },
   {
     path: '**',
     redirectTo: 'inicio',
     pathMatch: 'full',
   },
-
-
-
 ];

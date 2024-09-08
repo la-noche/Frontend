@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { competitionService } from '../../services/competition.service.js';
+import { CompetitionService } from '../../services/competition.service.js';
 import {
   ActivatedRoute,
   Router,
@@ -24,63 +24,64 @@ import { RegionService } from '../../services/region.service.js';
 import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
-  selector: 'app-competitionn-form',
+  selector: 'app-competition-form',
   standalone: true,
-  imports: [ReactiveFormsModule,
+  imports: [
+    ReactiveFormsModule,
     FormsModule,
     ButtonModule,
     RouterModule,
     InputTextModule,
     CardModule,
     RouterOutlet,
-    DropdownModule,],
-  templateUrl: './competitionn-form.component.html',
-  styleUrl: './competitionn-form.component.css'
+    DropdownModule,
+  ],
+  templateUrl: './competition-form.component.html',
+  styleUrl: './competition-form.component.css',
 })
-export class CompetitionnFormComponent implements OnInit  {
-  formcompetition!: FormGroup;
+export class CompetitionFormComponent implements OnInit {
+  formCompetition!: FormGroup;
   isSaveInProgress: boolean = false;
   edit: boolean = false;
   gamesList: gameInterface[] = [];
   gamesLoaded: boolean = false;
-  regionsList: RegionInterface[] =[];
+  regionsList: RegionInterface[] = [];
   regionsLoaded: boolean = false;
 
   constructor(
     private fb: FormBuilder,
-    private competitionService: competitionService,
+    private competitionService: CompetitionService,
     private gameService: GameService,
     private regionService: RegionService,
     private activatedRoute: ActivatedRoute,
     private messageService: MessageService,
     private router: Router
   ) {
-    this.formcompetition = this.fb.group({
+    this.formCompetition = this.fb.group({
       id: [null],
       name: ['', Validators.required],
       type: ['', Validators.required],
-      game: [null, Validators.required],
       dateStart: ['', Validators.required],
       dateEnding: ['', Validators.required],
+      game: [null, Validators.required],
       region: [null, Validators.required],
-      
-    })
+    });
   }
 
   ngOnInit(): void {
     let id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id !== 'new') {
       this.edit = true;
-        this.competitionService.getcompetitionById(+id!)
-    }   
-    this.loadgames();
-    this.loadregions();
+      this.getCompetitionById(+id!);
+    }
+    this.loadGames();
+    this.loadRegions();
   }
 
   getCompetitionById(id: number) {
-    this.competitionService.getcompetitionById(id).subscribe({
-      next: (foundcompetition) => {
-        this.formcompetition.patchValue(foundcompetition);
+    this.competitionService.getCompetitionById(id).subscribe({
+      next: (foundCompetition) => {
+        this.formCompetition.patchValue(foundCompetition);
       },
       error: () => {
         this.messageService.add({
@@ -93,7 +94,7 @@ export class CompetitionnFormComponent implements OnInit  {
     });
   }
 
-  loadgames() {
+  loadGames() {
     this.gameService.getGames().subscribe({
       next: (data) => {
         this.gamesList = data;
@@ -105,7 +106,7 @@ export class CompetitionnFormComponent implements OnInit  {
             detail:
               'No hay juegos disponibles. Por favor, cargue al menos un juego antes de crear o editar competiciones.',
           });
-          this.router.navigateByUrl('/games');
+          this.router.navigateByUrl('/game');
         }
       },
       error: () => {
@@ -120,7 +121,7 @@ export class CompetitionnFormComponent implements OnInit  {
     });
   }
 
-  loadregions() {
+  loadRegions() {
     this.regionService.getRegions().subscribe({
       next: (data) => {
         this.regionsList = data;
@@ -132,7 +133,7 @@ export class CompetitionnFormComponent implements OnInit  {
             detail:
               'No hay regiones disponibles. Por favor, cargue al menos una region antes de crear o editar competiciones.',
           });
-          this.router.navigateByUrl('/gameTypes');
+          this.router.navigateByUrl('/region');
         }
       },
       error: () => {
@@ -148,7 +149,7 @@ export class CompetitionnFormComponent implements OnInit  {
   }
 
   createCompetition() {
-    if (this.formcompetition.invalid) {
+    if (this.formCompetition.invalid) {
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
@@ -157,29 +158,29 @@ export class CompetitionnFormComponent implements OnInit  {
       return;
     }
     this.isSaveInProgress = true;
-    this.competitionService.createcompetition(this.formcompetition.value).subscribe({
-      next: () => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Creado',
-          detail: 'competicion guardada correctamente',
-        });
-        this.isSaveInProgress = false;
-        this.router.navigateByUrl('/competition');
-      },
-      error: () => {
-        this.isSaveInProgress = false;
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Revise los campos e intente nuevamente',
-        });
-      },
-    });
+    this.competitionService.createCompetition(this.formCompetition.value).subscribe({
+        next: () => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Creado',
+            detail: 'Competicion guardada correctamente',
+          });
+          this.isSaveInProgress = false;
+          this.router.navigateByUrl('/competition');
+        },
+        error: () => {
+          this.isSaveInProgress = false;
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Revise los campos e intente nuevamente',
+          });
+        },
+      });
   }
 
   updateCompetition() {
-    if (this.formcompetition.invalid) {
+    if (this.formCompetition.invalid) {
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
@@ -188,26 +189,24 @@ export class CompetitionnFormComponent implements OnInit  {
       return;
     }
     this.isSaveInProgress = true;
-    this.competitionService.updatecompetition(this.formcompetition.value).subscribe({
-      next: () => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Guardado',
-          detail: 'competicion actualizada correctamente',
-        });
-        this.isSaveInProgress = false;
-        this.router.navigateByUrl('/competition');
-      },
-      error: () => {
-        this.isSaveInProgress = false;
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Revise los campos e intente nuevamente',
-        });
-      },
-    });
+    this.competitionService.updateCompetition(this.formCompetition.value).subscribe({
+        next: () => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Guardado',
+            detail: 'Competicion actualizada correctamente',
+          });
+          this.isSaveInProgress = false;
+          this.router.navigateByUrl('/competition');
+        },
+        error: () => {
+          this.isSaveInProgress = false;
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Revise los campos e intente nuevamente',
+          });
+        },
+      });
   }
 }
-
-

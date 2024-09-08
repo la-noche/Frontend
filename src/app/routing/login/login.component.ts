@@ -38,8 +38,12 @@ export class LoginComponent {
     this.userService.login(user).subscribe({
       next: (token) => {
         this.router.navigateByUrl('/inicio');
-        console.log(token);
         localStorage.setItem('token', token);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Bienvenido',
+          detail: `Te damos la bienvenida ${this.userName}, gracias por visitarnos`,
+        });
       },
       error: (errorResponse) => {
         //muestro el mesaje de error cual fuere del back

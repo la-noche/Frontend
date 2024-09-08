@@ -1,5 +1,5 @@
 <div class="flex flex-column gap-2">
-    <button [routerLink]="['/competitionn-form', 'new']" class="button">
+    <button [routerLink]="['/competition-form', 'new']" class="button">
       Crear nueva competicion
     </button>
     <div class="flex gap-4 flex-wrap">
@@ -12,18 +12,18 @@
           />
         </ng-template>
         <p>
-          {{ competition.type }}
+          Tipo: {{ competition.type }}
         </p>
         <p>
-            {{ competition.dateStart }}
-          </p>
-          <p>
-            {{ competition.dateEnding }}
-          </p>
+          Fecha Desde: {{ competition.dateStart }}
+        </p>
+        <p>
+          Fecha Hasta: {{ competition.dateEnding }}
+        </p>
         <ng-template pTemplate="footer">
           <div class="flex gap-2 mt-1">
             <p-button
-              (onClick)="deletecompetition(competition.id)"
+              (onClick)="deleteCompetition(competition.id)"
               label="Borrar"
               severity="secondary"
             />
