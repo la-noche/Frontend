@@ -12,13 +12,19 @@
           />
         </ng-template>
         <p>
-          Tipo: {{ competition.type }}
+          <strong>Tipo: </strong>{{ competition.type }}
         </p>
         <p>
-          Fecha Desde: {{ competition.dateStart }}
+          <strong>Juego: </strong>{{ competition.game.name }}
         </p>
         <p>
-          Fecha Hasta: {{ competition.dateEnding }}
+          <strong>Region: </strong>{{ competition.region.name }}
+        </p>
+        <p>
+          <strong>Fecha Desde: </strong>{{ competition.dateStart }}
+        </p>
+        <p>
+          <strong>Fecha Hasta: </strong>{{ competition.dateEnding }}
         </p>
         <ng-template pTemplate="footer">
           <div class="flex gap-2 mt-1">

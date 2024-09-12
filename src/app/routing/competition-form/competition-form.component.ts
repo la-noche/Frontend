@@ -48,6 +48,7 @@ export class CompetitionFormComponent implements OnInit {
   gamesLoaded: boolean = false;
   regionsList: RegionInterface[] = [];
   regionsLoaded: boolean = false;
+  types = [{name: 'De pago', value: 'pago'}, {name: 'Gratuita', value: 'gratuita'}];
 
   constructor(
     private fb: FormBuilder,
@@ -150,11 +151,11 @@ export class CompetitionFormComponent implements OnInit {
   }
 
   getUserIdFromToken(): number | null {
-    const token = localStorage.getItem('token');  // Obtén el token del localStorage
+    const token = localStorage.getItem('token');
     if (token) {
       const decodedToken: any = jwtDecode(token); 
-      console.log(decodedToken.id) // Decodifica el token
-      return decodedToken.id || null;  // Devuelve el ID del usuario (puede llamarse 'id' o 'sub', según cómo lo hayas configurado)
+      console.log(decodedToken.id)
+      return decodedToken.id || null;
     }
     return null;
   }

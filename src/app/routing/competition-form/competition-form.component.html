@@ -12,9 +12,15 @@
         <label for="name">Nombre</label>
         <input type="text" pInputText formControlName="name" />
       </div>
-      <div>
+      <div class="field flex flex-column gap-1">
         <label for="type">De 'Pago' o 'Gratuita' ?</label>
-        <input type="text" pInputText formControlName="type" /> 
+        <p-dropdown
+          formControlName="type"
+          [options]="types"
+          optionLabel="name"
+          optionValue="value"
+          placeholder="Seleccione una opción"
+        ></p-dropdown>
       </div>
       <div class="field flex flex-column gap-1">
         <label for="dateStart">Fecha inicio</label>

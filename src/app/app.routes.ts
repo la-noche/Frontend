@@ -14,6 +14,8 @@ import { NewsComponent } from './routing/news/news.component.js';
 import { CompetitionComponent } from './routing/competition/competition.component.js';
 import { CompetitionFormComponent } from './routing/competition-form/competition-form.component.js';
 import { UserComponent } from './routing/user/user.component.js';
+import { TeamComponent } from './routing/team/team.component.js';
+import { TeamFormComponent } from './routing/team-form/team-form.component.js';
 
 export const routes: Routes = [
   {
@@ -38,6 +40,16 @@ export const routes: Routes = [
     path: 'user',
     component: UserComponent,
     title: 'Perfil de Usuario',
+  },
+  {
+    path: 'team',
+    component: TeamComponent,
+    title: 'Equipos',
+  },
+  {
+    path: 'team-form/:id',
+    component: TeamFormComponent,
+    title: 'Formulario de equipos',
   },
   {
     path: 'gameTypes',

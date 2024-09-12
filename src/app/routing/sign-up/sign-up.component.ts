@@ -13,6 +13,7 @@ import { UserService } from '../../services/user.service.js';
   styleUrl: './sign-up.component.css',
 })
 export class SignUpComponent {
+  id!: number;
   name: string = '';
   lastName: string = '';
   userName: string = '';
@@ -45,6 +46,7 @@ export class SignUpComponent {
 
     //creamos user
     const user: userInterface = {
+      id: this.id,
       name: this.name,
       lastName: this.lastName,
       userName: this.userName,

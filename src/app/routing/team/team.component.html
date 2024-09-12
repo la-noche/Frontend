@@ -1,0 +1,51 @@
+<div class="flex flex-column gap-2">
+    <button [routerLink]="['/team-form', 'new']" class="button">
+      Crear nuevo equipo
+    </button>
+    <div class="flex gap-4 flex-wrap">
+      @for (team of teamList; track team.id) {
+      <p-card header="{{ team.name }}" [style]="{ width: '360px'}">
+        <ng-template pTemplate="header">
+          <img
+            alt="Card"
+            src="https://primefaces.org/cdn/primeng/images/card-ng.jpg"
+          />
+        </ng-template>
+        
+        <p>
+          <strong>Jugadores:</strong>
+          @for (player of team.players; track player.id) {
+            <li>{{player.userName}}</li>
+          }
+        </p>
+
+        <ng-template pTemplate="footer">
+          <div class="footer-buttons">
+            <p-button
+              (onClick)="deleteTeam(team.id)"
+              label="Borrar equipo"
+              severity="secondary"
+            />
+            <button [routerLink]="['/team-form', team.id]" class="button">
+              Editar
+            </button>
+            <p-button
+              (onClick)="joinTeam(team.id)"
+              label="Unirse al equipo"
+              severity="success"
+            />
+            <p-button
+              (onClick)="leaveTeam(team.id)"
+              label="Salir del equipo"
+              severity="danger"
+            />
+          </div>
+        </ng-template>
+      </p-card>
+      }@empty {
+      <p>No existen equipos</p>
+      }
+    </div>
+  </div>
+  
+  <router-outlet></router-outlet>
