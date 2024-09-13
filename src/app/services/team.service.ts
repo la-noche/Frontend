@@ -32,10 +32,10 @@ export class TeamService {
   }
 
   addUserToTeam(teamId: number, userId: number): Observable<any> {
-    return this.http.post(`${this.apiUrl}/${teamId}/add-user`, { userId });
+    return this.http.post(`${this.apiUrl}/${teamId}/user`, { userId });
   }
 
   removeUserFromTeam(teamId: number, userId: number): Observable<any> {
-    return this.http.post(`${this.apiUrl}/${teamId}/remove-user`, { userId });
+    return this.http.delete(`${this.apiUrl}/${teamId}/user`, { params: { userId: userId.toString() } });
   }
 }
