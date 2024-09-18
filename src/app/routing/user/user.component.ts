@@ -6,11 +6,12 @@ import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { RouterModule, RouterOutlet } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [ButtonModule, CardModule, RouterModule, RouterOutlet],
+  imports: [ButtonModule, CardModule, RouterModule, RouterOutlet, DatePipe],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',
 })

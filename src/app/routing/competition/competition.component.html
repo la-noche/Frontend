@@ -21,10 +21,10 @@
           <strong>Region: </strong>{{ competition.region.name }}
         </p>
         <p>
-          <strong>Fecha Desde: </strong>{{ competition.dateStart }}
+          <strong>Fecha Desde: </strong>{{ competition.dateStart | date: 'dd/MM/yyyy HH:mm'}}hs
         </p>
         <p>
-          <strong>Fecha Hasta: </strong>{{ competition.dateEnding }}
+          <strong>Fecha Hasta: </strong>{{ competition.dateEnding | date: 'dd/MM/yyyy HH:mm'}}hs
         </p>
         <ng-template pTemplate="footer">
           <div class="flex gap-2 mt-1">

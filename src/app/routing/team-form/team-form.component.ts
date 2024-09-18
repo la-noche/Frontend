@@ -104,6 +104,33 @@ export class TeamFormComponent implements OnInit {
   }
 
   updateTeam() {
-
+    if (this.formTeam.invalid) {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Revise los campos e intente nuevamente',
+      });
+      return;
+    }
+    this.isSaveInProgress = true;
+    this.teamService.updateTeam(this.formTeam.value).subscribe({
+        next: () => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Guardado',
+            detail: 'Equipo actualizado correctamente',
+          });
+          this.isSaveInProgress = false;
+          this.router.navigateByUrl('/team');
+        },
+        error: (err) => {
+          this.isSaveInProgress = false;
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: err.error.message || 'Revise los campos e intente nuevamente',
+          });
+        },
+      });
   }
 }

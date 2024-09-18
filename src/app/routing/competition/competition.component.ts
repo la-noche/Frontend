@@ -5,11 +5,12 @@ import { MessageService } from 'primeng/api';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-competition',
   standalone: true,
-  imports: [RouterModule, RouterOutlet, CardModule, ButtonModule],
+  imports: [RouterModule, RouterOutlet, CardModule, ButtonModule, DatePipe],
   templateUrl: './competition.component.html',
   styleUrl: './competition.component.css',
 })

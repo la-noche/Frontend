@@ -16,6 +16,7 @@ import { CompetitionFormComponent } from './routing/competition-form/competition
 import { UserComponent } from './routing/user/user.component.js';
 import { TeamComponent } from './routing/team/team.component.js';
 import { TeamFormComponent } from './routing/team-form/team-form.component.js';
+import { UserFormComponent } from './routing/user-form/user-form.component.js';
 
 export const routes: Routes = [
   {
@@ -40,6 +41,11 @@ export const routes: Routes = [
     path: 'user',
     component: UserComponent,
     title: 'Perfil de Usuario',
+  },
+  {
+    path: 'user-form/:id',
+    component: UserFormComponent,
+    title: 'Formulario de Usuario',
   },
   {
     path: 'team',

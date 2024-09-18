@@ -10,19 +10,26 @@
         />
       </ng-template>
       <p>
-        Nombre: {{ user?.name }} {{ user?.lastName }}
+        <strong>Nombre:</strong> {{ user?.name }} {{ user?.lastName }}
       </p>
       <p>
-        Email: {{ user?.email }}
+        <strong>Email:</strong> {{ user?.email }}
+      </p>
+      <p>
+        <strong>Equipos:</strong>
+        @for (team of user?.teams; track team.id) {
+          <li>{{team.name}}</li>
+        }
+      </p>
+      <p>
+        <strong>Fecha de Alta:</strong> {{user?.createdAt | date: 'dd/MM/yyyy HH:mm' }}hs
+      </p>
+      <p>
+        <strong>Fecha de Modificación:</strong> {{user?.updatedAt | date: 'dd/MM/yyyy HH:mm' }}hs
       </p>
       <ng-template pTemplate="footer">
         <div class="flex gap-2 mt-1">
-          <button
-            [routerLink]="['/gameType-form', gameType.id]"
-            class="button"
-          >
-            Editar
-          </button>
+          <button [routerLink]="['/user-form', user?.id]" class="button">Editar</button>
         </div>
       </ng-template>
     </p-card>
