@@ -2,22 +2,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #2c2b2b;
-  padding: 10px;
+  background-color: #333;
+  padding: 5px;
   margin: 0;
   top: 0;
   width: 100%;
-  z-index: 1000
+  z-index: 1000;
+  position: relative;
 }
-
-.header {
-  font-family: monospace;
-  font-size: xx-large;
-  color: aqua;
-  border-width: 1cap;
-  border-bottom-color: aqua;
-}
-
 
 .logo:hover {
   color: #00d1d1;
@@ -32,7 +24,6 @@
   text-shadow: 1px 1px 1px #00000040;
   box-shadow: 8px 8px 20px 0px #45090059;
 
-  
   padding: 10px 30px;
   line-height: 20px;
   cursor: pointer;
@@ -161,4 +152,25 @@
 
 .tab:hover {
   background-color: rgb(223, 223, 223);
+}
+
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  position: fixed;
+  width: 100%;  
+  bottom: 0;
+  z-index: 1000;
+}
+
+footer a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+footer a:hover {
+  text-decoration: underline;
 }
