@@ -33,10 +33,7 @@ export const routes: Routes = [
   {
     path: 'inicio',
     component: StartComponent,
-    title: 'Página de inicio',
-    canActivate: [
-      authGuard,
-    ] /* Coloco el canActivate para restringir que cualquiera inicie a la página de inicio */,
+    title: 'Página de inicio'
   },
   {
     path: 'user',

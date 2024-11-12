@@ -1,5 +1,8 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@import "primeicons/primeicons.css";
+@import "primeng/resources/primeng.min.css";
+@import "primeflex/primeflex.scss";
+@import "primeng/resources/themes/soho-dark/theme.css";
+
+.monospace-text{
+  font-family: monospace;
 }

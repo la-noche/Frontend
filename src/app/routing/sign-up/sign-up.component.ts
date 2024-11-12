@@ -4,11 +4,13 @@ import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { userInterface } from '../../interfaces/user.interface.js';
 import { UserService } from '../../services/user.service.js';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [RouterOutlet, RouterModule, FormsModule],
+  imports: [RouterOutlet, RouterModule, FormsModule, InputTextModule, ButtonModule],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css',
 })

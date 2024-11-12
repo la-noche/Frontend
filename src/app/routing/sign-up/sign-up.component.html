@@ -9,19 +9,19 @@
 
 <body>
 
-    <div class="login-container">
-        <h1>Sign Up</h1>
+    <div class="field border-round border-radius surface-overlay p-2 w-3 border-primary border-2">
+        <h2 class="monospace-text font-bold text-2xl ml-1 text-primary">Signup</h2>
         <form action="/login" method="post">
-            <input type="text" [(ngModel)]="name" name="name" placeholder="Name">
-            <input type="text" [(ngModel)]="lastName" name="lastName" placeholder="Last Name">
-            <input type="text" [(ngModel)]="userName" name="username" placeholder="Username">
-            <input type="email" [(ngModel)]="email" name="email" placeholder="Email">
-            <input type="password" [(ngModel)]="password" name="password" placeholder="Password">
-            <input type="password" [(ngModel)]="confirmPassword" name="password" placeholder="Repeat password">
-            <button type="submit" (click)="addUser()" >Sign up</button>
+            <input pInputText type="text" class="monospace-text w-full mb-2" [(ngModel)]="name" name="name" placeholder="Name">
+            <input pInputText type="text" class="monospace-text w-full mb-2" [(ngModel)]="lastName" name="lastName" placeholder="Last Name">
+            <input pInputText type="text" class="monospace-text w-full mb-2" [(ngModel)]="userName" name="username" placeholder="Username">
+            <input pInputText type="email" class="monospace-text w-full mb-2" [(ngModel)]="email" name="email" placeholder="Email">
+            <input pInputText type="password" class="monospace-text w-full mb-2" [(ngModel)]="password" name="password" placeholder="Password">
+            <input pInputText type="password" class="monospace-text w-full mb-2" [(ngModel)]="confirmPassword" name="password" placeholder="Repeat password">
+            <button pButton class="monospace-text m-1 mb-3" type="submit" (click)="addUser()" >Sign up</button>
         </form>
-        <div class="links">
-            <a [routerLink]="'/login'">Volver</a>
+        <div>
+            <p-button label="Volver" routerLink="login" [link]="true"></p-button>
         </div>
     </div>
 

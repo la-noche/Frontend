@@ -3,4 +3,5 @@ export interface gameInterface {
   name: string;
   description: string;
   gameType: number;
+  imageUrl: string;
 }

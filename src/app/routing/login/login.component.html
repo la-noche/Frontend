@@ -9,15 +9,15 @@
 
 <body>
 
-    <div class="login-container">
-        <h1>Login</h1>
+    <div class="field border-round border-radius surface-overlay p-2 w-3 border-primary border-2">
+        <h2 class="monospace-text font-bold text-2xl ml-1 text-primary">Log in</h2>
         <form action="/login" method="post">
-            <input type="text" [(ngModel)]="userName" name="username" placeholder="Username">
-            <input type="password" [(ngModel)]="password" name="password" placeholder="Password">
-            <button type="submit" (click)="login()" >Sign in</button>
+            <input pInputText type="text" class="monospace-text w-full mb-2" [(ngModel)]="userName" name="username" placeholder="Username" required>
+            <input pInputText type="password" class="monospace-text w-full mb-3" [(ngModel)]="password" name="password" placeholder="Password" required>
+            <button pButton type="submit" class="monospace-text m-1 mb-3" (click)="login()">Log in</button>
         </form>
-        <div class="links">
-            <a [routerLink]="'/signup'">Register</a> |                                  <!-- Ver si dejamos o sacamos las opciones de registrar y recuperar contraseña -->
+        <div class="m-2">
+            <a [routerLink]="'/signup'">Signup</a> |                           
             <a href="/forgot-password">¿Forgot your password?</a>
         </div>
     </div>
