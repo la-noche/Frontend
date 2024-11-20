@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="start.component.css">
 </head>
 
-<body>
+<body class="min-h-screen">
 <div class="grid grid-nogutter text-800 main_box">
   <div class="col-12 md:col-6 p-6 text-center md:text-left flex align-items-center ">
     <section>
@@ -24,17 +24,14 @@
 
 <div class="w-full border-3 surface-border border-round mt-4 mb-4">
   <p-carousel [value]="gameList" [numVisible]="3" [numScroll]="1" [responsiveOptions]="responsiveOptions">
-      <!-- Header del carrusel -->
       <ng-template pTemplate="header">
         <h2 class="block text-4xl font-bold mb- ml-5 monospace-text">Available Games</h2>
       </ng-template>
-
-      <!-- Item del carrusel: Aquí defines cómo se ve cada juego -->
       <ng-template let-game pTemplate="item">
-        <div class="border-1 border-primary border-round m-2 p-3">
+        <div class="border-1 border-primary overflow-hidden h-28rem border-round m-2 p-3">
           <div class="mb-1">
             <div class="relative mx-auto">
-              <img src={{game.imageUrl}} alt={{game.name}} class="w-full border-round"/>
+              <img src="http://localhost:3000{{ game.imageUrl }}" alt={{game.name}} class="w-full h-19rem border-round"/>
             </div>
           </div>
           <div class="text-3xl mb-3 font-bold monospace-text">{{game.name}}</div>

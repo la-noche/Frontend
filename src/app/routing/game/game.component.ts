@@ -38,8 +38,8 @@ export class GameComponent implements OnInit {
       next: () => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Correcto',
-          detail: 'Juego eliminado',
+          summary: 'Success',
+          detail: 'Game deleted',
         });
         this.isDeleteInProgress = false;
         this.getGames();
@@ -49,7 +49,7 @@ export class GameComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'No se pudo eliminar el Juego',
+          detail: 'Game cannot be deleted',
         });
       },
     });

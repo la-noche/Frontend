@@ -19,12 +19,12 @@ export class GameService {
     return this.http.get<gameInterface>(`${this.apiUrl}/${id}`);
   }
 
-  createGame(game: gameInterface): Observable<gameInterface> {
+  createGame(game: FormData): Observable<gameInterface> {
     return this.http.post<gameInterface>(this.apiUrl, game);
   }
 
-  updateGame(game: gameInterface): Observable<gameInterface> {
-    return this.http.put<gameInterface>(`${this.apiUrl}/${game.id}`, game);
+  updateGame(game: FormData): Observable<gameInterface> {
+    return this.http.put<gameInterface>(`${this.apiUrl}/${game.get('id')}`, game);
   }
 
   deleteGame(id: number) {

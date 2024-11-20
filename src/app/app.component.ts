@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
     // Configurar los elementos del menú
     this.items = [
       { label: 'Home', icon: 'pi pi-home', routerLink: 'Inicio' },
-      { label: 'Game Types', icon: 'pi pi-angle-down', routerLink: 'gameTypes' },
+      { label: 'Game Types', icon: 'pi pi-objects-column', routerLink: 'gameTypes' },
       { label: 'Games', icon: 'pi pi-sparkles', routerLink: 'game' },
       { label: 'Regions', icon: 'pi pi-globe', routerLink: 'region' },
       { label: 'Competitions', icon: 'pi pi-trophy', routerLink: 'competition' },

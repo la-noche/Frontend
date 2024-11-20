@@ -1,4 +1,4 @@
-
+<p-toast></p-toast>
   <p-menubar [model]="items" *ngIf="isAuthenticated">
     <!-- Si el usuario está autenticado, muestra el botón de usuario y logout -->
     <button *ngIf="isAuthenticated" pButton icon="pi pi-user" style="border-radius: 100%; margin-right: 10px;"
@@ -12,7 +12,7 @@
 
 <router-outlet></router-outlet>
 
-<div class=" mt-5 surface-50 flex justify-content-center monospace-text">
+<div class="mt-5 surface-50 flex justify-content-center monospace-text">
     <p-button href="#nosotros" label="Nosotros" class="font-bold" [link]="true"></p-button>
     <p-button href="#contacto" label="helployalgaming&#64;gmail.com" class="font-bold" [link]="true">Contacto: </p-button>
     <p-button href="#terminos" label="Términos y Servicios" class="font-bold" [link]="true"></p-button>

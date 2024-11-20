@@ -1,36 +1,38 @@
-<div class="flex gap-4 flex-wrap">
-    <p-card
-      header="{{ user?.userName }}"
-      [style]="{ width: '360px'}"
-    >
-      <ng-template pTemplate="header">
-        <img
-          alt="Card"
-          src="https://primefaces.org/cdn/primeng/images/card-ng.jpg"
-        />
-      </ng-template>
-      <p>
-        <strong>Nombre:</strong> {{ user?.name }} {{ user?.lastName }}
-      </p>
-      <p>
-        <strong>Email:</strong> {{ user?.email }}
-      </p>
-      <p>
-        <strong>Equipos:</strong>
-        @for (team of user?.teams; track team.id) {
-          <li>{{team.name}}</li>
-        }
-      </p>
-      <p>
-        <strong>Fecha de Alta:</strong> {{user?.createdAt | date: 'dd/MM/yyyy HH:mm' }}hs
-      </p>
-      <p>
-        <strong>Fecha de Modificación:</strong> {{user?.updatedAt | date: 'dd/MM/yyyy HH:mm' }}hs
-      </p>
-      <ng-template pTemplate="footer">
-        <div class="flex gap-2 mt-1">
-          <button [routerLink]="['/user-form', user?.id]" class="button">Editar</button>
-        </div>
-      </ng-template>
-    </p-card>
-</div>
+<body class="min-h-screen">
+  <div class="flex gap-4 flex-wrap">
+      <p-card
+        header="{{ user?.userName }}"
+        [style]="{ width: '360px'}"
+      >
+        <ng-template pTemplate="header">
+          <img
+            alt="Card"
+            src="https://primefaces.org/cdn/primeng/images/card-ng.jpg"
+          />
+        </ng-template>
+        <p>
+          <strong>Nombre:</strong> {{ user?.name }} {{ user?.lastName }}
+        </p>
+        <p>
+          <strong>Email:</strong> {{ user?.email }}
+        </p>
+        <p>
+          <strong>Equipos:</strong>
+          @for (team of user?.teams; track team.id) {
+            <li>{{team.name}}</li>
+          }
+        </p>
+        <p>
+          <strong>Fecha de Alta:</strong> {{user?.createdAt | date: 'dd/MM/yyyy HH:mm' }}hs
+        </p>
+        <p>
+          <strong>Fecha de Modificación:</strong> {{user?.updatedAt | date: 'dd/MM/yyyy HH:mm' }}hs
+        </p>
+        <ng-template pTemplate="footer">
+          <div class="flex gap-2 mt-1">
+            <button [routerLink]="['/user-form', user?.id]" class="button">Editar</button>
+          </div>
+        </ng-template>
+      </p-card>
+  </div>
+</body>

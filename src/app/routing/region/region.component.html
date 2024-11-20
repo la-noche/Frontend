@@ -1,28 +1,30 @@
-<div class="flex flex-column gap-2">
-    <button [routerLink]="['/region-form', 'new']" class="button">
-        Crear nueva Region
-    </button>
-    <div class="flex gap-4 flex-wrap">
-        @for (region of regionList; track region.id) {
-        <p-card header="{{ region.name }}" [style]="{ width: '360px'}">
-            <ng-template pTemplate="header">
-                <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
-            </ng-template>
-            <p>
-                {{ region.description }}
-            </p>
-            <ng-template pTemplate="footer">
-                <div class="flex gap-2 mt-1">
-                    <p-button (onClick)="deleteRegion(region.id)" label="Borrar" severity="secondary" />
-                    <button [routerLink]="['/region-form', region.id]" class="button">
-                        Editar
-                    </button>
-                </div>
-            </ng-template>
-        </p-card>
-        }@empty {
-        <p>No existen Regiones</p>
-        }
+<body class="min-h-screen">
+    <div class="flex flex-column gap-2">
+        <button [routerLink]="['/region-form', 'new']" class="button">
+            Crear nueva Region
+        </button>
+        <div class="flex gap-4 flex-wrap">
+            @for (region of regionList; track region.id) {
+            <p-card header="{{ region.name }}" [style]="{ width: '360px'}">
+                <ng-template pTemplate="header">
+                    <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
+                </ng-template>
+                <p>
+                    {{ region.description }}
+                </p>
+                <ng-template pTemplate="footer">
+                    <div class="flex gap-2 mt-1">
+                        <p-button (onClick)="deleteRegion(region.id)" label="Borrar" severity="secondary" />
+                        <button [routerLink]="['/region-form', region.id]" class="button">
+                            Editar
+                        </button>
+                    </div>
+                </ng-template>
+            </p-card>
+            }@empty {
+            <p>No existen Regiones</p>
+            }
+        </div>
     </div>
-</div>
+</body>
 <router-outlet></router-outlet>

@@ -20,6 +20,7 @@ import { CardModule } from 'primeng/card';
 import { gameTypeInterface } from '../../interfaces/gameType.interface.js';
 import { GameTypesService } from '../../services/game-types.service.js';
 import { DropdownModule } from 'primeng/dropdown';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @Component({
   selector: 'app-game-form',
@@ -33,6 +34,7 @@ import { DropdownModule } from 'primeng/dropdown';
     CardModule,
     RouterOutlet,
     DropdownModule,
+    FileUploadModule
   ],
   templateUrl: './game-form.component.html',
   styleUrl: './game-form.component.css',
@@ -43,6 +45,7 @@ export class GameFormComponent implements OnInit {
   edit: boolean = false;
   gameTypesList: gameTypeInterface[] = [];
   gameTypesLoaded: boolean = false;
+  imageFile: File | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -57,6 +60,7 @@ export class GameFormComponent implements OnInit {
       name: ['', Validators.required],
       description: ['', Validators.required],
       gameType: [null, Validators.required],
+      imageUrl: [null]
     });
   }
 
@@ -69,6 +73,12 @@ export class GameFormComponent implements OnInit {
     this.loadGameTypes();
   }
 
+  onImageUpload(event: any) {
+    this.imageFile = event.files[0]; 
+  }
+
+  
+
   getGameById(id: number) {
     this.gameService.getGameById(id).subscribe({
       next: (foundGame) => {
@@ -78,12 +88,13 @@ export class GameFormComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'No encontrado',
+          detail: 'Not found.',
         });
         this.router.navigateByUrl('/');
       },
     });
   }
+
 
   loadGameTypes() {
     this.gameTypeService.getGameTypes().subscribe({
@@ -95,7 +106,7 @@ export class GameFormComponent implements OnInit {
             severity: 'warn',
             summary: 'Advertencia',
             detail:
-              'No hay tipos de juego disponibles. Por favor, cargue al menos un tipo de juego antes de crear o editar juegos.',
+              'There are no game types available. Please, upload at least one game type before creating or editing a game.',
           });
           this.router.navigateByUrl('/gameTypes');
         }
@@ -104,7 +115,7 @@ export class GameFormComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'No se pudieron cargar los tipos de juego',
+          detail: 'Game types couldn`t be found.',
         });
         this.gameTypesLoaded = false;
         this.router.navigateByUrl('/');
@@ -117,17 +128,24 @@ export class GameFormComponent implements OnInit {
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
-        detail: 'Por favor, complete los campos',
+        detail: 'Please, complete the required fields and select an image.',
       });
       return;
     }
+    const formData = new FormData();
+    formData.append('name', this.formGame.value.name);
+    formData.append('description', this.formGame.value.description);
+    formData.append('gameType', this.formGame.value.gameType);
+    if (this.imageFile) {
+      formData.append('image', this.imageFile);  
+    }  
     this.isSaveInProgress = true;
-    this.gameService.createGame(this.formGame.value).subscribe({
+    this.gameService.createGame(formData).subscribe({
       next: () => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Creado',
-          detail: 'Juego guardado correctamente',
+          summary: 'Created',
+          detail: 'Game saved successfully.',
         });
         this.isSaveInProgress = false;
         this.router.navigateByUrl('/game');
@@ -137,28 +155,37 @@ export class GameFormComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'Revise los campos e intente nuevamente',
+          detail: 'Please check the fields and try again.',
         });
       },
     });
   }
+
 
   updateGame() {
     if (this.formGame.invalid) {
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
-        detail: 'Revise los campos e intente nuevamente',
+        detail: 'Please check the fields and try again.',
       });
       return;
     }
     this.isSaveInProgress = true;
-    this.gameService.updateGame(this.formGame.value).subscribe({
+    const formData = new FormData();
+    formData.append('id', this.formGame.get('id')?.value);
+    formData.append('name', this.formGame.get('name')?.value);
+    formData.append('description', this.formGame.get('description')?.value);
+    formData.append('gameType', this.formGame.get('gameType')?.value);
+    if (this.imageFile) {
+      formData.append('image', this.imageFile); 
+    }
+    this.gameService.updateGame(formData).subscribe({
       next: () => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Guardado',
-          detail: 'Juego actualizado correctamente',
+          summary: 'Updated',
+          detail: 'Game updated successfully.',
         });
         this.isSaveInProgress = false;
         this.router.navigateByUrl('/game');
@@ -168,7 +195,7 @@ export class GameFormComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'Revise los campos e intente nuevamente',
+          detail: 'Please check the fields and try again.',
         });
       },
     });

@@ -1,36 +1,28 @@
-<div class="flex flex-column gap-2">
-  <button [routerLink]="['/game-form', 'new']" class="button">
-    Crear nuevo Juego
-  </button>
-  <div class="flex gap-4 flex-wrap">
-    @for (game of gameList; track game.id) {
-    <p-card header="{{ game.name }}" [style]="{ width: '360px'}">
-      <ng-template pTemplate="header">
-        <img
-          alt="Card"
-          src={{game.imageUrl}}
-        />
-      </ng-template>
-      <p>
-        {{ game.description }}
-      </p>
-      <ng-template pTemplate="footer">
-        <div class="flex gap-2 mt-1">
-          <p-button
-            (onClick)="deleteGame(game.id)"
-            label="Borrar"
-            severity="secondary"
-          />
-          <button [routerLink]="['/game-form', game.id]" class="button">
-            Editar
-          </button>
-        </div>
-      </ng-template>
-    </p-card>
-    }@empty {
-    <p>No existen Juegos</p>
-    }
+<body class="min-h-screen">
+  <div class="flex flex-column gap-2">
+    <button pButton label="Create a new game" class="font-bold monospace-text" [routerLink]="['/game-form', 'new']">
+    </button>
+    <div class="flex gap-3 flex-no-wrap">
+      @for (game of gameList; track game.id) {
+      <p-card header="{{ game.name }}" [style]="{ width: '360px', height: '27rem' }">
+        <ng-template pTemplate="header">
+          <img alt="Card" src="http://localhost:3000{{ game.imageUrl }}" class="w-full h-12rem border-round-top">
+        </ng-template>
+        <p class="white-space-nowrap overflow-hidden text-overflow-ellipsis">
+          {{ game.description }}
+        </p>
+        <ng-template pTemplate="footer">
+          <div class="flex gap-2 mt-1">
+            <button pButton class="monospace-text w-auto" (click)="deleteGame(game.id)" label="Delete" severity="danger"></button>
+            <button pButton label="Edit" [routerLink]="['/game-form', game.id]" class="monospace-text w-auto" severity="secondary">
+            </button>
+          </div>
+        </ng-template>
+      </p-card>
+      }@empty {
+      <p class="monospace-text">There are no games available</p>
+      }
+    </div>
   </div>
-</div>
-
+</body>
 <router-outlet></router-outlet>
