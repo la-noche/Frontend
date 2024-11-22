@@ -6,6 +6,7 @@ export interface userInterface {
   email: string;
   password: string;
   iconUrl?: string;
+  competitionsCreated?: number[];
   teams?: number[];
   createdAt?: Date;
   updatedAt?: Date;

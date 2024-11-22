@@ -2,16 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
-import { PrimeIcons, MenuItem } from 'primeng/api';
+import { PrimeIcons, MenuItem, MessageService } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
 import { CommonModule } from '@angular/common';
 import { PanelModule } from 'primeng/panel';
 import { AuthService } from './services/auth.service';
+import { SidebarModule } from 'primeng/sidebar';
+import { DividerModule } from 'primeng/divider';
+import { jwtDecode } from 'jwt-decode';
+import { UserService } from './services/user.service.js';
+import { userInterface } from './interfaces/user.interface.js';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, ToastModule, ButtonModule, MenubarModule, CommonModule, PanelModule],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, ToastModule, ButtonModule, MenubarModule, CommonModule, PanelModule, SidebarModule, DividerModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
@@ -19,16 +24,18 @@ export class AppComponent implements OnInit {
   title = 'Frontend';
   items: MenuItem[] | any;
   isAuthenticated: boolean = false;
-
-  constructor(private router: Router, private authService: AuthService) {}
+  sidebarVisible: boolean = false;
+  user?: userInterface;
+  constructor(private router: Router, private authService: AuthService, private userService: UserService, private messageService: MessageService) {}
 
   ngOnInit() {
     this.authService.isAuthenticated$.subscribe(isAuthenticated => {
       this.isAuthenticated = isAuthenticated;
+    this.getUser();
     });
 
     this.items = [
-      { label: 'Home', icon: 'pi pi-home', routerLink: 'Inicio' },
+      { label: 'Home', icon: 'pi pi-home', routerLink: 'home' },
       { label: 'Game Types', icon: 'pi pi-objects-column', routerLink: 'gameTypes' },
       { label: 'Games', icon: 'pi pi-sparkles', routerLink: 'game' },
       { label: 'Regions', icon: 'pi pi-globe', routerLink: 'region' },
@@ -40,6 +47,34 @@ export class AppComponent implements OnInit {
     if (!this.isAuthenticated) {
       this.router.navigateByUrl('/login');
     }
+  }
+  
+  getUser() {
+    const userId = this.getUserIdFromToken();
+    if (userId !== null) {
+      this.userService.getUserById(userId).subscribe({
+        next: (userData) => {
+          this.user = userData;
+          console.log('User data', this.user);
+        },
+        error: () => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'User not found',
+          });
+        },
+      });
+    }
+  }
+
+  getUserIdFromToken(): number | null {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken: any = jwtDecode(token);
+      return decodedToken.id || null;
+    }
+    return null;
   }
 
   logOut() {

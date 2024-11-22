@@ -6,11 +6,12 @@ import { TeamInterface } from '../../interfaces/team.interface.js';
 import { TeamService } from '../../services/team.service.js';
 import { MessageService } from 'primeng/api';
 import { jwtDecode } from 'jwt-decode';
+import { TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-team',
   standalone: true,
-  imports: [RouterModule, RouterOutlet, CardModule, ButtonModule],
+  imports: [RouterModule, RouterOutlet, CardModule, ButtonModule, TableModule],
   templateUrl: './team.component.html',
   styleUrl: './team.component.css',
 })

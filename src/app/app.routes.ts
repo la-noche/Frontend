@@ -23,96 +23,96 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    title: 'Inicio de sesión',
+    title: 'Login',
   },
   {
     path: 'signup',
     component: SignUpComponent,
-    title: 'Registrar Usuario',
+    title: 'Signup',
   },
   {
-    path: 'inicio',
+    path: 'home',
     component: StartComponent,
-    title: 'Página de inicio'
+    title: 'Home'
   },
   {
     path: 'user',
     component: UserComponent,
-    title: 'Perfil de Usuario',
+    title: 'User profile',
   },
   {
     path: 'user-form/:id',
     component: UserFormComponent,
-    title: 'Formulario de Usuario',
+    title: 'User form',
   },
   {
     path: 'team',
     component: TeamComponent,
-    title: 'Equipos',
+    title: 'Teams',
   },
   {
     path: 'team-form/:id',
     component: TeamFormComponent,
-    title: 'Formulario de equipos',
+    title: 'Team form',
   },
   {
     path: 'gameTypes',
     component: GameTypesComponent,
-    title: 'Tipos de Juego',
+    title: 'Game types',
   },
   {
     path: 'game',
     component: GameComponent,
-    title: 'Juegos',
+    title: 'Games',
   },
   {
     path: 'gameType-form/:id',
     component: GameTypeFormComponent,
-    title: 'Formulario de Tipos de Juego',
+    title: 'Game types form',
   },
   {
     path: 'game-form/:id',
     component: GameFormComponent,
-    title: 'Formulario de Juegos',
+    title: 'Game form',
   },
   {
     path: 'competition',
     component: CompetitionComponent,
-    title: 'Competiciones',
+    title: 'Competitions',
   },
   {
     path: 'competition-form/:id',
     component: CompetitionFormComponent,
-    title: 'Formulario de competiciones',
+    title: 'Competition form',
   },
   {
     path: 'inscription-form/:id',
     component: InscriptionFormComponent,
-    title: 'Formulario de Inscripciones',
+    title: 'Inscription form',
   },
   {
     path: 'region',
     component: RegionComponent,
-    title: 'Regiones',
+    title: 'Regions',
   },
   {
     path: 'region-form/:id',
     component: RegionFormComponent,
-    title: 'Formulario de Regiones',
+    title: 'Region form',
   },
   {
     path: 'news',
     component: NewsComponent,
-    title: 'Noticias',
+    title: 'News',
   },
   {
     path: 'news-form/:id',
     component: NewsFormComponent,
-    title: 'Formulario de Noticias',
+    title: 'News form',
   },
   {
     path: '**',
-    redirectTo: 'inicio',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
 ];

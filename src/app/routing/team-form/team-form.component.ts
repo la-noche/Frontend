@@ -5,11 +5,12 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { jwtDecode } from 'jwt-decode';
 import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-team-form',
   standalone: true,
-  imports: [RouterModule, ReactiveFormsModule, FormsModule, ButtonModule],
+  imports: [RouterModule, ReactiveFormsModule, FormsModule, ButtonModule, InputTextModule],
   templateUrl: './team-form.component.html',
   styleUrl: './team-form.component.css',
 })
