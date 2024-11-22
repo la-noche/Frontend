@@ -5,6 +5,7 @@ export interface userInterface {
   userName: string;
   email: string;
   password: string;
+  iconUrl?: string;
   teams?: number[];
   createdAt?: Date;
   updatedAt?: Date;

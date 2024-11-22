@@ -4,14 +4,17 @@ import { UserService } from '../../services/user.service.js';
 import { userInterface } from '../../interfaces/user.interface.js';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
-import { CardModule } from 'primeng/card';
+import { ImageModule } from 'primeng/image';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { DividerModule } from 'primeng/divider';
+import { TableModule } from 'primeng/table';
+
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [ButtonModule, CardModule, RouterModule, RouterOutlet, DatePipe],
+  imports: [ButtonModule, RouterModule, RouterOutlet, DatePipe, ImageModule, DividerModule, ButtonModule, TableModule],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',
 })
@@ -48,7 +51,7 @@ export class UserComponent implements OnInit {
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
-            detail: 'No se pudo encontrar el usuario',
+            detail: 'User not found',
           });
         },
       });

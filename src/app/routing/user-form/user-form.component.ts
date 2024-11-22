@@ -4,17 +4,20 @@ import { MessageService } from 'primeng/api';
 import { UserService } from '../../services/user.service.js';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @Component({
   selector: 'app-user-form',
   standalone: true,
-  imports: [RouterModule, ReactiveFormsModule, FormsModule, ButtonModule],
+  imports: [RouterModule, ReactiveFormsModule, FormsModule, ButtonModule, InputTextModule, FileUploadModule],
   templateUrl: './user-form.component.html',
   styleUrl: './user-form.component.css',
 })
 export class UserFormComponent implements OnInit {
   formUser!: FormGroup;
   isSaveInProgress: boolean = false;
+  imageFile: File | null = null;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -46,11 +49,15 @@ export class UserFormComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'Usuario no encontrado',
+          detail: 'User not found',
         });
         this.router.navigateByUrl('/');
       },
     });
+  }
+
+  onImageUpload(event: any) {
+    this.imageFile = event.files[0]; 
   }
 
   updateUser() {
@@ -58,17 +65,26 @@ export class UserFormComponent implements OnInit {
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
-        detail: 'Revise los campos e intente nuevamente',
+        detail: 'Check the fields and try again.',
       });
       return;
     }
     this.isSaveInProgress = true;
-    this.userService.updateUser(this.formUser.value).subscribe({
+    const formData = new FormData();
+    formData.append('id', this.formUser.get('id')?.value);
+    formData.append('name', this.formUser.get('name')?.value);
+    formData.append('lastName', this.formUser.get('lastName')?.value);
+    formData.append('userName', this.formUser.get('userName')?.value);
+    formData.append('email', this.formUser.get('email')?.value);
+    if (this.imageFile) {
+      formData.append('image', this.imageFile); 
+    }
+    this.userService.updateUser(formData).subscribe({
       next: () => {
         this.messageService.add({
           severity: 'success',
           summary: 'Guardado',
-          detail: 'Usuario actualizado correctamente',
+          detail: 'User updated successfully',
         });
         this.router.navigateByUrl('/user');
       },
@@ -77,7 +93,7 @@ export class UserFormComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: err.error.message || 'Revise los campos e intente nuevamente',
+          detail: err.error.message || 'Check the fields and try again.',
         });
       },
     });

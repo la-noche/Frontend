@@ -11,20 +11,19 @@ export class AuthService {
 
   constructor() {}
 
-  // Verifica si el token está presente en el localStorage
+
   private checkAuthStatus(): boolean {
     return !!localStorage.getItem(this.tokenKey);
   }
 
-  // Método para hacer login (guardar token)
+ 
   login(token: string): void {
     localStorage.setItem(this.tokenKey, token);
-    this.isAuthenticatedSubject.next(true);  // Actualizar el estado
+    this.isAuthenticatedSubject.next(true);  
   }
 
-  // Método para hacer logout (eliminar token)
   logout(): void {
     localStorage.removeItem(this.tokenKey);
-    this.isAuthenticatedSubject.next(false);  // Actualizar el estado
+    this.isAuthenticatedSubject.next(false);  
   }
 }

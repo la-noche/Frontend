@@ -23,12 +23,10 @@ export class AppComponent implements OnInit {
   constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit() {
-    // Suscribirse al estado de autenticación del servicio
     this.authService.isAuthenticated$.subscribe(isAuthenticated => {
       this.isAuthenticated = isAuthenticated;
     });
 
-    // Configurar los elementos del menú
     this.items = [
       { label: 'Home', icon: 'pi pi-home', routerLink: 'Inicio' },
       { label: 'Game Types', icon: 'pi pi-objects-column', routerLink: 'gameTypes' },
@@ -39,14 +37,13 @@ export class AppComponent implements OnInit {
       { label: 'News', icon: 'pi pi-th-large', routerLink: 'news' },
     ];
 
-    // Si el usuario no está autenticado, redirigirlo al login
     if (!this.isAuthenticated) {
       this.router.navigateByUrl('/login');
     }
   }
 
   logOut() {
-    this.authService.logout();  // Usar el servicio para hacer logout
+    this.authService.logout(); 
     this.router.navigateByUrl('/login');
   }
 }

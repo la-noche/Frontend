@@ -23,7 +23,7 @@ export class UserService {
     return this.http.get<userInterface>(`${this.apiUrl}/${id}`);
   }
 
-  updateUser(user: userInterface): Observable<userInterface> {
-    return this.http.put<userInterface>(`${this.apiUrl}/${user.id}`, user);
+  updateUser(user: FormData): Observable<userInterface> {
+    return this.http.put<userInterface>(`${this.apiUrl}/${user.get('id')}`, user);
   }
 }
