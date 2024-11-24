@@ -1,0 +1,25 @@
+.team-details {
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.team-header,
+.team-players,
+.team-statistics {
+    margin-bottom: 20px;
+}
+
+h3 {
+    color: #3a3a3a;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+}

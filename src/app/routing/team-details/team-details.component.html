@@ -1,0 +1,42 @@
+
+<body class="min-h-screen justify-content-center">
+    <div class="surface-50 p-5 flex border-round border-2 border-primary h-full"> 
+        <header>
+            <div class="flex justify-content-left align-items-center ">
+                <button pButton class="mb-4" [routerLink]="'/team'">
+                    <i class="pi pi-arrow-left"></i>
+                </button>
+            </div>
+            <div class=" justify-content-center monospace-text mb-4 font-bold text-primary text-3xl">
+                ID: <span class="text-color-secondary"> {{ foundTeam.id }} </span>
+            </div>
+            <div class=" justify-content-center monospace-text mb-4 font-bold text-primary text-3xl">
+                Team: <span class="text-color-secondary"> {{ foundTeam.name }} </span> 
+            </div>
+            <div class=" justify-content-center monospace-text mb-4 font-bold text-primary text-3xl">
+                Points: <span class="text-color-secondary"> {{ foundTeam.points }} </span>
+            </div>
+            <div class=" justify-content-center monospace-text mb-4 font-bold text-primary text-3xl">
+                Players:
+            <p-table [value]="foundTeam.players" [responsiveLayout]="'scroll'">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="text 3xl">Username</th>
+                        <th class="text 3xl">Name</th>
+                        <th class="text 3xl">Lastname</th>
+                        <th class="text 3xl">Email</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-player>
+                    <tr>
+                        <td class="text-color-secondary text 3xl">{{ player.userName }}</td>
+                        <td class="text-color-secondary text 3xl">{{ player.name }}</td>
+                        <td class="text-color-secondary text 3xl">{{ player.lastName }}</td>
+                        <td class="text-color-secondary text 3xl">{{ player.email }}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+            </div>
+        </header>
+    </div>
+</body>

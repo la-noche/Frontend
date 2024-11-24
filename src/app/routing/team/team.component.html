@@ -21,7 +21,7 @@
         </ng-template>
         <ng-template pTemplate="body" let-team>
           <tr>
-            <td>{{ team.name }}</td>
+            <td> <a [routerLink]="['/team-details', team.id]" class="monospace-text m-1" > {{ team.name }} </a> </td>
             <td>{{ team.points }}</td>
             <td>{{ team.players ? team.players.length :0}}</td>
             <td><button pButton (click)="joinTeam(team.id)" label="Join team" severity="success" class="monospace-text m-1"></button></td>

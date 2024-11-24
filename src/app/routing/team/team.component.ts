@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { TeamInterface } from '../../interfaces/team.interface.js';
@@ -11,7 +11,7 @@ import { TableModule } from 'primeng/table';
 @Component({
   selector: 'app-team',
   standalone: true,
-  imports: [RouterModule, RouterOutlet, CardModule, ButtonModule, TableModule],
+  imports: [RouterModule, RouterOutlet, RouterLink, CardModule, ButtonModule, TableModule],
   templateUrl: './team.component.html',
   styleUrl: './team.component.css',
 })
