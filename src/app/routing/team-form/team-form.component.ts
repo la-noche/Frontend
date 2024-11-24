@@ -49,7 +49,7 @@ export class TeamFormComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'No encontrado',
+          detail: 'Not found.',
         });
         this.router.navigateByUrl('/');
       },
@@ -71,7 +71,7 @@ export class TeamFormComponent implements OnInit {
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
-        detail: 'Por favor, complete los campos',
+        detail: 'Please, complete the required fields.',
       });
       return;
     }
@@ -87,8 +87,8 @@ export class TeamFormComponent implements OnInit {
       next: () => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Creado',
-          detail: 'Equipo guardado correctamente',
+          summary: 'Created',
+          detail: 'Team saved successfully',
         });
         this.isSaveInProgress = false;
         this.router.navigateByUrl('/team');
@@ -98,7 +98,7 @@ export class TeamFormComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: err.error.message || 'Revise los campos e intente nuevamente',
+          detail: err.error.message || 'Check the fields and try again.',
         });
       },
     });
@@ -109,7 +109,7 @@ export class TeamFormComponent implements OnInit {
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
-        detail: 'Revise los campos e intente nuevamente',
+        detail: 'Check the fields and try again.',
       });
       return;
     }
@@ -118,8 +118,8 @@ export class TeamFormComponent implements OnInit {
         next: () => {
           this.messageService.add({
             severity: 'success',
-            summary: 'Guardado',
-            detail: 'Equipo actualizado correctamente',
+            summary: 'Updated',
+            detail: 'Team updated successfully.',
           });
           this.isSaveInProgress = false;
           this.router.navigateByUrl('/team');
@@ -129,7 +129,7 @@ export class TeamFormComponent implements OnInit {
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
-            detail: err.error.message || 'Revise los campos e intente nuevamente',
+            detail: err.error.message || 'Check the fields and try again.',
           });
         },
       });

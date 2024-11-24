@@ -104,7 +104,7 @@ export class GameFormComponent implements OnInit {
         if (!this.gameTypesLoaded) {
           this.messageService.add({
             severity: 'warn',
-            summary: 'Advertencia',
+            summary: 'Warning',
             detail:
               'There are no game types available. Please, upload at least one game type before creating or editing a game.',
           });

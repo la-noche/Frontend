@@ -49,8 +49,8 @@ export class TeamComponent implements OnInit {
       next: () => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Correcto',
-          detail: 'Te has unido al equipo',
+          summary: 'Success',
+          detail: 'You joined the team.',
         });
         this.getTeams();
       },
@@ -58,7 +58,7 @@ export class TeamComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: err.error.message || 'No se pudo unir al equipo',
+          detail: err.error.message || 'You cannot join the team.',
         });
       },
     });
@@ -70,8 +70,8 @@ export class TeamComponent implements OnInit {
       next: () => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Correcto',
-          detail: 'Te has salido del equipo',
+          summary: 'Success',
+          detail: 'You left the team.',
         });
         this.getTeams();
       },
@@ -79,7 +79,7 @@ export class TeamComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: err.error.message || 'No se pudo salir del equipo',
+          detail: err.error.message || 'You cannot leave the team.',
         });
       },
     });
@@ -91,8 +91,8 @@ export class TeamComponent implements OnInit {
       next: () => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Correcto',
-          detail: 'Equipo eliminado',
+          summary: 'Success',
+          detail: 'Team deleted.',
         });
         this.isDeleteInProgress = false;
         this.getTeams();
@@ -102,7 +102,7 @@ export class TeamComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'No se pudo eliminar el equipo',
+          detail: 'Team cannot be deleted.',
         });
       },
     });

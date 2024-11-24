@@ -1,52 +1,46 @@
 <body class="min-h-screen"> 
-  <div class="flex flex-column gap-2">
-      <button [routerLink]="['/competition-form', 'new']" class="button">
-        Crear nueva competicion
-      </button>
-      <div class="flex gap-4 flex-wrap">
-        @for (competition of competitionList; track competition.id) {
-        <p-card header="{{ competition.name }}" [style]="{ width: '360px'}">
-          <ng-template pTemplate="header">
-            <img
-              alt="Card"
-              src="https://primefaces.org/cdn/primeng/images/card-ng.jpg"
-            />
-          </ng-template>
-          <p>
-            <strong>Tipo: </strong>{{ competition.type }}
-          </p>
-          <p>
-            <strong>Juego: </strong>{{ competition.game.name }}
-          </p>
-          <p>
-            <strong>Region: </strong>{{ competition.region.name }}
-          </p>
-          <p>
-            <strong>Fecha Desde: </strong>{{ competition.dateStart | date: 'dd/MM/yyyy HH:mm'}}hs
-          </p>
-          <p>
-            <strong>Fecha Hasta: </strong>{{ competition.dateEnding | date: 'dd/MM/yyyy HH:mm'}}hs
-          </p>
-          <ng-template pTemplate="footer">
-            <div class="flex gap-2 mt-1">
-              <p-button
-                (onClick)="deleteCompetition(competition.id)"
-                label="Borrar"
-                severity="secondary"
-              />
-              <button [routerLink]="['/competition-form', competition.id]" class="button">
-                Editar
-              </button>
-              <p-button [routerLink]="['/inscription-form', competition.id]">
-                Inscribirse
-              </p-button>            
-            </div>
-          </ng-template>
-        </p-card>
-        }@empty {
-        <p>No existen competiciones</p>
-        }
-      </div>
+  <div class="flex flex-column">
+    <button pButton label="Create a new competition" class="font-bold monospace-text" [routerLink]="['/competition-form', 'new']"></button>
+    <div class="flex gap-4 flex-wrap mt-2">
+      <p-table [value]="competitionList" [tableStyle]="{'min-width': '117rem'}" styleClass="monospace-text">
+        <ng-template pTemplate="caption">
+          <div class="flex align-items-center justify-content-between">
+            Competitions
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Game</th>
+            <th>Region</th>
+            <th>Creator</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-competition>
+          <tr>
+            <td>{{ competition.name }}</td>
+            <td>{{ competition.type }}</td>
+            <td>{{ competition.game.name}}</td>
+            <td>{{ competition.region.name}}</td>
+            <td>{{ competition.userCreator.userName }}</td>
+            <td>{{ competition.dateStart | date: 'yyyy-MM-dd HH:mm' }}</td>
+            <td>{{ competition.dateEnding | date: 'yyyy-MM-dd HH:mm' }}</td>
+            <td><button pButton [routerLink]="['/inscription-form', competition.id]" label="Join competition" severity="success"
+                class="monospace-text m-1"></button></td>
+            <td><button pButton [routerLink]="['/competition-form', competition.id]" label="Edit competition" severity="primary"
+                class="monospace-text m-1"></button></td>
+            <td><button pButton (click)="deleteCompetition(competition.id)" label="Delete competition" severity="danger"
+                class="monospace-text m-1"></button></td>
+          </tr>
+        </ng-template>
+      </p-table>
     </div>
+  </div>
 </body>
 <router-outlet></router-outlet>

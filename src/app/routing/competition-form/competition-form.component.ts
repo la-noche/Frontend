@@ -22,7 +22,7 @@ import { GameService } from '../../services/game.service.js';
 import { RegionInterface } from '../../interfaces/region.interface.js';
 import { RegionService } from '../../services/region.service.js';
 import { DropdownModule } from 'primeng/dropdown';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-competition-form',
@@ -48,7 +48,7 @@ export class CompetitionFormComponent implements OnInit {
   gamesLoaded: boolean = false;
   regionsList: RegionInterface[] = [];
   regionsLoaded: boolean = false;
-  types = [{name: 'De pago', value: 'pago'}, {name: 'Gratuita', value: 'gratuita'}];
+  types = [{name: 'Not free', value: 'not free'}, {name: 'Free', value: 'free'}];
 
   constructor(
     private fb: FormBuilder,
@@ -80,6 +80,15 @@ export class CompetitionFormComponent implements OnInit {
     this.loadRegions();
   }
 
+    DatesInvalid(dateStart: string, dateEnding: string): boolean {
+    const start = new Date(dateStart);
+    const end = new Date(dateEnding);
+    if (start >= end) {
+      return true;
+    }
+    return false;
+    }
+
   getCompetitionById(id: number) {
     this.competitionService.getCompetitionById(id).subscribe({
       next: (foundCompetition) => {
@@ -89,7 +98,7 @@ export class CompetitionFormComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'No encontrado',
+          detail: 'Not found.',
         });
         this.router.navigateByUrl('/');
       },
@@ -104,9 +113,9 @@ export class CompetitionFormComponent implements OnInit {
         if (!this.gamesLoaded) {
           this.messageService.add({
             severity: 'warn',
-            summary: 'Advertencia',
+            summary: 'Warning',
             detail:
-              'No hay juegos disponibles. Por favor, cargue al menos un juego antes de crear o editar competiciones.',
+              'There are no games available. Please, upload at least one game before creating or editing a competition.',
           });
           this.router.navigateByUrl('/game');
         }
@@ -115,7 +124,7 @@ export class CompetitionFormComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'No se pudieron cargar los juegos',
+          detail: 'Games couldn`t be found.',
         });
         this.gamesLoaded = false;
         this.router.navigateByUrl('/');
@@ -131,9 +140,9 @@ export class CompetitionFormComponent implements OnInit {
         if (!this.regionsLoaded) {
           this.messageService.add({
             severity: 'warn',
-            summary: 'Advertencia',
+            summary: 'Warning',
             detail:
-              'No hay regiones disponibles. Por favor, cargue al menos una region antes de crear o editar competiciones.',
+              'There are no regions available. Please, upload at least one region before creating or editing a competition.',
           });
           this.router.navigateByUrl('/region');
         }
@@ -142,7 +151,7 @@ export class CompetitionFormComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'No se pudieron cargar las regiones',
+          detail: 'Regions couldn`t be found.',
         });
         this.regionsLoaded = false;
         this.router.navigateByUrl('/');
@@ -162,11 +171,19 @@ export class CompetitionFormComponent implements OnInit {
 
   createCompetition() {
     const userId = this.getUserIdFromToken();
+    if (userId === null) {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Authenticated user couldn`t be found.',
+    });
+    return;
+    }
     if (this.formCompetition.invalid) {
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
-        detail: 'Por favor, complete los campos',
+        detail: 'Please, complete the required fields.',
       });
       return;
     }
@@ -180,13 +197,21 @@ export class CompetitionFormComponent implements OnInit {
       region: this.formCompetition.value.region,
       userCreator: userId,
     };
+    if (this.DatesInvalid(competitionData.dateStart, competitionData.dateEnding)) {
+      this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Start date cannot be higher than end date.',
+    });
+    return;
+    }
     this.isSaveInProgress = true;
     this.competitionService.createCompetition(competitionData).subscribe({
         next: () => {
           this.messageService.add({
             severity: 'success',
-            summary: 'Creado',
-            detail: 'Competicion guardada correctamente',
+            summary: 'Created',
+            detail: 'Competition saved successfully.',
           });
           this.isSaveInProgress = false;
           this.router.navigateByUrl('/competition');
@@ -196,7 +221,7 @@ export class CompetitionFormComponent implements OnInit {
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
-            detail: 'Revise los campos e intente nuevamente',
+            detail: 'Check the fields and try again.',
           });
         },
       });
@@ -207,17 +232,26 @@ export class CompetitionFormComponent implements OnInit {
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
-        detail: 'Revise los campos e intente nuevamente',
+        detail: 'Please, complete the required fields.',
       });
       return;
+    }
+    const { dateStart, dateEnding } = this.formCompetition.value;
+    if (this.DatesInvalid(dateStart, dateEnding)) {
+      this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Start date cannot be higher than end date.',
+    });
+    return;
     }
     this.isSaveInProgress = true;
     this.competitionService.updateCompetition(this.formCompetition.value).subscribe({
         next: () => {
           this.messageService.add({
             severity: 'success',
-            summary: 'Guardado',
-            detail: 'Competicion actualizada correctamente',
+            summary: 'Updated',
+            detail: 'Competition updated successfully.',
           });
           this.isSaveInProgress = false;
           this.router.navigateByUrl('/competition');
@@ -227,7 +261,7 @@ export class CompetitionFormComponent implements OnInit {
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
-            detail: 'Revise los campos e intente nuevamente',
+            detail: 'Check the fields and try again.',
           });
         },
       });

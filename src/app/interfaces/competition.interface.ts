@@ -6,5 +6,5 @@ export interface competitionInterface{
     dateEnding: Date;
     game: number;
     region: number;
-
+    userCreator: number;
 }

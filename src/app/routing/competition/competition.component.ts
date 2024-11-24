@@ -6,11 +6,12 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { DatePipe } from '@angular/common';
+import { TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-competition',
   standalone: true,
-  imports: [RouterModule, RouterOutlet, CardModule, ButtonModule, DatePipe],
+  imports: [RouterModule, RouterOutlet, CardModule, ButtonModule, DatePipe, TableModule],
   templateUrl: './competition.component.html',
   styleUrl: './competition.component.css',
 })
@@ -39,8 +40,8 @@ export class CompetitionComponent implements OnInit {
       next: () => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Correcto',
-          detail: 'Competicion eliminada',
+          summary: 'Success',
+          detail: 'Competition deleted.',
         });
         this.isDeleteInProgress = false;
         this.getCompetitions();
@@ -50,7 +51,7 @@ export class CompetitionComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'No se pudo eliminar la competicion',
+          detail: 'Competition cannot be deleted.',
         });
       },
     });
