@@ -23,7 +23,7 @@ export class UserComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private messageService: MessageService
+    private messageService: MessageService,
   ) {}
 
   ngOnInit(): void {

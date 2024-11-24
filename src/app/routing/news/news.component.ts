@@ -2,14 +2,15 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NewsInterface } from '../../interfaces/news.interface.js';
 import { NewsService } from '../../services/news.service.js';
 import { MessageService } from 'primeng/api';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
+import { CarouselModule } from 'primeng/carousel';
 
 @Component({
   selector: 'app-news',
   standalone: true,
-  imports: [RouterModule, RouterOutlet, CardModule, ButtonModule],
+  imports: [RouterModule, RouterOutlet, CardModule, ButtonModule, CarouselModule],
   templateUrl: './news.component.html',
   styleUrl: './news.component.css'
 })
@@ -17,11 +18,27 @@ import { ButtonModule } from 'primeng/button';
 export class NewsComponent implements OnInit {
   newsList: NewsInterface[] = [];
   isDeleteInProgress: boolean = false;
+  responsiveOptions: any[];
 
-  constructor(
-    private newsService: NewsService,
-    private messageService: MessageService
-  ) {}
+  constructor(private router: Router, private newsService: NewsService, private messageService: MessageService) {
+      this.responsiveOptions = [
+      {
+        breakpoint: '1024px',
+        numVisible: 3,
+        numScroll: 1
+      },
+      {
+        breakpoint: '768px',
+        numVisible: 2,
+        numScroll: 1
+      },
+      {
+        breakpoint: '560px',
+        numVisible: 1,
+        numScroll: 1
+      }
+    ];
+  }
 
   ngOnInit(): void {
     this.getNews();
