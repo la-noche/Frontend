@@ -27,7 +27,7 @@ export class LoginComponent {
         severity: 'error',
         summary: 'Error',
         detail:
-          'Todos los campos son obligatorios, por favor, complete los campos',
+          'Please, complete the required fields',
       });
       return;
     };
@@ -44,8 +44,8 @@ export class LoginComponent {
         this.authService.login(token); 
         this.messageService.add({
           severity: 'success',
-          summary: 'Bienvenido',
-          detail: `Te damos la bienvenida ${this.userName}, gracias por visitarnos`,
+          summary: 'Welcome',
+          detail: `Greetings ${this.userName}, thanks for visiting`,
         });
       },
       error: (errorResponse) => {

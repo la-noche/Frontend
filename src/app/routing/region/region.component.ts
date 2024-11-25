@@ -39,8 +39,8 @@ export class RegionComponent implements OnInit {
       next: () => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Correcto',
-          detail: 'Region eliminada',
+          summary: 'Success',
+          detail: 'Region successfuly deleted',
         });
         this.isDeleteInProgress = false;
         this.getRegions();
@@ -50,7 +50,7 @@ export class RegionComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'No se pudo eliminar la Region',
+          detail: 'Region cannot be deleted',
         });
       },
     });

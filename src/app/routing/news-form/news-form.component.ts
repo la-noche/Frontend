@@ -75,7 +75,7 @@ export class NewsFormComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'No encontrado',
+          detail: 'Not found',
         });
         this.router.navigateByUrl('/');
       },
@@ -87,7 +87,7 @@ export class NewsFormComponent implements OnInit {
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
-        detail: 'Por favor, complete los campos',
+        detail: 'Please, complete the required fields',
       });
       return;
     }
@@ -96,8 +96,8 @@ export class NewsFormComponent implements OnInit {
       next: () => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Creada',
-          detail: 'Noticia guardada correctamente',
+          summary: 'Created',
+          detail: 'News saved succesfully',
         });
         this.isSaveInProgress = false;
         this.router.navigateByUrl('/news');
@@ -107,7 +107,7 @@ export class NewsFormComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'Revise los campos e intente nuevamente',
+          detail: 'Please check the fields and try again',
         });
       },
     });
@@ -119,7 +119,7 @@ export class NewsFormComponent implements OnInit {
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
-        detail: 'Revise los campos e intente nuevamente',
+        detail: 'Please check the fields and try again',
       });
       return;
     }
@@ -129,7 +129,7 @@ export class NewsFormComponent implements OnInit {
         this.messageService.add({
           severity: 'success',
           summary: 'Guardado',
-          detail: 'Noticia actualizada correctamente',
+          detail: 'News succesfully updated',
         });
         this.isSaveInProgress = false;
         this.router.navigateByUrl('/news');
@@ -139,7 +139,7 @@ export class NewsFormComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'Revise los campos e intente nuevamente',
+          detail: 'Please check the fields and try again',
         });
       },
     });

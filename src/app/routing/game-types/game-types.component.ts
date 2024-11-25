@@ -5,11 +5,13 @@ import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { DatePipe } from '@angular/common';
+import { TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-game-types',
   standalone: true,
-  imports: [ButtonModule, CardModule, RouterModule, RouterOutlet],
+  imports: [ButtonModule, CardModule, RouterModule, RouterOutlet, DatePipe, TableModule],
   templateUrl: './game-types.component.html',
   styleUrl: './game-types.component.css',
 })
@@ -37,8 +39,8 @@ export class GameTypesComponent implements OnInit {
       next: () => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Correcto',
-          detail: 'Tipo de Juego eliminado',
+          summary: 'Success',
+          detail: 'Game type deleted',
         });
         this.isDeleteInProgress = false;
         this.getGames();
@@ -48,7 +50,7 @@ export class GameTypesComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'No se pudo eliminar el Tipo de Juego, porque hay un Juego de este tipo',
+          detail: 'Game type cannot be deleted, there is a game with this game type',
         });
       },
     });

@@ -56,8 +56,8 @@ export class NewsComponent implements OnInit {
       next: () => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Correcto',
-          detail: 'Noticia eliminada',
+          summary: 'OK',
+          detail: 'News deleted',
         });
         this.isDeleteInProgress = false;
         this.getNews();
@@ -67,7 +67,7 @@ export class NewsComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'No se pudo eliminar la noticia',
+          detail: 'could not delete news',
         });
       },
     });

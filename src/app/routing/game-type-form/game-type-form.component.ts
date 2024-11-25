@@ -69,7 +69,7 @@ export class GameTypeFormComponent {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'No encontrado',
+          detail: 'Not found',
         });
         this.router.navigateByUrl('/');
       },
@@ -81,7 +81,7 @@ export class GameTypeFormComponent {
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
-        detail: 'Por favor, complete los campos',
+        detail: 'Please, complete the required fields',
       });
       return;
     }
@@ -91,7 +91,7 @@ export class GameTypeFormComponent {
         this.messageService.add({
           severity: 'success',
           summary: 'Creado',
-          detail: 'Tipo de Juego guardado correctamente',
+          detail: 'Game type succesfully created',
         });
         this.isSaveInProgress = false;
         this.router.navigateByUrl('/gameTypes');
@@ -101,7 +101,7 @@ export class GameTypeFormComponent {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'Revise los campos e intente nuevamente',
+          detail: 'Please check the fields and try again.',
         });
       },
     });
@@ -112,7 +112,7 @@ export class GameTypeFormComponent {
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
-        detail: 'Revise los campos e intente nuevamente',
+        detail: 'Please check the fields and try again.',
       });
       return;
     }
@@ -121,8 +121,8 @@ export class GameTypeFormComponent {
       next: () => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Guardado',
-          detail: 'Tipo de Juego actualizado correctamente',
+          summary: 'Updated',
+          detail: 'Game type updated succesfully',
         });
         this.isSaveInProgress = false;
         this.router.navigateByUrl('/gameTypes');
@@ -132,7 +132,7 @@ export class GameTypeFormComponent {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'Revise los campos e intente nuevamente',
+          detail: 'Please check the fields and try again.',
         });
       },
     });

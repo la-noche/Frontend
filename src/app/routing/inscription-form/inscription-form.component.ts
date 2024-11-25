@@ -65,7 +65,7 @@ export class InscriptionFormComponent implements OnInit {
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
-            detail: 'No se pudo encontrar el usuario',
+            detail: 'Could not find user',
           });
         },
       });
@@ -77,7 +77,7 @@ export class InscriptionFormComponent implements OnInit {
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
-        detail: 'Por favor, seleccione un equipo',
+        detail: 'Please select a team',
       });
       return;
     }
@@ -88,7 +88,7 @@ export class InscriptionFormComponent implements OnInit {
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
-        detail: 'ID de competición inválido',
+        detail: 'invalid competition ID',
       });
       return;
     }
@@ -108,8 +108,8 @@ export class InscriptionFormComponent implements OnInit {
       next: () => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Inscripción exitosa',
-          detail: 'Te has inscrito correctamente a la competición',
+          summary: 'Inscription was a success',
+          detail: 'You have successfully registered for the competition',
         });
         this.router.navigateByUrl('/competition');
       },
@@ -117,7 +117,7 @@ export class InscriptionFormComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: err.error.message || 'No se pudo completar la inscripción',
+          detail: err.error.message || 'Could not finish inscription',
         });
       },
     });

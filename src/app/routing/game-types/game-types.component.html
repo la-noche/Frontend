@@ -1,34 +1,32 @@
-<body class="min-h-screen">
-  <div class="flex flex-column gap-2">
-    <button [routerLink]="['/gameType-form', 'new']" class="button">
-      Crear nuevo Tipo de Juego
-    </button>
-    <div class="flex gap-4 flex-wrap">
-      @for (gameType of gameTypesList; track gameType.id) {
-      <p-card
-        header="{{ gameType.name }}"
-        [style]="{ width: '360px'}"
-        
-      >
-        <ng-template pTemplate="header">
-          <img
-            alt="Card"
-            src="https://primefaces.org/cdn/primeng/images/card-ng.jpg"
-          />
-        </ng-template>
-        <p>
-          {{ gameType.description }}
-        </p>
-        <ng-template pTemplate="footer">
-          <div class="flex gap-2 mt-1">
-            <button pButton (onClick)="deleteGameType(gameType.id)" label="Delete" icon="pi pi-trash" class="monospace-text w-auto" severity="danger"> </button>
-            <button pButton label="Edit" icon="pi pi-pencil" [routerLink]="['/gameType-form', gameType.id]" class="monospace-text w-auto" severity="secondary"> </button>
+<body class="min-h-screen"> 
+  <div class="flex flex-column">
+    <button pButton label="Create a new game type" class="font-bold monospace-text" [routerLink]="['/gameType-form', 'new']"></button>
+    <div class="flex gap-4 flex-wrap mt-2">
+      <p-table [value]="gameTypesList" [tableStyle]="{'min-width': '117rem'}" styleClass="monospace-text">
+        <ng-template pTemplate="caption">
+          <div class="flex align-items-center justify-content-between">
+            game types
           </div>
         </ng-template>
-      </p-card>
-      }@empty {
-      <p>No existen Tipos de Juego</p>
-      }
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-gameType>
+          <tr>
+            <td>{{ gameType.name }}</td>
+            <td>{{ gameType.description }}</td>
+            <td><button pButton [routerLink]="['/gameType-form', gameType.id]" label="Edit" severity="secondary"
+                class="monospace-text m-1"></button></td>
+            <td><button pButton (click)="deleteGameType(gameType.id)" label="Delete" severity="danger"
+                class="monospace-text m-1"></button></td>
+          </tr>
+        </ng-template>
+      </p-table>
     </div>
   </div>
 </body>
