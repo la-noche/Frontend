@@ -5,8 +5,7 @@ import { userInterface } from '../../interfaces/user.interface.js';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { ImageModule } from 'primeng/image';
-import { RouterModule, RouterOutlet } from '@angular/router';
-import { DatePipe } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { DividerModule } from 'primeng/divider';
 import { TableModule } from 'primeng/table';
 
@@ -14,7 +13,7 @@ import { TableModule } from 'primeng/table';
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [ButtonModule, RouterModule, RouterOutlet, DatePipe, ImageModule, DividerModule, ButtonModule, TableModule],
+  imports: [ButtonModule, RouterModule, ImageModule, DividerModule, ButtonModule, TableModule],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',
 })
