@@ -39,7 +39,7 @@ export class GameComponent implements OnInit {
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
-          detail: 'Game deleted',
+          detail: 'Game deleted successfully.',
         });
         this.isDeleteInProgress = false;
         this.getGames();
@@ -49,7 +49,7 @@ export class GameComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'Game cannot be deleted',
+          detail: 'Game cannot be deleted.',
         });
       },
     });

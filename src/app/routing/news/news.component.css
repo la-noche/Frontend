@@ -1,47 +1,46 @@
-.button {
-    background: linear-gradient(140.14deg, #b10eec 15.05%, #531fd6 114.99%) padding-box,
-        linear-gradient(142.51deg, #fa64e8 8.65%, #530385 88.82%) border-box;
-    border-radius: 7px;
-    border: 2px solid transparent;
+.news-item {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
 
-    text-shadow: 1px 1px 1px #00000040;
-    box-shadow: 8px 8px 20px 0px #45090059;
+  .image-container {
+    position: relative;
+    width: 100%;
+    height: 25rem;
+    overflow: hidden;
+    border-radius: 8px;
 
-    width: fit-content;
-    padding: 10px 40px;
-    line-height: 20px;
-    cursor: pointer;
-    transition: all 0.3s;
-    color: white;
-    font-size: 18px;
-    font-weight: 500;
-}
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.5s ease;
+    }
 
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: block;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      color: #fff;
+      text-align: justify;
+      padding: 0 10px;
+    }
 
-.button:hover {
-    box-shadow: none;
-    opacity: 80%;
-}
+    &:hover img {
+      filter: blur(4px);
+      transform: scale(1.1);
+    }
 
-.activebutton {
-    background: linear-gradient(140.14deg, #433999 15.05%, #6b1173 114.99%) padding-box,
-        linear-gradient(142.51deg, #6c5cf7 8.65%, #4f1b52 88.82%) border-box;
-    border-radius: 7px;
-    border: 2px solid transparent;
-
-    text-shadow: 1px 1px 1px #00000040;
-    box-shadow: 8px 8px 20px 0px #45090059;
-
-    padding: 10px 40px;
-    line-height: 20px;
-    cursor: pointer;
-    transition: all 0.3s;
-    color: white;
-    font-size: 18px;
-    font-weight: 500;
-}
-
-.activebutton:hover {
-    box-shadow: none;
-    opacity: 80%;
+    &:hover .overlay {
+      opacity: 1;
+    }
+  }
 }

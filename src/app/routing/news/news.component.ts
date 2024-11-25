@@ -6,19 +6,23 @@ import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { CarouselModule } from 'primeng/carousel';
+import { AnimateOnScrollModule } from 'primeng/animateonscroll';
+import { DialogModule } from 'primeng/dialog';
 
 @Component({
   selector: 'app-news',
   standalone: true,
-  imports: [RouterModule, RouterOutlet, CardModule, ButtonModule, CarouselModule],
+  imports: [RouterModule, RouterOutlet, CardModule, ButtonModule, CarouselModule, AnimateOnScrollModule, DialogModule],
   templateUrl: './news.component.html',
   styleUrl: './news.component.css'
 })
 
 export class NewsComponent implements OnInit {
   newsList: NewsInterface[] = [];
+  selectedNews: NewsInterface | null = null;
   isDeleteInProgress: boolean = false;
   responsiveOptions: any[];
+  visible: boolean = false;
 
   constructor(private router: Router, private newsService: NewsService, private messageService: MessageService) {
       this.responsiveOptions = [
@@ -44,6 +48,11 @@ export class NewsComponent implements OnInit {
     this.getNews();
   }
 
+  showDialog(news: NewsInterface): void {
+  this.selectedNews = news;
+  this.visible = true;
+}
+
   getNews() {
     this.newsService.getNews().subscribe((data) => {
       this.newsList = data;
@@ -56,8 +65,8 @@ export class NewsComponent implements OnInit {
       next: () => {
         this.messageService.add({
           severity: 'success',
-          summary: 'OK',
-          detail: 'News deleted',
+          summary: 'Success',
+          detail: 'News deleted successfully.',
         });
         this.isDeleteInProgress = false;
         this.getNews();
@@ -67,7 +76,7 @@ export class NewsComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'could not delete news',
+          detail: 'News cannot be deleted.',
         });
       },
     });
