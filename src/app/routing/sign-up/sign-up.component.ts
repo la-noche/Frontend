@@ -31,7 +31,7 @@ export class SignUpComponent {
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
-        detail: 'Todos los campos son obligatorios, por favor, complete los campos',
+        detail: 'Please, complete the required fields',
       });
       return;
     }
@@ -41,7 +41,7 @@ export class SignUpComponent {
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
-        detail: 'Las passwords ingresadas son distintas',
+        detail: 'Passwords do not match',
       });
       return;
     }
@@ -61,8 +61,8 @@ export class SignUpComponent {
       next: () => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Registrado',
-          detail: `El usuario ${this.userName} fue registrado con exito`,
+          summary: 'Registered',
+          detail: `The user: ${this.userName} was successfully registered`,
         });
         this.router.navigateByUrl('/login');
       },

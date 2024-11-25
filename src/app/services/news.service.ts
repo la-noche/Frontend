@@ -20,12 +20,12 @@ export class NewsService {
     return this.http.get<NewsInterface>(`${this.apiUrl}/${id}`);
   }
 
-  createNews(news: NewsInterface): Observable<NewsInterface> {
+  createNews(news: FormData): Observable<NewsInterface> {
     return this.http.post<NewsInterface>(this.apiUrl, news);
   }
 
-  updateNews(news: NewsInterface): Observable<NewsInterface> {
-    return this.http.put<NewsInterface>(`${this.apiUrl}/${news.id}`, news);
+  updateNews(news: FormData): Observable<NewsInterface> {
+    return this.http.put<NewsInterface>(`${this.apiUrl}/${news.get('id')}`, news);
   }
 
   deleteNews(id: number) {

@@ -83,7 +83,7 @@ export class UserFormComponent implements OnInit {
       next: () => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Guardado',
+          summary: 'Updated',
           detail: 'User updated successfully',
         });
         this.router.navigateByUrl('/user');
