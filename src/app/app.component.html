@@ -10,7 +10,6 @@
         <p-divider></p-divider>
         <button *ngIf="isAuthenticated" pButton size="large" label="Account" [text]="true" class="block border-none monospace-text"
           routerLink="user"></button>
-        <!-- poner la parte de mis equipos y competiciones a las que esta unido -->
         <p-divider></p-divider>
         <button *ngIf="isAuthenticated" pButton size="large" label="Sign out" [text]="true" class="block border-none monospace-text"
           (click)="logOut()"></button>

@@ -1,42 +1,48 @@
 <body class="min-h-screen">
     <div class="flex flex-column gap-2">
-        <!-- Botón para crear nueva noticia -->
-        <button [routerLink]="['/news-form', 'new']" class="button">
-            Crear nueva Noticia
+        <button pButton label="Create a news" class="font-bold monospace-text" [routerLink]="['/news-form', 'new']">
         </button>
-
-        <!-- Carrusel para las noticias -->
-        <p-carousel [value]="newsList" [numVisible]="3" [numScroll]="1" [circular]="false"
-            [responsiveOptions]="responsiveOptions" [showIndicators]="true">
-
-            <!-- Plantilla para cada ítem del carrusel -->
+        <p-carousel [value]="newsList" [numVisible]="3" [numScroll]="1" [circular]="true"
+            [responsiveOptions]="responsiveOptions" [showIndicators]="true" [autoplayInterval]="5000">
             <ng-template pTemplate="item" let-news>
-                <p-card [header]="news.title" [style]="{ width: '360px' }">
-                    <!-- Imagen de la noticia -->
-                    <ng-template pTemplate="header">
-                        <img alt="Imagen de la noticia"
-                            [src]="news.imageUrl ? news.imageUrl : 'https://primefaces.org/cdn/primeng/images/card-ng.jpg'"
-                            style="width: 100%; height: 200px; object-fit: cover;" />
-                    </ng-template>
-
-                    <!-- Cuerpo de la noticia -->
-                    <p>{{ news.body }}</p>
-
-                    <!-- Footer con botones -->
-                    <ng-template pTemplate="footer">
-                        <div class="flex gap-2 mt-1">
-                            <p-button (onClick)="deleteNews(news.id)" label="Delete" icon="pi pi-trash" class="monospace-text w-auto" severity="danger">
-                            </p-button>
-                            <p-button label="Edit" icon="pi pi-pencil" class="monospace-text w-auto" styleClass="p-button-secondary"
-                                [routerLink]="['/news-form', news.id]">
-                            </p-button>
+                <div class="news-item">
+                    <div class="image-container">
+                        <img src="http://localhost:3000{{ news.imageUrl }}" [alt]="news.name"/>
+                        <div class="overlay">
+                            <h2 class="monospace-text">{{ news.title }}</h2>
+                            <h3 class="monospace-text text-color-secondary">{{ news.date | date: 'yyyy-MM-dd' }}</h3>
+                            <div class="sticky bottom-0">
+                                <button pButton (click)="deleteNews(news.id)" label="Delete" icon="pi pi-trash" class="monospace-text w-auto"severity="danger"></button>
+                                <button pButton label="Edit" icon="pi pi-pencil" class="monospace-text w-auto" severity="secondary"[routerLink]="['/news-form', news.id]"></button>
+                            </div>
                         </div>
-                    </ng-template>
-                </p-card>
+                    </div>
+                </div>
             </ng-template>
         </p-carousel>
+        @for (news of newsList; track news.id) {
+        <div pAnimateOnScroll enterClass="fadeinleft" leaveClass="fadeoutleft" class="grid grid-nogutter border-bottom-1 surface-border surface-section text-800 animation-duration-1000 animation-ease-in-out">
+            <div class="col-12 md:col-6 p-6 text-center md:text-left flex align-items-center ">
+                <section>
+                    <span class="block text-4xl font-bold mb-1 monospace-text">{{ news.title }}</span>
+                    <p class= "surface-0 w-20rem mt-3 white-space-nowrap overflow-hidden text-overflow-ellipsis monospace-text">{{ news.body }}</p>
+                    <p class="monospace-text"> {{ news.date | date:'yyyy-MM-dd' }}</p>
+                    <button pButton (click)="showDialog(news)" pRipple label="Show more" type="button" class="p-button-outlined"></button>
+                </section>
+            </div>
+            <div class="col-12 md:col-6 overflow-hidden">
+                <img src="http://localhost:3000{{ news.imageUrl }}" alt="Image" class="md:ml-auto block md:h-25rem"
+                    style="clip-path: polygon(8% 0, 100% 0%, 100% 100%, 0 100%)">
+            </div>
+        </div>
+        <p-dialog header="{{ selectedNews?.title }}" [modal]="true" [(visible)]="visible" [style]="{ width: '50rem' }"
+            [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
+            <p class="mb-5 monospace-text">
+                {{ selectedNews?.body }}
+            </p>
+        </p-dialog>
 
-        <!-- En caso de lista vacía -->
+        }
         <div *ngIf="newsList.length === 0">
             <p>No existen noticias disponibles.</p>
         </div>

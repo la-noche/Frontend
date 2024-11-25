@@ -1,34 +1,48 @@
-<div class="flex justify-content-center align-items-center w-ful">
-    <div class="custom-background">
-        <header class="header">
-            <div class="divalign"><button class="buttonback" [routerLink]="'/news'">
-                    <svg height="16" width="16" xmlns="http://www.w3.org/2000/svg" version="1.1"
-                        viewBox="0 0 1024 1024">
-                        <path
-                            d="M874.690416 495.52477c0 11.2973-9.168824 20.466124-20.466124 20.466124l-604.773963 0 188.083679 188.083679c7.992021 7.992021 7.992021 20.947078 0 28.939099-4.001127 3.990894-9.240455 5.996574-14.46955 5.996574-5.239328 0-10.478655-1.995447-14.479783-5.996574l-223.00912-223.00912c-3.837398-3.837398-5.996574-9.046027-5.996574-14.46955 0-5.433756 2.159176-10.632151 5.996574-14.46955l223.019353-223.029586c7.992021-7.992021 20.957311-7.992021 28.949332 0 7.992021 8.002254 7.992021 20.957311 0 28.949332l-188.073446 188.073446 604.753497 0C865.521592 475.058646 874.690416 484.217237 874.690416 495.52477z"
-                            stroke="white" stroke-width="100"></path>
-                    </svg>
-                </button></div> Crear una Noticia
-        </header>
-        <form [formGroup]="formNews" (ngSubmit)="edit ? updateNews() : createNews()"
-            class="flex flex-column gap-2">
-            <div class="field flex flex-column gap-1">
-                <label for="title">Titulo</label>
-                <input type="text" pInputText formControlName="title" />
+<body class="h-screen flex align-items-center justify-content-center">
+    <div class="w-8 surface-50 p-3 border-round border-2 border-primary">
+        <header>
+            <div class="flex justify-content-left align-items-center ">
+                <button pButton class="mb-4" [routerLink]="'/news'">
+                    <i class="pi pi-arrow-left"></i>
+                </button>
             </div>
-            <div class="field flex flex-column gap-1">
-                <label for="body">Cuerpo de la noticia</label>
-                <input type="text" pInputText formControlName="body" />
-            </div>  <!-- 
-            <div class="field flex flex-column gap-1">
-                <label for="image">Imágen de la noticia</label>
-                <input type="file" id="fileInput" accept="image/*" formControlName="image" />
-                <br><br>
-                <img id="preview" src="" alt="Vista previa de la imagen" style="max-width: 300px; display: none;" />   
-            </div>    VER COMO AGREGAR PARA AÑADIR UNA IMAGEN        -->
+            <div class="flex justify-content-center align-items-center monospace-text mb-4 font-bold text-primary text-3xl">
+                Please complete all required fields.
+            </div>
+        </header>
+        <form 
+            [formGroup]="formNews" 
+            (ngSubmit)="edit ? updateNews() : createNews()"
+            class="flex flex-column gap-2"
+        >
+            <div class="field flex flex-column monospace-text text-2xl text-primary">
+                <label for="title">Title</label>
+                <input type="text" pInputText class="monospace-text" maxlength="50" formControlName="title" />
+            </div>
+
+            <div class="field flex flex-column monospace-text text-2xl text-primary">
+                <label for="body">Body</label>
+                <input type="text" class="monospace-text" pInputText formControlName="body" />
+            </div> 
+            
+            <div class="field flex flex-column monospace-text text-2xl text-primary">
+                <label for="imageUrl">Upload Image</label>
+                <p-fileUpload 
+                    name="image" 
+                    accept="image/*" 
+                    customUpload="true" 
+                    [auto]="true" 
+                    chooseLabel="Select Image"
+                    uploadLabel="Upload" 
+                    cancelLabel="Cancel" 
+                    maxFileSize="1000000" 
+                    (onSelect)="onImageUpload($event)">
+                </p-fileUpload>
+            </div>
             <div class="flex gap-2">
-                <p-button label="Guardar" [loading]="isSaveInProgress" type="submit" />
+                <p-button [style]="{'font-family':'monospace'}" label="Save" [loading]="isSaveInProgress" type="submit" />
             </div>
         </form>
     </div>
-</div>
+</body>
+

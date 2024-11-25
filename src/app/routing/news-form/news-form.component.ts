@@ -19,6 +19,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
 import { NewsInterface } from '../../interfaces/news.interface.js';
 import { DropdownModule } from 'primeng/dropdown';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @Component({
   selector: 'app-news-form',
@@ -32,6 +33,7 @@ import { DropdownModule } from 'primeng/dropdown';
     CardModule,
     RouterOutlet,
     DropdownModule,
+    FileUploadModule
   ],
   templateUrl: './news-form.component.html',
   styleUrl: './news-form.component.css'
@@ -43,6 +45,7 @@ export class NewsFormComponent implements OnInit {
   edit: boolean = false;
   newsList: NewsInterface[] = [];
   newsLoaded: boolean = false;
+  imageFile: File | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -66,6 +69,10 @@ export class NewsFormComponent implements OnInit {
     }
   }
 
+  onImageUpload(event: any) {
+    this.imageFile = event.files[0]; 
+  }
+
   getNewsById(id: number) {
     this.newsService.getNewsById(id).subscribe({
       next: (foundNews) => {
@@ -75,7 +82,7 @@ export class NewsFormComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'No encontrado',
+          detail: 'Not found.',
         });
         this.router.navigateByUrl('/');
       },
@@ -87,17 +94,23 @@ export class NewsFormComponent implements OnInit {
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
-        detail: 'Por favor, complete los campos',
+        detail: 'Please, complete the required fields.',
       });
       return;
     }
+    const formData = new FormData();
+    formData.append('title', this.formNews.value.title);
+    formData.append('body', this.formNews.value.body);
+    if (this.imageFile) {
+      formData.append('image', this.imageFile);  
+    }  
     this.isSaveInProgress = true;
-    this.newsService.createNews(this.formNews.value).subscribe({
+    this.newsService.createNews(formData).subscribe({
       next: () => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Creada',
-          detail: 'Noticia guardada correctamente',
+          summary: 'Created',
+          detail: 'News saved successfully.',
         });
         this.isSaveInProgress = false;
         this.router.navigateByUrl('/news');
@@ -107,7 +120,7 @@ export class NewsFormComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'Revise los campos e intente nuevamente',
+          detail: 'Check the fields and try again.',
         });
       },
     });
@@ -119,17 +132,24 @@ export class NewsFormComponent implements OnInit {
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
-        detail: 'Revise los campos e intente nuevamente',
+        detail: 'Please, complete the required fields.',
       });
       return;
     }
+    const formData = new FormData();
+    formData.append('id', this.formNews.get('id')?.value);
+    formData.append('title', this.formNews.value.title);
+    formData.append('body', this.formNews.value.body);
+    if (this.imageFile) {
+      formData.append('image', this.imageFile);  
+    }  
     this.isSaveInProgress = true;
-    this.newsService.updateNews(this.formNews.value).subscribe({
+    this.newsService.updateNews(formData).subscribe({
       next: () => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Guardado',
-          detail: 'Noticia actualizada correctamente',
+          summary: 'Updated',
+          detail: 'News updated successfully.',
         });
         this.isSaveInProgress = false;
         this.router.navigateByUrl('/news');
@@ -139,7 +159,7 @@ export class NewsFormComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'Revise los campos e intente nuevamente',
+          detail: 'Check the fields and try again.',
         });
       },
     });
