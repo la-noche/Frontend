@@ -19,24 +19,14 @@
         <label for="name">Name</label>
         <input type="text" pInputText class="monospace-text" formControlName="name" />
       </div>
-
-      <div class="field flex flex-column monospace-text text-2xl text-primary">
-        <label for="type">Type</label>
-        <p-dropdown
-          formControlName="type"
-          [options]="types"
-          optionLabel="name"
-          optionValue="value"
-          placeholder="Select an option"
-        ></p-dropdown>
-      </div>
       <div class="field flex flex-column monospace-text text-2xl text-primary">
         <label for="dateStart">Start date</label>
-        <input type="datetime-local" pInputText formControlName="dateStart" class="dateInput"/>
+        <input type="datetime-local" pInputText formControlName="dateStart" class="dateInput" [min]="minDateTime"
+/>
       </div>
       <div class="field flex flex-column monospace-text text-2xl text-primary">
         <label for="dateEnd">End date</label>
-        <input type="datetime-local" pInputText formControlName="dateEnding" class="dateInput"/>
+        <input type="datetime-local" pInputText formControlName="dateEnding" class="dateInput" [min]="minDateTime"/>
       </div>
       <div class="field flex flex-column monospace-text text-2xl text-primary">
         <label for="game">Game</label>
@@ -59,7 +49,7 @@
         ></p-dropdown>
       </div>
       <div class="flex gap-2">
-        <p-button label="Save" [loading]="isSaveInProgress" type="submit" />
+        <p-button styleClass="monospace-text" label="Save" [loading]="isSaveInProgress" type="submit" />
       </div>
     </form>
   </div>

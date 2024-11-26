@@ -48,7 +48,7 @@ export class CompetitionFormComponent implements OnInit {
   gamesLoaded: boolean = false;
   regionsList: RegionInterface[] = [];
   regionsLoaded: boolean = false;
-  types = [{name: 'Not free', value: 'not free'}, {name: 'Free', value: 'free'}];
+  minDateTime: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -62,7 +62,6 @@ export class CompetitionFormComponent implements OnInit {
     this.formCompetition = this.fb.group({
       id: [null],
       name: ['', Validators.required],
-      type: ['', Validators.required],
       dateStart: ['', Validators.required],
       dateEnding: ['', Validators.required],
       game: [null, Validators.required],
@@ -76,18 +75,33 @@ export class CompetitionFormComponent implements OnInit {
       this.edit = true;
       this.getCompetitionById(+id!);
     }
+    this.setMinDateTime();
     this.loadGames();
     this.loadRegions();
   }
 
-    DatesInvalid(dateStart: string, dateEnding: string): boolean {
-    const start = new Date(dateStart);
-    const end = new Date(dateEnding);
-    if (start >= end) {
-      return true;
-    }
-    return false;
-    }
+  setMinDateTime(): void {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = (now.getMonth() + 1).toString().padStart(2, '0');
+    const day = now.getDate().toString().padStart(2, '0');
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    this.minDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
+  }
+
+  DatesInvalid(dateStart: string, dateEnding: string): boolean {
+  const start = new Date(dateStart);
+  const end = new Date(dateEnding);
+  const now = new Date();
+  if (start >= end) {
+    return true;
+  }
+  if (now > start || now > end){
+    return true;
+  }
+  return false;
+  }
 
   getCompetitionById(id: number) {
     this.competitionService.getCompetitionById(id).subscribe({
@@ -190,7 +204,6 @@ export class CompetitionFormComponent implements OnInit {
     const competitionData = {
       id: this.formCompetition.value.id,
       name: this.formCompetition.value.name,
-      type: this.formCompetition.value.type,
       dateStart: this.formCompetition.value.dateStart,
       dateEnding: this.formCompetition.value.dateEnding,
       game: this.formCompetition.value.game,
@@ -201,7 +214,7 @@ export class CompetitionFormComponent implements OnInit {
       this.messageService.add({
       severity: 'error',
       summary: 'Error',
-      detail: 'Start date cannot be higher than end date.',
+      detail: 'Dates are invalid.',
     });
     return;
     }
@@ -241,7 +254,7 @@ export class CompetitionFormComponent implements OnInit {
       this.messageService.add({
       severity: 'error',
       summary: 'Error',
-      detail: 'Start date cannot be higher than end date.',
+      detail: 'Dates are invalid.',
     });
     return;
     }
