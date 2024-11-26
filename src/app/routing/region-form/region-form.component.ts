@@ -19,6 +19,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
 import { RegionInterface } from '../../interfaces/region.interface.js';
 import { DropdownModule } from 'primeng/dropdown';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @Component({
   selector: 'app-region-form',
@@ -32,6 +33,7 @@ import { DropdownModule } from 'primeng/dropdown';
     CardModule,
     RouterOutlet,
     DropdownModule,
+    FileUploadModule
   ],
   templateUrl: './region-form.component.html',
   styleUrl: './region-form.component.css'
@@ -43,6 +45,7 @@ export class RegionFormComponent implements OnInit {
   edit: boolean = false;
   regionList: RegionInterface[] = [];
   regionLoaded: boolean = false;
+  imageFile: File | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -54,7 +57,6 @@ export class RegionFormComponent implements OnInit {
     this.formRegion = this.fb.group({
       id: [null],
       name: ['', [Validators.required]],
-      description: ['', [Validators.required]],
     });
   }
 
@@ -64,6 +66,10 @@ export class RegionFormComponent implements OnInit {
       this.edit = true;
       this.getRegionById(+id!);
     }
+  }
+
+  onImageUpload(event: any) {
+    this.imageFile = event.files[0]; 
   }
 
   getRegionById(id: number) {
@@ -91,12 +97,17 @@ export class RegionFormComponent implements OnInit {
       });
       return;
     }
+    const formData = new FormData();
+    formData.append('name', this.formRegion.get('name')?.value);
+    if (this.imageFile) {
+      formData.append('image', this.imageFile);
+    }
     this.isSaveInProgress = true;
-    this.regionService.createRegion(this.formRegion.value).subscribe({
+    this.regionService.createRegion(formData).subscribe({
       next: () => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Creada',
+          summary: 'Created',
           detail: 'Region successfully saved',
         });
         this.isSaveInProgress = false;
@@ -123,12 +134,18 @@ export class RegionFormComponent implements OnInit {
       });
       return;
     }
+    const formData = new FormData();
+    formData.append('id', this.formRegion.get('id')?.value);
+    formData.append('name', this.formRegion.get('name')?.value);
+    if (this.imageFile) {
+      formData.append('image', this.imageFile);
+    }
     this.isSaveInProgress = true;
-    this.regionService.updateRegion(this.formRegion.value).subscribe({
+    this.regionService.updateRegion(formData).subscribe({
       next: () => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Guardado',
+          summary: 'Updated',
           detail: 'Region successfully updated',
         });
         this.isSaveInProgress = false;

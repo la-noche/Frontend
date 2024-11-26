@@ -20,12 +20,12 @@ export class RegionService {
     return this.http.get<RegionInterface>(`${this.apiUrl}/${id}`);
   }
 
-  createRegion(region: RegionInterface): Observable<RegionInterface> {
+  createRegion(region: FormData): Observable<RegionInterface> {
     return this.http.post<RegionInterface>(this.apiUrl, region);
   }
 
-  updateRegion(region: RegionInterface): Observable<RegionInterface> {
-    return this.http.put<RegionInterface>(`${this.apiUrl}/${region.id}`, region);
+  updateRegion(region: FormData): Observable<RegionInterface> {
+    return this.http.put<RegionInterface>(`${this.apiUrl}/${region.get('id')}`, region);
   }
 
   deleteRegion(id: number) {

@@ -1,26 +1,22 @@
 <body class="min-h-screen">
     <div class="flex flex-column gap-2">
-        <button [routerLink]="['/region-form', 'new']" class="button">
-            Crear nueva Region
+        <button pButton label="Create a new region" class="font-bold monospace-text" [routerLink]="['/region-form', 'new']">
         </button>
         <div class="flex gap-4 flex-wrap">
             @for (region of regionList; track region.id) {
             <p-card header="{{ region.name }}" [style]="{ width: '360px'}">
                 <ng-template pTemplate="header">
-                    <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
+                    <img alt="Card" src="http://localhost:3000{{ region.imageUrl }}" class="w-full h-12rem border-round-top">
                 </ng-template>
-                <p>
-                    {{ region.description }}
-                </p>
                 <ng-template pTemplate="footer">
                     <div class="flex gap-2 mt-1">
-                        <button pButton (onClick)="deleteRegion(region.id)" label="Delete" icon="pi pi-trash" class="monospace-text w-auto" severity="danger" ></button>
+                        <button pButton (click)="deleteRegion(region.id)" label="Delete" icon="pi pi-trash" class="monospace-text w-auto" severity="danger" ></button>
                         <button pButton label="Edit" icon="pi pi-pencil" [routerLink]="['/region-form', region.id]" class="monospace-text w-auto" severity="secondary"></button>
                     </div>
                 </ng-template>
             </p-card>
             }@empty {
-            <p>No existen Regiones</p>
+            <p>There are no regions available</p>
             }
         </div>
     </div>
