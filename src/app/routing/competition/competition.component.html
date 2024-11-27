@@ -14,7 +14,6 @@
             <th>Game</th>
             <th>Region</th>
             <th>Creator</th>
-            <th>Start Date</th>
             <th>Inscription Limit Date</th>
             <th></th>
             <th></th>
@@ -27,10 +26,8 @@
             <td>{{ competition.game.name }}</td>
             <td>{{ competition.region.name }}</td>
             <td>{{ competition.userCreator.userName }}</td>
-            <td>{{ competition.dateStart | date: 'yyyy-MM-dd HH:mm' }}</td>
-            <td>{{ competition.dateInscriptionLimit | date: 'yyyy-MM-dd HH:mm' }}</td>
-            <td><button *ngIf="competition.dateInscriptionLimit > todayString"
-              pButton [routerLink]="['/inscription-form', competition.id]" label="Join competition" severity="success"
+            <td>{{ competition.dateInscriptionLimit | date: 'yyyy-MM-dd HH:mm'}}</td>
+            <td><button pButton [routerLink]="['/inscription-form', competition.id]" label="Join competition" severity="success"
                 class="monospace-text m-1"></button></td>
             <td><button pButton [routerLink]="['/competition-form', competition.id]" label="Edit competition" severity="primary"
                 class="monospace-text m-1"></button></td>
