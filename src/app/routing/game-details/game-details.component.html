@@ -16,9 +16,7 @@
                 Description: <span class="text-color-secondary"> {{ foundGame.description }} </span>
             </div>
             <div class=" justify-content-center monospace-text mb-4 font-bold text-primary text-3xl">
-                Game type: 
-                @if (foundGameType) { <span [value]="foundGame.gameType" class="text-color-secondary">{{ foundGameType.name }}</span> }
-                @else { <span class="text-color-secondary">Loading...</span> }
+                Game type: <span class="text-color-secondary">{{ foundGame?.gameType?.name }}</span> 
             </div>
             <div class=" justify-content-center monospace-text mb-4 font-bold text-primary text-3xl">
                 Competitions:
@@ -27,16 +25,14 @@
                     <tr>
                         <th class="text 3xl">Name</th>
                         <th class="text 3xl">Date Start</th>
-                        <th class="text 3xl">Date Ending</th>
                         <th class="text 3xl">Region</th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-competition>
                     <tr>
                         <td class="text-color-secondary text 3xl">{{ competition.name }}</td>
-                        <td class="text-color-secondary text 3xl">{{ competition.dateStart }}</td>
-                        <td class="text-color-secondary text 3xl">{{ competition.dateEnding }}</td>
-                        <td class="text-color-secondary text 3xl">{{ competition.region || 'Loading...' }}</td>
+                        <td class="text-color-secondary text 3xl">{{ competition.dateStart | date: 'yyyy-MM-dd HH:mm' }}</td>
+                        <td class="text-color-secondary text 3xl">{{ competition.region|| 'Loading...' }}</td>
                     </tr>
                 </ng-template>
             </p-table>

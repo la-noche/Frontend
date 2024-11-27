@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { RouterModule, ActivatedRoute, Router } from '@angular/router';
 import { GameService } from '../../services/game.service.js';
-import { GameTypesService } from '../../services/game-types.service.js';
 import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import { TableModule } from 'primeng/table';
@@ -13,7 +13,7 @@ import { RegionInterface } from '../../interfaces/region.interface.js';
 @Component({
   selector: 'app-game-details',
   standalone: true,
-  imports: [RouterModule, ButtonModule, TableModule],
+  imports: [RouterModule, ButtonModule, TableModule, DatePipe],
   templateUrl: './game-details.component.html',
   styleUrl: './game-details.component.css',
 })
@@ -26,7 +26,6 @@ export class GameDetailsComponent implements OnInit{
   constructor(
     private regionService: RegionService,
     private gameService: GameService,
-    private gameTypeService: GameTypesService,
     private activatedRoute: ActivatedRoute,
     private messageService: MessageService,
     private router: Router
@@ -42,15 +41,6 @@ export class GameDetailsComponent implements OnInit{
     this.gameService.getGameById(id).subscribe({
       next: (foundGame) => {
         this.foundGame = foundGame;
-        if (foundGame.gameType) {
-          this.getGameTypeById(foundGame.gameType);
-        } else {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: 'Game type not found.',
-          });
-        }
       },
       error: () => {
         this.messageService.add({
@@ -63,20 +53,6 @@ export class GameDetailsComponent implements OnInit{
     });
   }
 
-  getGameTypeById(id: number) {
-  this.gameTypeService.getGameTypeById(id).subscribe({
-    next: (foundGameType) => {
-      this.foundGameType = foundGameType;
-    },
-    error: () => {
-      this.messageService.add({
-        severity: 'error',
-        summary: 'Error',
-        detail: 'Game type not found.',
-      });
-    },
-  });
-}
 /*
   getRegionById(id: number) {
   this.regionService.getRegionById(id).subscribe({
