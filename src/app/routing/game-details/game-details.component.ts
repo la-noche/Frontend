@@ -20,6 +20,7 @@ import { RegionInterface } from '../../interfaces/region.interface.js';
 export class GameDetailsComponent implements OnInit{
   foundGame!: gameInterface;
   foundRegion!: RegionInterface;
+  regionCache: { [key: number]: string } = {};
 
 
   constructor(
@@ -33,14 +34,15 @@ export class GameDetailsComponent implements OnInit{
   ngOnInit(): void {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id) {
-      this.getGameById(+id);};
+      this.getGameById(+id);}
+      const idRegion = this.foundGame.competitions ;
     }
   
   getGameById(id: number) {
     this.gameService.getGameById(id).subscribe({
       next: (foundGame) => {
         this.foundGame = foundGame;
-      },
+    },
       error: () => {
         this.messageService.add({
           severity: 'error',
@@ -52,11 +54,20 @@ export class GameDetailsComponent implements OnInit{
     });
   }
 
-  getRegionName(region: number): string {
-    this.regionService.getRegionById(region).subscribe({
+getRegionName(regionId: number): string {
+  if (!this.regionCache[regionId]) {
+    this.regionService.getRegionById(regionId).subscribe((region) => {
+      this.regionCache[regionId] = region.name;
+    });
+    return 'Loading...';
+  }
+  return this.regionCache[regionId];
+}
+
+  getRegionById(id: number) {
+    this.regionService.getRegionById(id).subscribe({
       next: (foundRegion) => {
-        this.foundRegion = foundRegion
-        
+        this.foundRegion = foundRegion;
       },
       error: () => {
         this.messageService.add({
@@ -64,8 +75,9 @@ export class GameDetailsComponent implements OnInit{
           summary: 'Error',
           detail: 'Region not found.',
         });
-      },
+      }
     });
-    return this.foundRegion.name;
   }
-}
+
+} 
+  

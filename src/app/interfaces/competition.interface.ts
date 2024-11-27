@@ -1,4 +1,5 @@
 import { inscriptionInterface } from "./inscription.interface.js";
+import { RegionInterface } from "./region.interface.js";
 
 
 export interface competitionInterface{
