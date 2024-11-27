@@ -6,7 +6,7 @@
             @for (region of regionList; track region.id) {
             <p-card header="{{ region.name }}" [style]="{ width: '360px'}">
                 <ng-template pTemplate="header">
-                    <img alt="Card" src="http://localhost:3000{{ region.imageUrl }}" class="w-full h-12rem border-round-top">
+                    <img alt="Card" [src]="region?.imageUrl ? 'http://localhost:3000' + region?.imageUrl : 'images/no-image.jpg'" class="w-full h-12rem border-round-top">
                 </ng-template>
                 <ng-template pTemplate="footer">
                     <div class="flex gap-2 mt-1">

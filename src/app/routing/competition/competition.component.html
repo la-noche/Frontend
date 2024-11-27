@@ -11,7 +11,6 @@
         <ng-template pTemplate="header">
           <tr>
             <th>Name</th>
-            <th>Type</th>
             <th>Game</th>
             <th>Region</th>
             <th>Creator</th>
@@ -25,7 +24,6 @@
         <ng-template pTemplate="body" let-competition>
           <tr>
             <td>{{ competition.name }}</td>
-            <td>{{ competition.type }}</td>
             <td>{{ competition.game.name}}</td>
             <td>{{ competition.region.name}}</td>
             <td>{{ competition.userCreator.userName }}</td>
