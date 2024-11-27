@@ -83,7 +83,6 @@ export class InscriptionFormComponent implements OnInit {
     }
 
     const competitionId = this.activatedRoute.snapshot.paramMap.get('id');
-    // Verifico si el ID de la competición existe y es válido
     if (!competitionId) {
       this.messageService.add({
         severity: 'error',
@@ -93,10 +92,10 @@ export class InscriptionFormComponent implements OnInit {
       return;
     }
 
-    // Lo convierto a number
     const competition = +competitionId;
 
     const inscriptionData = {
+      id: this.formInscription.value.id,
       competition: competition,
       team: this.formInscription.value.team,
       date: new Date(),

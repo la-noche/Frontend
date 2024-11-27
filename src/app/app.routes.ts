@@ -19,6 +19,7 @@ import { TeamFormComponent } from './routing/team-form/team-form.component.js';
 import { UserFormComponent } from './routing/user-form/user-form.component.js';
 import { InscriptionFormComponent } from './routing/inscription-form/inscription-form.component.js';
 import { TeamDetailsComponent } from './routing/team-details/team-details.component.js';
+import { CompetitionDetailsComponent } from './routing/competition-details/competition-details.component.js';
 
 export const routes: Routes = [
   {
@@ -85,6 +86,16 @@ export const routes: Routes = [
     path: 'competition',
     component: CompetitionComponent,
     title: 'Competitions',
+  },
+  {
+    path: 'competition-details/:id',
+    component: CompetitionDetailsComponent,
+    title: 'Competition details',
+  },
+  {
+    path: 'team-details/:id',
+    component: TeamDetailsComponent,
+    title: 'Teams details',
   },
   {
     path: 'competition-form/:id',

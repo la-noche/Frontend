@@ -1,5 +1,5 @@
 export interface inscriptionInterface {
-  id?: number;
+  id: number;
   date: Date;
   score?: number;
   status: string;
