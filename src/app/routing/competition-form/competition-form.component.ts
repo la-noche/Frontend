@@ -62,7 +62,6 @@ export class CompetitionFormComponent implements OnInit {
     this.formCompetition = this.fb.group({
       id: [null],
       name: ['', Validators.required],
-      dateStart: ['', Validators.required],
       dateInscriptionLimit: ['', Validators.required],
       game: [null, Validators.required],
       region: [null, Validators.required],
@@ -90,14 +89,10 @@ export class CompetitionFormComponent implements OnInit {
     this.minDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
   }
 
-  DatesInvalid(dateStart: string, dateInscriptionLimit: string): boolean {
-  const start = new Date(dateStart);
+  DatesInvalid(dateInscriptionLimit: string): boolean {
   const endInsc = new Date(dateInscriptionLimit);
   const now = new Date();
-  if (start <= endInsc) {
-    return true;
-  }
-  if (now > start || now > endInsc){
+  if (now > endInsc){
     return true;
   }
   return false;
@@ -204,13 +199,12 @@ export class CompetitionFormComponent implements OnInit {
     const competitionData = {
       id: this.formCompetition.value.id,
       name: this.formCompetition.value.name,
-      dateStart: this.formCompetition.value.dateStart,
       dateInscriptionLimit: this.formCompetition.value.dateInscriptionLimit,
       game: this.formCompetition.value.game,
       region: this.formCompetition.value.region,
       userCreator: userId,
     };
-    if (this.DatesInvalid(competitionData.dateStart, competitionData.dateInscriptionLimit)) {
+    if (this.DatesInvalid(competitionData.dateInscriptionLimit)) {
       this.messageService.add({
       severity: 'error',
       summary: 'Error',
@@ -250,7 +244,7 @@ export class CompetitionFormComponent implements OnInit {
       return;
     }
     const { dateStart, dateInscriptionLimit } = this.formCompetition.value;
-    if (this.DatesInvalid(dateStart, dateInscriptionLimit)) {
+    if (this.DatesInvalid(dateInscriptionLimit)) {
       this.messageService.add({
       severity: 'error',
       summary: 'Error',

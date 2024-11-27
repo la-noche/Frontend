@@ -24,14 +24,12 @@
                 <ng-template pTemplate="header">
                     <tr>
                         <th class="text 3xl">Name</th>
-                        <th class="text 3xl">Date Start</th>
                         <th class="text 3xl">Region</th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-competition>
                     <tr>
                         <td class="text-color-secondary text 3xl">{{ competition.name }}</td>
-                        <td class="text-color-secondary text 3xl">{{ competition.dateStart | date: 'yyyy-MM-dd HH:mm' }}</td>
                         <td class="text-color-secondary text 3xl">{{ competition.region|| 'Loading...' }}</td>
                     </tr>
                 </ng-template>

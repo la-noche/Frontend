@@ -7,31 +7,31 @@
                 </button>
             </div>
             <div class=" justify-content-center monospace-text mb-4 font-bold text-primary text-3xl">
-                ID: <span class="text-color-secondary"> {{ foundTeam.id }} </span>
+                ID: <span class="text-color-secondary monospace-text"> {{ foundTeam.id }} </span>
             </div>
             <div class=" justify-content-center monospace-text mb-4 font-bold text-primary text-3xl">
-                Team: <span class="text-color-secondary"> {{ foundTeam.name }} </span> 
+                Team: <span class="text-color-secondary monospace-text"> {{ foundTeam.name }} </span> 
             </div>
             <div class=" justify-content-center monospace-text mb-4 font-bold text-primary text-3xl">
-                Points: <span class="text-color-secondary"> {{ foundTeam.points }} </span>
+                Points: <span class="text-color-secondary monospace-text"> {{ foundTeam.points }} </span>
             </div>
             <div class=" justify-content-center monospace-text mb-4 font-bold text-primary text-3xl">
                 Players:
             <p-table [value]="foundTeam.players" [responsiveLayout]="'scroll'">
                 <ng-template pTemplate="header">
                     <tr>
-                        <th class="text 3xl">Username</th>
-                        <th class="text 3xl">Name</th>
-                        <th class="text 3xl">Lastname</th>
-                        <th class="text 3xl">Email</th>
+                        <th class="monospace-text">Username</th>
+                        <th class="monospace-text">Name</th>
+                        <th class="monospace-text">Lastname</th>
+                        <th class="monospace-text">Email</th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-player>
                     <tr>
-                        <td class="text-color-secondary text 3xl">{{ player.userName }}</td>
-                        <td class="text-color-secondary text 3xl">{{ player.name }}</td>
-                        <td class="text-color-secondary text 3xl">{{ player.lastName }}</td>
-                        <td class="text-color-secondary text 3xl">{{ player.email }}</td>
+                        <td class="text-color-secondary monospace-text">{{ player.userName }}</td>
+                        <td class="text-color-secondary monospace-text">{{ player.name }}</td>
+                        <td class="text-color-secondary monospace-text">{{ player.lastName }}</td>
+                        <td class="text-color-secondary monospace-text">{{ player.email }}</td>
                     </tr>
                 </ng-template>
             </p-table>

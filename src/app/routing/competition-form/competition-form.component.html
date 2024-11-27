@@ -19,11 +19,7 @@
         <label for="name">Name</label>
         <input type="text" pInputText class="monospace-text" formControlName="name" />
       </div>
-      <div class="field flex flex-column monospace-text text-2xl text-primary">
-        <label for="dateStart">Start date</label>
-        <input type="datetime-local" pInputText formControlName="dateStart" class="dateInput" [min]="minDateTime"
-/>
-      </div>
+
       <div class="field flex flex-column monospace-text text-2xl text-primary">
         <label for="dateInscriptionLimit">Inscription limit date</label>
         <input type="datetime-local" pInputText formControlName="dateInscriptionLimit" class="dateInput" [min]="minDateTime"/>

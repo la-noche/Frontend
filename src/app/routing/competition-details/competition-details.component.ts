@@ -63,7 +63,6 @@ export class CompetitionDetailsComponent implements OnInit{
     return null;
   }
 
-
   getCompetitionById(id: number) {
     this.competitionService.getCompetitionById(id).subscribe({
       next: (foundCompetition) => {
