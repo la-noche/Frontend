@@ -1,0 +1,46 @@
+<body class="min-h-screen justify-content-center">
+    <div class="surface-50 p-5 flex border-round border-2 border-primary h-full">
+        <header>
+            <div class="flex justify-content-left align-items-center ">
+                <button pButton class="mb-4" [routerLink]="'/game'">
+                    <i class="pi pi-arrow-left"></i>
+                </button>
+            </div>
+            <div class=" justify-content-center monospace-text mb-4 font-bold text-primary text-3xl">
+                ID: <span class="text-color-secondary"> {{ foundGame.id }} </span>
+            </div>
+            <div class=" justify-content-center monospace-text mb-4 font-bold text-primary text-3xl">
+                Name: <span class="text-color-secondary"> {{ foundGame.name }} </span>
+            </div>
+            <div class=" justify-content-center monospace-text mb-4 font-bold text-primary text-3xl">
+                Description: <span class="text-color-secondary"> {{ foundGame.description }} </span>
+            </div>
+            <div class=" justify-content-center monospace-text mb-4 font-bold text-primary text-3xl">
+                Game type: 
+                @if (foundGameType) { <span [value]="foundGame.gameType" class="text-color-secondary">{{ foundGameType.name }}</span> }
+                @else { <span class="text-color-secondary">Loading...</span> }
+            </div>
+            <div class=" justify-content-center monospace-text mb-4 font-bold text-primary text-3xl">
+                Competitions:
+            <p-table [value]="foundGame.competitions" [responsiveLayout]="'scroll'">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="text 3xl">Name</th>
+                        <th class="text 3xl">Date Start</th>
+                        <th class="text 3xl">Date Ending</th>
+                        <th class="text 3xl">Region</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-competition>
+                    <tr>
+                        <td class="text-color-secondary text 3xl">{{ competition.name }}</td>
+                        <td class="text-color-secondary text 3xl">{{ competition.dateStart }}</td>
+                        <td class="text-color-secondary text 3xl">{{ competition.dateEnding }}</td>
+                        <td class="text-color-secondary text 3xl">{{ competition.region || 'Loading...' }}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+            </div>
+        </header>
+    </div>
+</body>
