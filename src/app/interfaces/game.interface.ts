@@ -3,5 +3,6 @@ export interface gameInterface {
   name: string;
   description: string;
   gameType: number;
+  competitions: number[];
   imageUrl: string;
 }

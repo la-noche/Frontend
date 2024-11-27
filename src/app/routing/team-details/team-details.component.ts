@@ -7,7 +7,7 @@ import { TableModule } from 'primeng/table';
 import { TeamInterface } from '../../interfaces/team.interface.js';
 
 @Component({
-  selector: 'app-team',
+  selector: 'app-team-details',
   standalone: true,
   imports: [RouterModule, ButtonModule, TableModule],
   templateUrl: './team-details.component.html',
