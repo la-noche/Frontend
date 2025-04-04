@@ -27,7 +27,15 @@ export class CompetitionDetailsComponent implements OnInit{
   isSaveInProgress: boolean = false;
   acceptedRegistrationsCount: number = 0;
 
-  constructor(private competitionService: CompetitionService, private incriptionService: InscriptionService,private userService: UserService, private activatedRoute: ActivatedRoute,private messageService: MessageService, private router: Router){}
+  constructor(
+    private competitionService: CompetitionService,
+    private incriptionService: InscriptionService,
+    private userService: UserService,
+    private activatedRoute: ActivatedRoute,
+    private messageService: MessageService,
+    private router: Router
+  ){}
+
   ngOnInit(): void{
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id) {

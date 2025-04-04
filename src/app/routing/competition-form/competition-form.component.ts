@@ -1,18 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CompetitionService } from '../../services/competition.service.js';
-import {
-  ActivatedRoute,
-  Router,
-  RouterModule,
-  RouterOutlet,
-} from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -27,16 +16,7 @@ import { jwtDecode } from 'jwt-decode';
 @Component({
   selector: 'app-competition-form',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    ButtonModule,
-    RouterModule,
-    InputTextModule,
-    CardModule,
-    RouterOutlet,
-    DropdownModule,
-  ],
+  imports: [ReactiveFormsModule, FormsModule, ButtonModule, RouterModule, InputTextModule, CardModule, DropdownModule],
   templateUrl: './competition-form.component.html',
   styleUrl: './competition-form.component.css',
 })

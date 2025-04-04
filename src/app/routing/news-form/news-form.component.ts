@@ -1,18 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NewsService } from '../../services/news.service.js';
-import {
-  ActivatedRoute,
-  Router,
-  RouterModule,
-  RouterOutlet,
-} from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -24,17 +13,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 @Component({
   selector: 'app-news-form',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    ButtonModule,
-    RouterModule,
-    InputTextModule,
-    CardModule,
-    RouterOutlet,
-    DropdownModule,
-    FileUploadModule
-  ],
+  imports: [ReactiveFormsModule, FormsModule, ButtonModule, RouterModule, InputTextModule, CardModule, DropdownModule, FileUploadModule],
   templateUrl: './news-form.component.html',
   styleUrl: './news-form.component.css'
 })

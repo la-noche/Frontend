@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/router';
+import { RouterOutlet, RouterLink, Router } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
-import { PrimeIcons, MenuItem, MessageService } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
 import { CommonModule } from '@angular/common';
 import { PanelModule } from 'primeng/panel';
@@ -12,11 +12,13 @@ import { DividerModule } from 'primeng/divider';
 import { jwtDecode } from 'jwt-decode';
 import { UserService } from './services/user.service.js';
 import { userInterface } from './interfaces/user.interface.js';
+import { ActivatedRoute, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, ToastModule, ButtonModule, MenubarModule, CommonModule, PanelModule, SidebarModule, DividerModule],
+  imports: [RouterOutlet, RouterLink, ToastModule, ButtonModule, MenubarModule, CommonModule, PanelModule, SidebarModule, DividerModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
@@ -26,13 +28,10 @@ export class AppComponent implements OnInit {
   isAuthenticated: boolean = false;
   sidebarVisible: boolean = false;
   user?: userInterface;
-  constructor(private router: Router, private authService: AuthService, private userService: UserService, private messageService: MessageService) {}
+  
+  constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService, private userService: UserService, private messageService: MessageService) {}
 
   ngOnInit() {
-    this.authService.isAuthenticated$.subscribe(isAuthenticated => {
-      this.isAuthenticated = isAuthenticated;
-    this.getUser();
-    });
 
     this.items = [
       { label: 'Home', icon: 'pi pi-home', routerLink: 'home' },
@@ -43,10 +42,30 @@ export class AppComponent implements OnInit {
       { label: 'Teams', icon: 'pi pi-users', routerLink: 'team' },
       { label: 'News', icon: 'pi pi-th-large', routerLink: 'news' },
     ];
+    
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        const currentUrl = this.router.url;
 
-    if (!this.isAuthenticated) {
-      this.router.navigateByUrl('/login');
-    }
+        this.authService.isAuthenticated$.subscribe((isAuthenticated) => {
+          this.isAuthenticated = isAuthenticated;
+
+          if (!isAuthenticated) {
+            // Solo rutas públicas
+            if (
+              !currentUrl.startsWith('/reset-password') &&
+              !currentUrl.startsWith('/forgot-password') &&
+              !currentUrl.startsWith('/signup') &&
+              !currentUrl.startsWith('/login')
+            ) {
+              this.router.navigateByUrl('/login');
+            }
+          } else {
+            this.getUser();
+          }
+        });
+      });
   }
   
   getUser() {

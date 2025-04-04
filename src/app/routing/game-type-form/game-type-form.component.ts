@@ -1,19 +1,8 @@
 import { Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { GameTypesService } from '../../services/game-types.service.js';
 import { ButtonModule } from 'primeng/button';
-import {
-  ActivatedRoute,
-  Router,
-  RouterModule,
-  RouterOutlet,
-} from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
@@ -21,15 +10,7 @@ import { CardModule } from 'primeng/card';
 @Component({
   selector: 'app-game-type-form',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    ButtonModule,
-    RouterModule,
-    InputTextModule,
-    CardModule,
-    RouterOutlet,
-  ],
+  imports: [ReactiveFormsModule, FormsModule, ButtonModule, RouterModule, InputTextModule, CardModule],
   templateUrl: './game-type-form.component.html',
   styleUrl: './game-type-form.component.css',
 })

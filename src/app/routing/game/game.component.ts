@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { gameInterface } from '../../interfaces/game.interface.js';
 import { GameService } from '../../services/game.service.js';
 import { MessageService } from 'primeng/api';

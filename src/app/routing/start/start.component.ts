@@ -6,7 +6,6 @@ import { CarouselModule } from 'primeng/carousel';
 import { GameService } from '../../services/game.service.js';
 import { gameInterface } from '../../interfaces/game.interface.js';
 
-
 @Component({
   selector: 'app-start',
   standalone: true,
@@ -16,7 +15,11 @@ import { gameInterface } from '../../interfaces/game.interface.js';
 })
 export class StartComponent implements OnInit{
   responsiveOptions: any[];
-  constructor( private router: Router, private gameService: GameService){
+
+  constructor(
+    private router: Router, 
+    private gameService: GameService
+  ){
     this.responsiveOptions = [
       {
         breakpoint: '1024px',
@@ -35,6 +38,7 @@ export class StartComponent implements OnInit{
       }
     ];
   }
+
   gameList: gameInterface[] = [];
 
   getGames() {

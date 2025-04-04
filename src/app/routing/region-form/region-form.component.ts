@@ -1,18 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegionService } from '../../services/region.service.js';
-import {
-  ActivatedRoute,
-  Router,
-  RouterModule,
-  RouterOutlet,
-} from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -24,17 +13,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 @Component({
   selector: 'app-region-form',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    ButtonModule,
-    RouterModule,
-    InputTextModule,
-    CardModule,
-    RouterOutlet,
-    DropdownModule,
-    FileUploadModule
-  ],
+  imports: [ReactiveFormsModule, FormsModule, ButtonModule, RouterModule, InputTextModule, CardModule, DropdownModule, FileUploadModule],
   templateUrl: './region-form.component.html',
   styleUrl: './region-form.component.css'
 })

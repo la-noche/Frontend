@@ -12,13 +12,7 @@ import { userInterface } from '../../interfaces/user.interface.js';
 @Component({
   selector: 'app-inscription-form',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    ButtonModule,
-    RouterModule,
-    DropdownModule,
-  ],
+  imports: [ReactiveFormsModule, FormsModule, ButtonModule, RouterModule, DropdownModule,],
   templateUrl: './inscription-form.component.html',
   styleUrl: './inscription-form.component.css',
 })

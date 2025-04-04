@@ -24,7 +24,11 @@ export class NewsComponent implements OnInit {
   responsiveOptions: any[];
   visible: boolean = false;
 
-  constructor(private router: Router, private newsService: NewsService, private messageService: MessageService) {
+  constructor(
+    private router: Router, 
+    private newsService: NewsService, 
+    private messageService: MessageService
+  ) {
       this.responsiveOptions = [
       {
         breakpoint: '1024px',

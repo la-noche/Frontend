@@ -21,6 +21,8 @@ import { InscriptionFormComponent } from './routing/inscription-form/inscription
 import { TeamDetailsComponent } from './routing/team-details/team-details.component.js';
 import { CompetitionDetailsComponent } from './routing/competition-details/competition-details.component.js';
 import { GameDetailsComponent } from './routing/game-details/game-details.component.js';
+import { ForgotPasswordComponent } from './routing/forgot-password/forgot-password.component.js';
+import { ResetPasswordComponent } from './routing/reset-password/reset-password.component.js';
 
 export const routes: Routes = [
   {
@@ -36,7 +38,17 @@ export const routes: Routes = [
   {
     path: 'home',
     component: StartComponent,
-    title: 'Home'
+    title: 'Home',
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent,
+    title: 'Forgot Password',
+  },
+  {
+    path: 'reset-password',
+    component: ResetPasswordComponent,
+    title: 'Reset Password',
   },
   {
     path: 'user',
@@ -136,6 +148,6 @@ export const routes: Routes = [
   {
     path: '**',
     redirectTo: 'home',
-    pathMatch: 'full',
+    pathMatch: 'prefix',
   },
 ];

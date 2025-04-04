@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RegionInterface } from '../../interfaces/region.interface.js';
 import { RegionService } from '../../services/region.service.js';
 import { MessageService } from 'primeng/api';

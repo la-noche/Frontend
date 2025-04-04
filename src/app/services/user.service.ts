@@ -26,4 +26,12 @@ export class UserService {
   updateUser(user: FormData): Observable<userInterface> {
     return this.http.put<userInterface>(`${this.apiUrl}/${user.get('id')}`, user);
   }
+
+  forgotPassword(email: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/forgot-password`, { email });
+  }
+
+  resetPassword(token: string, newPassword: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/reset-password`, { token, newPassword });
+  }
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterModule, RouterOutlet } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { userInterface } from '../../interfaces/user.interface.js';
 import { UserService } from '../../services/user.service.js';
@@ -10,7 +10,7 @@ import { ButtonModule } from 'primeng/button';
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [RouterOutlet, RouterModule, FormsModule, InputTextModule, ButtonModule],
+  imports: [RouterModule, FormsModule, InputTextModule, ButtonModule],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css',
 })
@@ -23,7 +23,11 @@ export class SignUpComponent {
   password: string = '';
   confirmPassword: string = '';
 
-  constructor(private messageService: MessageService, private userService: UserService, private router: Router){}
+  constructor(
+    private messageService: MessageService, 
+    private userService: UserService, 
+    private router: Router
+  ){}
 
   addUser(){
     //validar que el usuario ingrese valores

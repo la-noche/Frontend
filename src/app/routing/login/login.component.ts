@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterModule, RouterOutlet } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { UserService } from '../../services/user.service.js';
 import { AuthService } from '../../services/auth.service.js';
@@ -10,7 +10,7 @@ import { ButtonModule } from 'primeng/button';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterModule, RouterOutlet, FormsModule, InputTextModule, ButtonModule],
+  imports: [RouterModule, FormsModule, InputTextModule, ButtonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -18,7 +18,12 @@ export class LoginComponent {
   userName: string = '';
   password: string = '';
   
-  constructor(private messageService: MessageService, private userService: UserService, private router: Router, private authService: AuthService){}
+  constructor(
+    private messageService: MessageService, 
+    private userService: UserService, 
+    private router: Router, 
+    private authService: AuthService
+  ){}
 
   login() {
     //validar que el usuario ingrese valores

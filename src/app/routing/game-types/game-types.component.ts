@@ -5,19 +5,19 @@ import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { DatePipe } from '@angular/common';
 import { TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-game-types',
   standalone: true,
-  imports: [ButtonModule, CardModule, RouterModule, RouterOutlet, DatePipe, TableModule],
+  imports: [ButtonModule, CardModule, RouterModule, RouterOutlet, TableModule],
   templateUrl: './game-types.component.html',
   styleUrl: './game-types.component.css',
 })
 export class GameTypesComponent implements OnInit {
   gameTypesList: gameTypeInterface[] = [];
   isDeleteInProgress: boolean = false;
+  
   constructor(
     private gameTypesService: GameTypesService,
     private messageService: MessageService
