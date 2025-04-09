@@ -5,25 +5,31 @@ import { MessageService } from 'primeng/api';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
+import { AuthService } from '../../services/auth.service.js';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [RouterModule, RouterOutlet, CardModule, ButtonModule],
+  imports: [RouterModule, RouterOutlet, CardModule, ButtonModule, CommonModule],
   templateUrl: './game.component.html',
   styleUrl: './game.component.css',
 })
 export class GameComponent implements OnInit {
   gameList: gameInterface[] = [];
   isDeleteInProgress: boolean = false;
+  isAdmin: boolean = false;
 
   constructor(
     private gameService: GameService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
     this.getGames();
+    this.isAdmin = this.authService.isAdmin();
+    console.log('Is admin?', this.isAdmin);
   }
 
   getGames() {

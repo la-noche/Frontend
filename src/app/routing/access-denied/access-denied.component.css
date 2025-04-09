@@ -1,0 +1,15 @@
+.access-denied-card {
+  max-width: 500px;
+  margin: 4rem auto;
+  text-align: center;
+  padding: 2rem;
+  font-style: monospace;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  font-style: monospace;
+}

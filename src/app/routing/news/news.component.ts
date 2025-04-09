@@ -8,6 +8,7 @@ import { ButtonModule } from 'primeng/button';
 import { CarouselModule } from 'primeng/carousel';
 import { AnimateOnScrollModule } from 'primeng/animateonscroll';
 import { DialogModule } from 'primeng/dialog';
+import { AuthService } from '../../services/auth.service.js';
 
 @Component({
   selector: 'app-news',
@@ -23,11 +24,13 @@ export class NewsComponent implements OnInit {
   isDeleteInProgress: boolean = false;
   responsiveOptions: any[];
   visible: boolean = false;
+  isAdmin: boolean = false;
 
   constructor(
     private router: Router, 
     private newsService: NewsService, 
-    private messageService: MessageService
+    private messageService: MessageService,
+    private authService: AuthService
   ) {
       this.responsiveOptions = [
       {
@@ -50,6 +53,7 @@ export class NewsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getNews();
+    this.isAdmin = this.authService.isAdmin();
   }
 
   showDialog(news: NewsInterface): void {

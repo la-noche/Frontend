@@ -1,6 +1,6 @@
 <body class="min-h-screen">
   <div class="flex flex-column gap-2">
-    <button pButton label="Create a new game" class="font-bold monospace-text" [routerLink]="['/game-form', 'new']">
+    <button *ngIf="isAdmin" pButton label="Create a new game" class="font-bold monospace-text" [routerLink]="['/game-form', 'new']">
     </button>
     <div class="flex gap-3 flex-no-wrap"> 
       @for (game of gameList; track game.id) {
@@ -15,8 +15,8 @@
         </p>
         <ng-template pTemplate="footer">
           <div class="flex gap-2 mt-1">
-            <button pButton class="monospace-text w-auto" (click)="deleteGame(game.id)" label="Delete" icon="pi pi-trash" severity="danger"></button>
-            <button pButton label="Edit" icon="pi pi-pencil" [routerLink]="['/game-form', game.id]" class="monospace-text w-auto" severity="secondary"></button>
+            <button pButton *ngIf="isAdmin" class="monospace-text w-auto" (click)="deleteGame(game.id)" label="Delete" icon="pi pi-trash" severity="danger"></button>
+            <button pButton *ngIf="isAdmin" label="Edit" icon="pi pi-pencil" [routerLink]="['/game-form', game.id]" class="monospace-text w-auto" severity="secondary"></button>
           </div>
         </ng-template>
       </p-card>

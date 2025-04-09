@@ -1,6 +1,6 @@
 <body class="min-h-screen">
     <div class="flex flex-column gap-2">
-        <button pButton label="Create a news" class="font-bold monospace-text" [routerLink]="['/news-form', 'new']">
+        <button *ngIf="isAdmin" pButton label="Create a news" class="font-bold monospace-text" [routerLink]="['/news-form', 'new']">
         </button>
         <p-carousel [value]="newsList" [numVisible]="3" [numScroll]="1" [circular]="true"
             [responsiveOptions]="responsiveOptions" [showIndicators]="true" [autoplayInterval]="5000">
@@ -12,8 +12,8 @@
                             <h2 class="monospace-text">{{ news.title }}</h2>
                             <h3 class="monospace-text text-color-secondary">{{ news.date | date: 'yyyy-MM-dd' }}</h3>
                             <div class="sticky bottom-0">
-                                <button pButton (click)="deleteNews(news.id)" label="Delete" icon="pi pi-trash" class="monospace-text w-auto"severity="danger"></button>
-                                <button pButton label="Edit" icon="pi pi-pencil" class="monospace-text w-auto" severity="secondary"[routerLink]="['/news-form', news.id]"></button>
+                                <button pButton *ngIf="isAdmin" (click)="deleteNews(news.id)" label="Delete" icon="pi pi-trash" class="monospace-text w-auto"severity="danger"></button>
+                                <button pButton *ngIf="isAdmin" label="Edit" icon="pi pi-pencil" class="monospace-text w-auto" severity="secondary"[routerLink]="['/news-form', news.id]"></button>
                             </div>
                         </div>
                     </div>

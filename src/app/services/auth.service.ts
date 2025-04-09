@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { jwtDecode } from 'jwt-decode';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -16,6 +17,18 @@ export class AuthService {
     return !!localStorage.getItem(this.tokenKey);
   }
 
+  getRole(): string | null {
+  const token = localStorage.getItem('token');
+  if (token) {
+    const decoded: any = jwtDecode(token);
+    return decoded.role || null;
+  }
+  return null;
+  }
+
+  isAdmin(): boolean {
+    return this.getRole() === 'admin';
+  }
  
   login(token: string): void {
     localStorage.setItem(this.tokenKey, token);

@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
 
-    this.items = [
+  /*this.items = [
       { label: 'Home', icon: 'pi pi-home', routerLink: 'home' },
       { label: 'Game Types', icon: 'pi pi-objects-column', routerLink: 'gameTypes' },
       { label: 'Games', icon: 'pi pi-sparkles', routerLink: 'game' },
@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
       { label: 'Competitions', icon: 'pi pi-trophy', routerLink: 'competition' },
       { label: 'Teams', icon: 'pi pi-users', routerLink: 'team' },
       { label: 'News', icon: 'pi pi-th-large', routerLink: 'news' },
-    ];
+    ];*/
     
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
@@ -75,6 +75,7 @@ export class AppComponent implements OnInit {
         next: (userData) => {
           this.user = userData;
           console.log('User data', this.user);
+          this.setupMenu();
         },
         error: () => {
           this.messageService.add({
@@ -94,6 +95,21 @@ export class AppComponent implements OnInit {
       return decodedToken.id || null;
     }
     return null;
+  }
+
+  setupMenu() {
+    const isAdmin = this.user?.role === 'admin';
+    this.items = [
+      { label: 'Home', icon: 'pi pi-home', routerLink: 'home' },
+      { label: 'Games', icon: 'pi pi-sparkles', routerLink: 'game' },
+      { label: 'Competitions', icon: 'pi pi-trophy', routerLink: 'competition' },
+      { label: 'Teams', icon: 'pi pi-users', routerLink: 'team' },
+      { label: 'News', icon: 'pi pi-th-large', routerLink: 'news' },
+      ...(isAdmin ? [
+        { label: 'Game Types', icon: 'pi pi-objects-column', routerLink: 'gameTypes' },
+        { label: 'Regions', icon: 'pi pi-globe', routerLink: 'region' }
+      ] : []),
+    ]
   }
 
   logOut() {

@@ -6,6 +6,7 @@ import { GameTypeFormComponent } from './routing/game-type-form/game-type-form.c
 import { GameComponent } from './routing/game/game.component.js';
 import { GameFormComponent } from './routing/game-form/game-form.component.js';
 import { authGuard } from './utils/auth.guard.js';
+import { adminGuard } from './utils/admin.guard.js';
 import { SignUpComponent } from './routing/sign-up/sign-up.component.js';
 import { RegionComponent } from './routing/region/region.component.js';
 import { RegionFormComponent } from './routing/region-form/region-form.component.js';
@@ -23,6 +24,7 @@ import { CompetitionDetailsComponent } from './routing/competition-details/compe
 import { GameDetailsComponent } from './routing/game-details/game-details.component.js';
 import { ForgotPasswordComponent } from './routing/forgot-password/forgot-password.component.js';
 import { ResetPasswordComponent } from './routing/reset-password/reset-password.component.js';
+import { AccessDeniedComponent } from './routing/access-denied/access-denied.component.js';
 
 export const routes: Routes = [
   {
@@ -79,6 +81,7 @@ export const routes: Routes = [
     path: 'gameTypes',
     component: GameTypesComponent,
     title: 'Game types',
+    canActivate: [adminGuard]
   },
   {
     path: 'game',
@@ -94,11 +97,13 @@ export const routes: Routes = [
     path: 'gameType-form/:id',
     component: GameTypeFormComponent,
     title: 'Game types form',
+    canActivate: [adminGuard]
   },
   {
     path: 'game-form/:id',
     component: GameFormComponent,
     title: 'Game form',
+    canActivate: [adminGuard]
   },
   {
     path: 'competition',
@@ -129,11 +134,13 @@ export const routes: Routes = [
     path: 'region',
     component: RegionComponent,
     title: 'Regions',
+    canActivate: [adminGuard]
   },
   {
     path: 'region-form/:id',
     component: RegionFormComponent,
     title: 'Region form',
+    canActivate: [adminGuard]
   },
   {
     path: 'news',
@@ -141,9 +148,15 @@ export const routes: Routes = [
     title: 'News',
   },
   {
+  path: 'access-denied',
+  component: AccessDeniedComponent,
+  title: 'Acceso denegado',
+  },
+  {
     path: 'news-form/:id',
     component: NewsFormComponent,
     title: 'News form',
+    canActivate: [adminGuard]
   },
   {
     path: '**',

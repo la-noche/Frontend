@@ -10,4 +10,5 @@ export interface userInterface {
   teams?: number[];
   createdAt?: Date;
   updatedAt?: Date;
+  role?: string;
 }
