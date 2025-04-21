@@ -223,34 +223,45 @@ export class CompetitionFormComponent implements OnInit {
       });
       return;
     }
-    const { dateStart, dateInscriptionLimit } = this.formCompetition.value;
+
+    const { dateInscriptionLimit } = this.formCompetition.value;
     if (this.DatesInvalid(dateInscriptionLimit)) {
       this.messageService.add({
-      severity: 'error',
-      summary: 'Error',
-      detail: 'Dates are invalid.',
-    });
-    return;
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Dates are invalid.',
+      });
+      return;
     }
+
     this.isSaveInProgress = true;
+
     this.competitionService.updateCompetition(this.formCompetition.value).subscribe({
-        next: () => {
+      next: () => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Updated',
+          detail: 'Competition updated successfully.',
+        });
+        this.isSaveInProgress = false;
+        this.router.navigateByUrl('/competition');
+      },
+      error: (err) => {
+        this.isSaveInProgress = false;
+        if (err.status === 403) {
           this.messageService.add({
-            severity: 'success',
-            summary: 'Updated',
-            detail: 'Competition updated successfully.',
+            severity: 'error',
+            summary: 'Unauthorized',
+            detail: 'You are not allowed to update this competition.',
           });
-          this.isSaveInProgress = false;
-          this.router.navigateByUrl('/competition');
-        },
-        error: () => {
-          this.isSaveInProgress = false;
+        } else {
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
             detail: 'Check the fields and try again.',
           });
-        },
-      });
+        }
+      }
+    })
   }
 }

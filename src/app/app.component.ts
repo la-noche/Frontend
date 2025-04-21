@@ -32,16 +32,6 @@ export class AppComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService, private userService: UserService, private messageService: MessageService) {}
 
   ngOnInit() {
-
-  /*this.items = [
-      { label: 'Home', icon: 'pi pi-home', routerLink: 'home' },
-      { label: 'Game Types', icon: 'pi pi-objects-column', routerLink: 'gameTypes' },
-      { label: 'Games', icon: 'pi pi-sparkles', routerLink: 'game' },
-      { label: 'Regions', icon: 'pi pi-globe', routerLink: 'region' },
-      { label: 'Competitions', icon: 'pi pi-trophy', routerLink: 'competition' },
-      { label: 'Teams', icon: 'pi pi-users', routerLink: 'team' },
-      { label: 'News', icon: 'pi pi-th-large', routerLink: 'news' },
-    ];*/
     
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
@@ -74,7 +64,6 @@ export class AppComponent implements OnInit {
       this.userService.getUserById(userId).subscribe({
         next: (userData) => {
           this.user = userData;
-          console.log('User data', this.user);
           this.setupMenu();
         },
         error: () => {

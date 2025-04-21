@@ -29,7 +29,6 @@ export class GameComponent implements OnInit {
   ngOnInit(): void {
     this.getGames();
     this.isAdmin = this.authService.isAdmin();
-    console.log('Is admin?', this.isAdmin);
   }
 
   getGames() {

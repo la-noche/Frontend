@@ -26,6 +26,24 @@ export class AuthService {
   return null;
   }
 
+  getUser(): { id: number; userName: string; role: string } | null {
+    const token = localStorage.getItem(this.tokenKey);
+    if (token) {
+      try {
+        const decoded: any = jwtDecode(token);
+        return {
+          id: decoded.id,
+          userName: decoded.userName,
+          role: decoded.role
+        };
+      } catch (e) {
+        console.error('Error decoding token', e);
+        return null;
+      }
+    }
+    return null;
+  }
+
   isAdmin(): boolean {
     return this.getRole() === 'admin';
   }

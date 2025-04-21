@@ -92,7 +92,6 @@ export class InscriptionFormComponent implements OnInit {
       id: this.formInscription.value.id,
       competition: competition,
       team: this.formInscription.value.team,
-      date: new Date(),
       status: 'pending',
     };
 

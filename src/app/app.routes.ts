@@ -7,6 +7,7 @@ import { GameComponent } from './routing/game/game.component.js';
 import { GameFormComponent } from './routing/game-form/game-form.component.js';
 import { authGuard } from './utils/auth.guard.js';
 import { adminGuard } from './utils/admin.guard.js';
+import { competitionAccessGuard } from './utils/competition-access.guard.js';
 import { SignUpComponent } from './routing/sign-up/sign-up.component.js';
 import { RegionComponent } from './routing/region/region.component.js';
 import { RegionFormComponent } from './routing/region-form/region-form.component.js';
@@ -124,6 +125,7 @@ export const routes: Routes = [
     path: 'competition-form/:id',
     component: CompetitionFormComponent,
     title: 'Competition form',
+    canActivate: [competitionAccessGuard]
   },
   {
     path: 'inscription-form/:id',
