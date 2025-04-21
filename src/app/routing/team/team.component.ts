@@ -7,7 +7,7 @@ import { TeamService } from '../../services/team.service.js';
 import { MessageService } from 'primeng/api';
 import { jwtDecode } from 'jwt-decode';
 import { TableModule } from 'primeng/table';
-
+import { AuthService } from '../../services/auth.service.js';
 @Component({
   selector: 'app-team',
   standalone: true,
@@ -17,11 +17,13 @@ import { TableModule } from 'primeng/table';
 })
 export class TeamComponent implements OnInit {
   teamList: TeamInterface[] = [];
+  myTeams: TeamInterface[] = [];
   isDeleteInProgress: boolean = false;
 
   constructor(
     private teamService: TeamService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -30,10 +32,17 @@ export class TeamComponent implements OnInit {
 
   getTeams() {
     this.teamService.getTeams().subscribe((data) => {
-      this.teamList = data;
+      if (data.length > 0) {
+        this.myTeams = data.filter(team => (team.userCreator as any).id === this.getUserIdFromToken());
+        this.teamList = data.filter(team => (team.userCreator as any).id !== this.getUserIdFromToken());
+      }
     });
   }
 
+  isAdmin(): boolean {
+    return this.authService.isAdmin();
+  }
+  
   getUserIdFromToken(): number | null {
     const token = localStorage.getItem('token');
     if (token) {
@@ -97,12 +106,12 @@ export class TeamComponent implements OnInit {
         this.isDeleteInProgress = false;
         this.getTeams();
       },
-      error: () => {
+      error: (err) => {
         this.isDeleteInProgress = false;
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'Team cannot be deleted.',
+          detail: err.error.message || 'Team cannot be deleted.',
         });
       },
     });

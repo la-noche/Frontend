@@ -28,6 +28,10 @@ export class AccessDeniedComponent implements OnInit {
       detail = 'Admin role is required to access this section';
     }
 
+    if (this.reason === 'not-creator') {
+      detail = 'You are not the creator of this section';
+    }
+
     this.messageService.add({
       severity: 'error',
       summary: 'Access denied',

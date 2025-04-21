@@ -26,6 +26,7 @@ import { GameDetailsComponent } from './routing/game-details/game-details.compon
 import { ForgotPasswordComponent } from './routing/forgot-password/forgot-password.component.js';
 import { ResetPasswordComponent } from './routing/reset-password/reset-password.component.js';
 import { AccessDeniedComponent } from './routing/access-denied/access-denied.component.js';
+import { teamAccessGuard } from './utils/team-access.guard.js';
 
 export const routes: Routes = [
   {
@@ -77,6 +78,7 @@ export const routes: Routes = [
     path: 'team-form/:id',
     component: TeamFormComponent,
     title: 'Team form',
+    canActivate: [teamAccessGuard]
   },
   {
     path: 'gameTypes',
