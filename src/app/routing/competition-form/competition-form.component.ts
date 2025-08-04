@@ -12,6 +12,7 @@ import { RegionInterface } from '../../interfaces/region.interface.js';
 import { RegionService } from '../../services/region.service.js';
 import { DropdownModule } from 'primeng/dropdown';
 import { jwtDecode } from 'jwt-decode';
+import { max } from 'rxjs';
 
 @Component({
   selector: 'app-competition-form',
@@ -43,6 +44,7 @@ export class CompetitionFormComponent implements OnInit {
       id: [null],
       name: ['', Validators.required],
       dateInscriptionLimit: ['', Validators.required],
+      maxTeams: [16, [Validators.required, Validators.min(2), Validators.max(16)]],
       game: [null, Validators.required],
       region: [null, Validators.required],
     });
@@ -180,6 +182,7 @@ export class CompetitionFormComponent implements OnInit {
       id: this.formCompetition.value.id,
       name: this.formCompetition.value.name,
       dateInscriptionLimit: this.formCompetition.value.dateInscriptionLimit,
+      maxTeams: this.formCompetition.value.maxTeams,
       game: this.formCompetition.value.game,
       region: this.formCompetition.value.region,
       userCreator: userId,

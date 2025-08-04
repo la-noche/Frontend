@@ -41,9 +41,17 @@ export class CompetitionComponent implements OnInit {
     this.competitionService.getCompetitions().subscribe((data) => {
       const user = this.authService.getUser();
     if (!user) return;
+    data.forEach((competition) => {
+      competition.registrations = competition.registrations?.filter(reg => reg.status === 'accepted') || [];
+    });
     this.myCompetitions = data.filter(c => (c.userCreator as any)?.id === user.id);
     this.competitionList = data.filter(c => (c.userCreator as any)?.id !== user.id);
     });
+  }
+
+  isBeforeLimit(limitDate: string | Date): boolean {
+    const now = new Date();
+    return new Date(limitDate) > now;
   }
 
   deleteCompetition(id: number) {

@@ -24,6 +24,12 @@
         <label for="dateInscriptionLimit">Inscription limit date</label>
         <input type="datetime-local" pInputText formControlName="dateInscriptionLimit" class="dateInput" [min]="minDateTime"/>
       </div>
+
+      <div class="field flex flex-column monospace-text text-2xl  text-primary">
+        <label for="maxTeams">Maximum amount of Teams (2-16)</label>
+        <input type="number" pInputText min="2" max="16" formControlName="maxTeams" />
+      </div>
+
       <div class="field flex flex-column monospace-text text-2xl text-primary">
         <label for="game">Game</label>
         <p-dropdown

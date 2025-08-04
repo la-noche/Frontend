@@ -9,6 +9,7 @@ export interface competitionInterface{
     winner?: number;
     dateInscriptionLimit: Date;
     game: number;
+    maxTeams: number;
     region: number;
     userCreator: number;
     registrations?: inscriptionInterface[];

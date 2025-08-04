@@ -15,6 +15,7 @@
             <th>Region</th>
             <th>Creator</th>
             <th>Inscription Limit Date</th>
+            <th>Teams</th>
             <th></th>
             <th></th>
             <th></th>
@@ -27,7 +28,8 @@
             <td>{{ competition.region.name }}</td>
             <td>{{ competition.userCreator.userName }}</td>
             <td>{{ competition.dateInscriptionLimit | date: 'yyyy-MM-dd HH:mm'}}</td>
-            <td><button pButton [routerLink]="['/inscription-form', competition.id]" label="Join competition" severity="success"
+            <td>{{ (competition.registrations?.length || 0) }} / {{ competition.maxTeams }}</td>
+            <td><button *ngIf="isBeforeLimit(competition.dateInscriptionLimit)" pButton [routerLink]="['/inscription-form', competition.id]" label="Join competition" severity="success"
                 class="monospace-text m-1"></button></td>
             <td><button pButton [routerLink]="['/competition-form', competition.id]" label="Edit competition" severity="primary"
                 class="monospace-text m-1"></button></td>
@@ -49,6 +51,7 @@
             <th>Region</th>
             <th>Creator</th>
             <th>Inscription Limit Date</th>
+            <th>Teams</th>
             <th></th>
             <th></th>
             <th></th>
@@ -62,7 +65,8 @@
             <td>{{ competition.region.name }}</td>
             <td>{{ competition.userCreator.userName }}</td>
             <td>{{ competition.dateInscriptionLimit | date: 'yyyy-MM-dd HH:mm'}}</td>
-            <td><button pButton [routerLink]="['/inscription-form', competition.id]" label="Join competition"
+            <td>{{ competition.registrations?.length || 0 }} / {{ competition.maxTeams }}</td>
+            <td><button *ngIf="isBeforeLimit(competition.dateInscriptionLimit)" pButton [routerLink]="['/inscription-form', competition.id]" label="Join competition"
                 severity="success" class="monospace-text m-1"></button></td>
             <td><button *ngIf="isAdmin()" pButton [routerLink]="['/competition-form', competition.id]" label="Edit competition" severity="primary"
                 class="monospace-text m-1"></button></td>

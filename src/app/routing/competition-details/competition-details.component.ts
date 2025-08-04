@@ -98,11 +98,12 @@ export class CompetitionDetailsComponent implements OnInit{
 
   acceptInscription(registration: inscriptionInterface){
     this.isSaveInProgress = true;
-    if (this.acceptedRegistrationsCount >= 8) {
+
+    if (this.acceptedRegistrationsCount >= this.foundCompetition.maxTeams) {
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
-        detail: 'The maximum number of accepted teams (8) has been reached.',
+        detail: 'The maximum number of accepted teams has been reached.',
       });
       this.isSaveInProgress = false;
       return;

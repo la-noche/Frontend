@@ -29,11 +29,25 @@
           Creator: <span class="text-color-secondary"> {{ foundCompetition?.userCreator?.userName }} </span>
         </div>
         <div class="justify-content-center monospace-text mb-2 text-2xl">
-          Amount of teams: <span class="text-color-secondary"> {{ acceptedRegistrationsCount }} / 8 </span>
+          Amount of teams: <span class="text-color-secondary"> {{ acceptedRegistrationsCount }} / {{ foundCompetition?.maxTeams }} </span>
         </div>
       </div>
       <div class="col-8 ml-5 surface-50 p-3 border-1 border-primary border-round">
-        <h2 class="text text-primary text-3xl">Fixture</h2>
+        <h2 class="text text-primary text-3xl">Leader board</h2>
+        <p-table [value]="foundCompetition?.registrations">
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="monospace-text">Team ID</th>
+              <th class="monospace-text">Points</th>
+            </tr>
+          </ng-template>
+          <ng-template  pTemplate="body" let-registration>
+            <tr *ngIf="registration.status === 'accepted'">
+              <td><a [routerLink]="['/team-details', registration.team]" class="monospace-text">{{ registration.team }}</a></td>
+              <td class="text-color-secondary monospace-text">{{ registration.points }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
       </div>
       <div *ngIf="user?.id !== foundCompetition?.userCreator?.id"
         class="col-11 m-3 surface-50 p-3 border-1 border-primary border-round">
