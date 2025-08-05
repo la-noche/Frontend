@@ -12,11 +12,12 @@ import { DatePipe } from '@angular/common';
 import { jwtDecode } from 'jwt-decode';
 import { userInterface } from '../../interfaces/user.interface.js';
 import { TableModule } from 'primeng/table';
+import { TabViewModule } from 'primeng/tabview';
 
 @Component({
   selector: 'app-competition-details',
   standalone: true,
-  imports: [ButtonModule, RouterModule, DatePipe, CommonModule, TableModule],
+  imports: [ButtonModule, RouterModule, DatePipe, CommonModule, TableModule, TabViewModule],
   templateUrl: './competition-details.component.html',
   styleUrl: './competition-details.component.css'
 })
@@ -69,6 +70,25 @@ export class CompetitionDetailsComponent implements OnInit{
       return decodedToken.id || null;
     }
     return null;
+  }
+
+  startCompetition() {
+    this.competitionService.startCompetition(this.foundCompetition.id).subscribe({
+      next: () => {
+        this.messageService.add({ 
+          severity: 'success', 
+          summary: 'Started', 
+          detail: 'Competition started successfully'
+        })
+      },
+      error: (err) => {
+        this.messageService.add({ 
+          severity: 'error', 
+          summary: 'Error', 
+          detail: err.error.message 
+        })
+      }
+    })
   }
 
   getCompetitionById(id: number) {

@@ -12,5 +12,6 @@ export interface competitionInterface{
     maxTeams: number;
     region: number;
     userCreator: number;
+    matches?: number[];
     registrations?: inscriptionInterface[];
 }

@@ -33,4 +33,8 @@ export class CompetitionService {
   deleteCompetition(id: number) {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
+
+  startCompetition(id: number) {
+    return this.http.post(`${this.apiUrl}/${id}/start`, {});
+  }
 }
