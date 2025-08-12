@@ -35,7 +35,10 @@
       <div class="col-8 ml-5 surface-50 p-3 border-1 border-primary border-round">
         <p-tabView class="monospace-text mt-4">
           <p-tabPanel header="Scoreboard">
-            <p-table [value]="foundCompetition?.registrations">
+            <p-table 
+            [value]="foundCompetition?.registrations"
+            sortField="points" 
+            [sortOrder]="-1">
               <ng-template pTemplate="header">
                 <tr>
                   <th class="monospace-text">Team ID</th>
@@ -51,25 +54,49 @@
             </p-table>
           </p-tabPanel>
           <p-tabPanel header="Matches">
-            <h3 class="monospace-text">Matches</h3>
-              <p-table [value]="foundCompetition?.matches">
-                <ng-template pTemplate="header">
-                  <tr>
-                    <th class="monospace-text">Date</th>
-                    <th class="monospace-text">Teams</th>
-                    <th class="monospace-text">Round</th>
-                  </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-match>
-                  <tr>
-                    <td>{{ match.matchDate | date:'yyyy-MM-dd HH:mm' }}</td>
-                    <td>{{ match.teams[0]?.name }} vs {{ match.teams[1]?.name }}</td>
-                    <td>{{ match.round }}</td>
-                  </tr>
-                </ng-template>
-              </p-table>
+            <p-table [value]="foundCompetition?.matches">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th class="monospace-text">Date</th>
+                  <th class="monospace-text">Teams</th>
+                  <th class="monospace-text">Round</th>
+                  <th class="monospace-text" *ngIf="user?.id === foundCompetition?.userCreator?.id">Set Winner</th>
+                  <th class="monospace-text" *ngIf="user?.id !== foundCompetition?.userCreator?.id">Winner</th>
+                  <th class="monospace-text" *ngIf="user?.id === foundCompetition?.userCreator?.id"></th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-match>
+                <tr class="monospace-text">
+                  <td>{{ match.matchDate | date:'yyyy-MM-dd' }}</td>
+                  <td>{{ match.teams[0]?.name }} vs {{ match.teams[1]?.name }}</td>
+                  <td>{{ match.round }}</td>
+                  <td *ngIf="user?.id === foundCompetition?.userCreator?.id">
+                    <p-dropdown
+                      *ngIf="match.draw === null"
+                      [options]="[{label: match.teams[0]?.name, value: match.teams[0]?.id}, 
+                                  {label: match.teams[1]?.name, value: match.teams[1]?.id}, 
+                                  {label: 'Draw', value: 0}]" 
+                      class="monospace-text p-2" 
+                      [(ngModel)]="match.winner"
+                      [style]="{width: '100%'}"
+                      [placeholder]="'Select winner'">
+                    </p-dropdown>
+                   <p *ngIf="match.draw !== null && !match.draw" class="monospace-text">{{match.winner.name}}</p>
+                   <p *ngIf="match.draw !== null && match.draw" class="monospace-text">Draw</p>
+                  </td>
+                  <td *ngIf="user?.id === foundCompetition?.userCreator?.id">
+                    <button *ngIf="match.draw === null" pButton label="Save" class="monospace-text" (click)="saveWinner(match)" ></button>
+                  </td>
+                  <td *ngIf="user?.id !== foundCompetition?.userCreator?.id">
+                    <span *ngIf="match.winner?.name">{{ match.winner?.name }}</span>
+                    <span *ngIf="match.draw">Draw</span>
+                    <span *ngIf="!match.winner?.name && !match.draw">Not set</span>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
             <div *ngIf="foundCompetition.matches?.length === 0">
-              <p>No matches available</p>
+              <p class="monospace-text">No matches available</p>
             </div>
           </p-tabPanel>
         </p-tabView>
@@ -109,17 +136,20 @@
             <tr>
               <td><a [routerLink]="['/team-details', registration.team]" class="monospace-text">{{ registration.team }}</a></td>
               <td class="text-color-secondary monospace-text">{{ registration.date | date:'yyyy-MM-dd HH:mm' }}</td>
-              <td class="text-color-secondary monospace-text">{{ registration.status }}</td>
+              <td  class="text-color-secondary monospace-text">{{ registration.status }}</td>
               <td>
-                <button *ngIf="registration.status === 'pending'" pButton label="Accept" (click)="acceptInscription(registration)" [disabled]="isSaveInProgress" class="monospace-text"></button>
-                <button *ngIf="registration.status === 'accepted'" pButton severity="secondary" label="Cancel" (click)="cancelInscription(registration)"[disabled]="isSaveInProgress" class="monospace-text"></button>
+                <button *ngIf="foundCompetition?.dateStart===null && registration.status === 'pending'" pButton label="Accept" (click)="acceptInscription(registration)" [disabled]="isSaveInProgress" class="monospace-text"></button>
+                <button *ngIf="foundCompetition?.dateStart===null && registration.status === 'accepted'" pButton severity="secondary" label="Cancel" (click)="cancelInscription(registration)"[disabled]="isSaveInProgress" class="monospace-text"></button>
               </td>
             </tr>
           </ng-template>
         </p-table>
         <div class="mt-3">
-          <button pButton label="Start Competition" icon="pi pi-play" (click)="startCompetition()"
+          <button pButton *ngIf="foundCompetition?.dateStart===null" [disabled]="isSaveInProgress" label="Start Competition" icon="pi pi-play" (click)="startCompetition()"
             class="p-button-success monospace-text">
+          </button>
+          <button pButton *ngIf="foundCompetition?.dateStart!==null && foundCompetition?.dateEnd===null" [disabled]="isSaveInProgress" label="Finish Competition" icon="pi pi-stop" (click)="finishCompetition()"
+            class="p-button-danger monospace-text">
           </button>
         </div>
       </div>

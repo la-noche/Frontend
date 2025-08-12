@@ -3,5 +3,6 @@ export interface matchInterface {
   matchDate: Date;
   round: string;
   winner: number | null;
+  draw: boolean;
   teams: number[];
 }

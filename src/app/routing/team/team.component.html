@@ -11,7 +11,6 @@
         <ng-template pTemplate="header">
           <tr>
             <th>Name</th>
-            <th>Points</th>
             <th>Members</th>
             <th></th>
             <th></th>
@@ -22,7 +21,6 @@
         <ng-template pTemplate="body" let-team>
           <tr>
             <td> <a [routerLink]="['/team-details', team.id]" class="monospace-text m-1" > {{ team.name }} </a> </td>
-            <td>{{ team.points }}</td>
             <td>{{ team.players ? team.players.length :0}}</td>
             <td><button pButton (click)="joinTeam(team.id)" label="Join team" severity="success" class="monospace-text m-1"></button></td>
             <td><button pButton (click)="leaveTeam(team.id)" label="Leave team" severity="secondary" class="monospace-text m-1"></button></td>
@@ -40,7 +38,6 @@
         <ng-template pTemplate="header">
           <tr>
             <th>Name</th>
-            <th>Points</th>
             <th>Members</th>
             <th></th>
             <th></th>
@@ -51,7 +48,6 @@
         <ng-template pTemplate="body" let-team>
           <tr>
             <td> <a [routerLink]="['/team-details', team.id]" class="monospace-text m-1"> {{ team.name }} </a> </td>
-            <td>{{ team.points }}</td>
             <td>{{ team.players ? team.players.length :0}}</td>
             <td><button pButton (click)="joinTeam(team.id)" label="Join team" severity="success"
                 class="monospace-text m-1"></button></td>
