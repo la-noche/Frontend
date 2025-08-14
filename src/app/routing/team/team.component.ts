@@ -7,11 +7,12 @@ import { TeamService } from '../../services/team.service.js';
 import { MessageService } from 'primeng/api';
 import { jwtDecode } from 'jwt-decode';
 import { TableModule } from 'primeng/table';
+import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service.js';
 @Component({
   selector: 'app-team',
   standalone: true,
-  imports: [RouterModule, RouterOutlet, RouterLink, CardModule, ButtonModule, TableModule],
+  imports: [RouterModule, RouterOutlet, RouterLink, CardModule, ButtonModule, TableModule, CommonModule],
   templateUrl: './team.component.html',
   styleUrl: './team.component.css',
 })
@@ -41,6 +42,17 @@ export class TeamComponent implements OnInit {
 
   isAdmin(): boolean {
     return this.authService.isAdmin();
+  }
+
+  isMember(id: number): boolean {
+    const userId = this.getUserIdFromToken();
+    if (this.myTeams.some(team => team.id === id && team.players.some(user => (user as any).id === userId))){
+      return true;
+    }
+    if (this.teamList.some(team => team.id === id && team.players.some(user => (user as any).id === userId))) {
+      return true;
+    }
+    return false;
   }
   
   getUserIdFromToken(): number | null {

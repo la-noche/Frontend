@@ -22,8 +22,8 @@
           <tr>
             <td> <a [routerLink]="['/team-details', team.id]" class="monospace-text m-1" > {{ team.name }} </a> </td>
             <td>{{ team.players ? team.players.length :0}}</td>
-            <td><button pButton (click)="joinTeam(team.id)" label="Join team" severity="success" class="monospace-text m-1"></button></td>
-            <td><button pButton (click)="leaveTeam(team.id)" label="Leave team" severity="secondary" class="monospace-text m-1"></button></td>
+            <td><button *ngIf="!isMember(team.id) && team.players.length < 5" pButton (click)="joinTeam(team.id)" label="Join team" severity="success" class="monospace-text m-1"></button></td>
+            <td><button *ngIf="isMember(team.id)" pButton (click)="leaveTeam(team.id)" label="Leave team" severity="secondary" class="monospace-text m-1"></button></td>
             <td><button pButton [routerLink]="['/team-form', team.id]" label="Edit team" severity="primary" class="monospace-text m-1"></button></td>
             <td><button pButton (click)="deleteTeam(team.id)" label="Delete team" severity="danger" class="monospace-text m-1"></button></td>
           </tr>
@@ -49,9 +49,9 @@
           <tr>
             <td> <a [routerLink]="['/team-details', team.id]" class="monospace-text m-1"> {{ team.name }} </a> </td>
             <td>{{ team.players ? team.players.length :0}}</td>
-            <td><button pButton (click)="joinTeam(team.id)" label="Join team" severity="success"
+            <td><button *ngIf="!isMember(team.id) && team.players.length < 5" pButton (click)="joinTeam(team.id)" label="Join team" severity="success"
                 class="monospace-text m-1"></button></td>
-            <td><button pButton (click)="leaveTeam(team.id)" label="Leave team" severity="secondary"
+            <td><button *ngIf="isMember(team.id)" pButton (click)="leaveTeam(team.id)" label="Leave team" severity="secondary"
                 class="monospace-text m-1"></button></td>
             <td><button *ngIf="isAdmin()" pButton [routerLink]="['/team-form', team.id]" label="Edit team" severity="primary"
                 class="monospace-text m-1"></button></td>

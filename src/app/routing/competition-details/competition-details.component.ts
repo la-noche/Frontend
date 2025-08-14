@@ -172,6 +172,8 @@ export class CompetitionDetailsComponent implements OnInit{
         })
       }
     })
+    window.location.reload();
+    
   }
 
   finishCompetition(){

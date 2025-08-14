@@ -88,7 +88,7 @@
                     <button *ngIf="match.draw === null" pButton label="Save" class="monospace-text" (click)="saveWinner(match)" ></button>
                   </td>
                   <td *ngIf="user?.id !== foundCompetition?.userCreator?.id">
-                    <span *ngIf="match.winner?.name">{{ match.winner?.name }}</span>
+                    <span *ngIf="match.winner?.name !== null">{{ match.winner?.name }}</span>
                     <span *ngIf="match.draw">Draw</span>
                     <span *ngIf="!match.winner?.name && !match.draw">Not set</span>
                   </td>
@@ -114,8 +114,7 @@
           </ng-template>
           <ng-template pTemplate="body" let-registration>
             <tr *ngIf="registration.status === 'accepted'">
-              <td><a [routerLink]="['/team-details', registration.team]" class="monospace-text">{{ registration.team }}</a>
-              </td>
+              <td><a [routerLink]="['/team-details', registration.team]" class="monospace-text">{{ registration.team }}</a></td>
               <td class="text-color-secondary monospace-text">{{ registration.date | date:'yyyy-MM-dd HH:mm' }}</td>
             </tr>
           </ng-template>
