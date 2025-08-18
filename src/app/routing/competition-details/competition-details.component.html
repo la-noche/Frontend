@@ -71,7 +71,7 @@
                   <td>{{ match.teams[0]?.name }} vs {{ match.teams[1]?.name }}</td>
                   <td>{{ match.round }}</td>
                   <td *ngIf="user?.id === foundCompetition?.userCreator?.id">
-                    <p-dropdown
+                    <p-dropdown appendTo="body"
                       *ngIf="match.draw === null"
                       [options]="[{label: match.teams[0]?.name, value: match.teams[0]?.id}, 
                                   {label: match.teams[1]?.name, value: match.teams[1]?.id}, 
@@ -79,7 +79,9 @@
                       class="monospace-text p-2" 
                       [(ngModel)]="match.winner"
                       [style]="{width: '100%'}"
-                      [placeholder]="'Select winner'">
+                      [placeholder]="'Select winner'"
+
+                      >
                     </p-dropdown>
                    <p *ngIf="match.draw !== null && !match.draw" class="monospace-text">{{match.winner.name}}</p>
                    <p *ngIf="match.draw !== null && match.draw" class="monospace-text">Draw</p>

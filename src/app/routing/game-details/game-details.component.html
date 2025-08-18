@@ -30,7 +30,8 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-competition>
                     <tr>
-                        <td class="text-color-secondary text 3xl">{{ competition.name }}</td>
+                        <td><a [routerLink]="['/competition-details', competition.id]" class="monospace-text m-1"> {{ competition.name }}
+                        </a></td>
                         <td class="text-color-secondary text 3xl"> {{ competition.dateInscriptionLimit | date: 'yyyy-MM-dd HH:mm' }} </td>
                         <td class="text-color-secondary text 3xl"> {{ getRegionName(competition.region) || 'Loading...' }} </td> 
                     </tr>

@@ -26,7 +26,8 @@
       <p-table [value]="user?.competitionsCreated" [tableStyle]="{ 'min-width': '29rem' }">
         <ng-template pTemplate="body" let-competition>
           <tr>
-            <td class="monospace-text">{{ competition.name }}</td>
+            <td><a [routerLink]="['/competition-details', competition.id]" class="monospace-text m-1"> {{ competition.name }}
+            </a></td>
           </tr>
         </ng-template>
       </p-table>

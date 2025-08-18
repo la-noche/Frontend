@@ -104,6 +104,7 @@ export class CompetitionDetailsComponent implements OnInit{
           summary: 'Updated',
           detail: 'Match winner updated successfully.',
         });
+        this.getCompetitionById(this.foundCompetition.id);
         this.isSaveInProgress = false;
       },
       error: (err) => {
@@ -158,11 +159,14 @@ export class CompetitionDetailsComponent implements OnInit{
   startCompetition() {
     this.competitionService.startCompetition(this.foundCompetition.id).subscribe({
       next: () => {
-        this.messageService.add({ 
-          severity: 'success', 
-          summary: 'Started', 
-          detail: 'Competition started successfully'
-        })
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Started',
+          detail: 'Competition started successfully',
+        });
+        setTimeout(function () {
+          window.location.reload();
+        }, 1500);
       },
       error: (err) => {
         this.messageService.add({ 
@@ -171,9 +175,7 @@ export class CompetitionDetailsComponent implements OnInit{
           detail: err.error.message 
         })
       }
-    })
-    window.location.reload();
-    
+    })    
   }
 
   finishCompetition(){
