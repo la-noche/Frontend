@@ -77,7 +77,12 @@ export class NewsComponent implements OnInit {
           detail: 'News deleted successfully.',
         });
         this.isDeleteInProgress = false;
-        this.getNews();
+        const index = this.newsList.findIndex(news => news.id === id);
+
+        // 2. Si se encuentra el elemento (index no es -1), elimínalo del array
+        if (index !== -1) {
+          this.newsList.splice(index, 1);
+        }
       },
       error: () => {
         this.isDeleteInProgress = false;
