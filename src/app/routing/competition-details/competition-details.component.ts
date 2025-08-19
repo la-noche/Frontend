@@ -9,6 +9,7 @@ import { InscriptionService } from '../../services/inscription.service.js';
 import { MatchService } from '../../services/match.service.js';
 import { UserService } from '../../services/user.service.js';
 import { MessageService } from 'primeng/api';
+import { AuthService } from '../../services/auth.service.js';
 import { ButtonModule } from 'primeng/button';
 import { DatePipe } from '@angular/common';
 import { jwtDecode } from 'jwt-decode';
@@ -37,6 +38,7 @@ export class CompetitionDetailsComponent implements OnInit{
     private incriptionService: InscriptionService,
     private matchService: MatchService,
     private userService: UserService,
+    private authService: AuthService,
     private activatedRoute: ActivatedRoute,
     private messageService: MessageService,
     private router: Router
@@ -121,7 +123,9 @@ export class CompetitionDetailsComponent implements OnInit{
   giveScore(match: matchInterface) {
     if (match.winner !== null) {
       this.foundCompetition.registrations?.forEach((registration) => {
-        if (registration.team === match.winner) {
+        console.log(match.winner)
+        console.log(registration)
+        if ((registration.team as any).id === match.winner) {
           if (typeof registration.points === 'number') {
             registration.points += 3;
             this.updateWinners(registration);
@@ -132,7 +136,7 @@ export class CompetitionDetailsComponent implements OnInit{
     if (match.winner === null && match.draw) {
       this.foundCompetition.registrations?.forEach((registration) => {
         match.teams?.forEach((team) => {
-          if (registration.team === (team as any).id) {
+          if ((registration.team as any).id === (team as any).id) {
             if (typeof registration.points === 'number') {
               registration.points += 1;
               this.updateWinners(registration);
@@ -178,6 +182,10 @@ export class CompetitionDetailsComponent implements OnInit{
     })    
   }
 
+  isAdmin(): boolean {
+    return this.authService.isAdmin();
+  }
+
   finishCompetition(){
     this.isSaveInProgress = true;
     for (const match of this.foundCompetition.matches || []) {
@@ -213,11 +221,12 @@ export class CompetitionDetailsComponent implements OnInit{
       dateEnd: this.foundCompetition.dateEnd,
       dateInscriptionLimit: this.foundCompetition.dateInscriptionLimit,
       maxTeams: this.foundCompetition.maxTeams,
-      winner: this.foundCompetition.winner,
+      winner: (this.foundCompetition.winner as any).id,
       game: (this.foundCompetition.game as any).id,
       region: (this.foundCompetition.region as any).id,
       userCreator: (this.foundCompetition.userCreator as any).id,
     };
+    console.log(payload);
     this.competitionService.updateCompetition(payload).subscribe({
       next: () => {
         this.isSaveInProgress = false;
@@ -227,12 +236,12 @@ export class CompetitionDetailsComponent implements OnInit{
           detail: 'Competition finished successfully.',
         });
       },
-      error: () => {
+      error: (err) => {
         this.isSaveInProgress = false;
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'Competition couldn`t be finished.',
+          detail: err.error.message ||'Competition couldn`t be finished.',
         });
       },
     });
@@ -286,12 +295,12 @@ export class CompetitionDetailsComponent implements OnInit{
         this.isSaveInProgress = false;
         this.countAcceptedRegistrations();
       },
-      error: () => {
+      error: (err) => {
         this.isSaveInProgress = false;
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'Inscription couldn`t be accepted.',
+          detail: err.error.message || 'Inscription couldn`t be accepted.',
         });
       },
     });
@@ -310,12 +319,12 @@ export class CompetitionDetailsComponent implements OnInit{
         this.isSaveInProgress = false;
         this.countAcceptedRegistrations();
       },
-      error: () => {
+      error: (err) => {
         this.isSaveInProgress = false;
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'Inscription couldn`t be cancelled.',
+          detail: err.error.message || 'Inscription couldn`t be cancelled.',
         });
       },
     });

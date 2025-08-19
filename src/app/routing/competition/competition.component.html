@@ -31,7 +31,7 @@
             <td>{{ (competition.registrations?.length || 0) }} / {{ competition.maxTeams }}</td>
             <td><button *ngIf="isBeforeLimit(competition.dateInscriptionLimit)" pButton [routerLink]="['/inscription-form', competition.id]" label="Join competition" severity="success"
                 class="monospace-text m-1"></button></td>
-            <td><button pButton [routerLink]="['/competition-form', competition.id]" label="Edit competition" severity="primary"
+            <td><button *ngIf="competition.dateStart === null" pButton [routerLink]="['/competition-form', competition.id]" label="Edit competition" severity="primary"
                 class="monospace-text m-1"></button></td>
             <td><button pButton (click)="deleteCompetition(competition.id)" label="Delete competition" severity="danger"
                 class="monospace-text m-1"></button></td>
@@ -68,7 +68,7 @@
             <td>{{ competition.registrations?.length || 0 }} / {{ competition.maxTeams }}</td>
             <td><button *ngIf="isBeforeLimit(competition.dateInscriptionLimit)" pButton [routerLink]="['/inscription-form', competition.id]" label="Join competition"
                 severity="success" class="monospace-text m-1"></button></td>
-            <td><button *ngIf="isAdmin()" pButton [routerLink]="['/competition-form', competition.id]" label="Edit competition" severity="primary"
+            <td><button *ngIf="isAdmin() && competition.dateStart === null" pButton [routerLink]="['/competition-form', competition.id]" label="Edit competition" severity="primary"
                 class="monospace-text m-1"></button></td>
             <td><button *ngIf="isAdmin()" pButton (click)="deleteCompetition(competition.id)" label="Delete competition" severity="danger"
                 class="monospace-text m-1"></button></td>

@@ -41,13 +41,13 @@
             [sortOrder]="-1">
               <ng-template pTemplate="header">
                 <tr>
-                  <th class="monospace-text">Team ID</th>
+                  <th class="monospace-text">Team</th>
                   <th class="monospace-text">Points</th>
                 </tr>
               </ng-template>
               <ng-template  pTemplate="body" let-registration>
                 <tr *ngIf="registration.status === 'accepted'">
-                  <td><a [routerLink]="['/team-details', registration.team]" class="monospace-text">{{ registration.team }}</a></td>
+                  <td class="text-color-secondary monospace-text">{{ registration.team.name }}</td>
                   <td class="text-color-secondary monospace-text">{{ registration.points }}</td>
                 </tr>
               </ng-template>
@@ -60,9 +60,9 @@
                   <th class="monospace-text">Date</th>
                   <th class="monospace-text">Teams</th>
                   <th class="monospace-text">Round</th>
-                  <th class="monospace-text" *ngIf="user?.id === foundCompetition?.userCreator?.id">Set Winner</th>
-                  <th class="monospace-text" *ngIf="user?.id !== foundCompetition?.userCreator?.id">Winner</th>
-                  <th class="monospace-text" *ngIf="user?.id === foundCompetition?.userCreator?.id"></th>
+                  <th class="monospace-text" *ngIf="user?.id === foundCompetition?.userCreator?.id || isAdmin()">Set Winner</th>
+                  <th class="monospace-text" *ngIf="user?.id !== foundCompetition?.userCreator?.id && !isAdmin()">Winner</th>
+                  <th class="monospace-text" *ngIf="user?.id === foundCompetition?.userCreator?.id || isAdmin()"></th>
                 </tr>
               </ng-template>
               <ng-template pTemplate="body" let-match>
@@ -70,7 +70,7 @@
                   <td>{{ match.matchDate | date:'yyyy-MM-dd' }}</td>
                   <td>{{ match.teams[0]?.name }} vs {{ match.teams[1]?.name }}</td>
                   <td>{{ match.round }}</td>
-                  <td *ngIf="user?.id === foundCompetition?.userCreator?.id">
+                  <td *ngIf="user?.id === foundCompetition?.userCreator?.id || isAdmin()">
                     <p-dropdown appendTo="body"
                       *ngIf="match.draw === null"
                       [options]="[{label: match.teams[0]?.name, value: match.teams[0]?.id}, 
@@ -86,10 +86,10 @@
                    <p *ngIf="match.draw !== null && !match.draw" class="monospace-text">{{match.winner.name}}</p>
                    <p *ngIf="match.draw !== null && match.draw" class="monospace-text">Draw</p>
                   </td>
-                  <td *ngIf="user?.id === foundCompetition?.userCreator?.id">
+                  <td *ngIf="user?.id === foundCompetition?.userCreator?.id || isAdmin()">
                     <button *ngIf="match.draw === null" pButton label="Save" class="monospace-text" (click)="saveWinner(match)" ></button>
                   </td>
-                  <td *ngIf="user?.id !== foundCompetition?.userCreator?.id">
+                  <td *ngIf="user?.id !== foundCompetition?.userCreator?.id && !isAdmin()">
                     <span *ngIf="match.winner?.name !== null">{{ match.winner?.name }}</span>
                     <span *ngIf="match.draw">Draw</span>
                     <span *ngIf="!match.winner?.name && !match.draw">Not set</span>
@@ -104,30 +104,30 @@
         </p-tabView>
       </div>
 
-      <div *ngIf="user?.id !== foundCompetition?.userCreator?.id"
+      <div *ngIf="user?.id !== foundCompetition?.userCreator?.id && !isAdmin()"
         class="col-11 m-3 surface-50 p-3 border-1 border-primary border-round">
         <h2 class="text text-primary text-3xl">Inscriptions</h2>
         <p-table [value]="foundCompetition?.registrations">
           <ng-template pTemplate="header">
             <tr>
-              <th class="monospace-text">Team ID</th>
+              <th class="monospace-text">Team</th>
               <th class="monospace-text">Inscription date</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-registration>
             <tr *ngIf="registration.status === 'accepted'">
-              <td><a [routerLink]="['/team-details', registration.team]" class="monospace-text">{{ registration.team }}</a></td>
+              <td class="text-color-secondary monospace-text">{{ registration.team.name }}</td>
               <td class="text-color-secondary monospace-text">{{ registration.date | date:'yyyy-MM-dd HH:mm' }}</td>
             </tr>
           </ng-template>
         </p-table>
       </div>
-      <div *ngIf="user?.id === foundCompetition?.userCreator?.id" class="col-11 m-3 surface-50 p-3 border-1 border-primary border-round">
+      <div *ngIf="user?.id === foundCompetition?.userCreator?.id || isAdmin()" class="col-11 m-3 surface-50 p-3 border-1 border-primary border-round">
         <h2 class="text text-primary text-3xl">Inscriptions [creator view]</h2>
         <p-table [value]="foundCompetition?.registrations">
           <ng-template pTemplate="header">
             <tr>
-              <th class="monospace-text">Team ID</th>
+              <th class="monospace-text">Team</th>
               <th class="monospace-text">Inscription date</th>
               <th class="monospace-text">Status</th>
               <th></th>
@@ -135,7 +135,7 @@
           </ng-template>
           <ng-template pTemplate="body" let-registration>
             <tr>
-              <td><a [routerLink]="['/team-details', registration.team]" class="monospace-text">{{ registration.team }}</a></td>
+              <td class="text-color-secondary monospace-text">{{ registration.team.name }}</td>
               <td class="text-color-secondary monospace-text">{{ registration.date | date:'yyyy-MM-dd HH:mm' }}</td>
               <td  class="text-color-secondary monospace-text">{{ registration.status }}</td>
               <td>

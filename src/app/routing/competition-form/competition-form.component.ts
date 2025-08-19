@@ -261,7 +261,7 @@ export class CompetitionFormComponent implements OnInit {
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
-            detail: 'Check the fields and try again.',
+            detail: err.error.message || 'Check the fields and try again.',
           });
         }
       }
