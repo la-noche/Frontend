@@ -31,6 +31,9 @@
         <div class="justify-content-center monospace-text mb-2 text-2xl">
           Amount of teams: <span class="text-color-secondary"> {{ acceptedRegistrationsCount }} / {{ foundCompetition?.maxTeams }} </span>
         </div>
+        <div class="justify-content-center monospace-text mb-2 text-3xl font-bold">
+          Winner: <span class="text-green-300"> {{ foundCompetition?.winner?.name }} </span>
+        </div>
       </div>
       <div class="col-8 ml-5 surface-50 p-3 border-1 border-primary border-round">
         <p-tabView class="monospace-text mt-4">
