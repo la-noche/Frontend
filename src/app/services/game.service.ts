@@ -7,7 +7,7 @@ import { gameInterface } from '../interfaces/game.interface.js';
   providedIn: 'root',
 })
 export class GameService {
-  private apiUrl = 'http://localhost:3000/api/game';
+  private apiUrl = 'https://backend-production-0538.up.railway.app/api/game';
 
   constructor(private http: HttpClient) {}
 

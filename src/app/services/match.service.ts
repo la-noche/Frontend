@@ -7,7 +7,7 @@ import { matchInterface } from '../interfaces/match.interface.js';
   providedIn: 'root'
 })
 export class MatchService {
-  private apiUrl = 'http://localhost:3000/api/match';
+  private apiUrl = 'https://backend-production-0538.up.railway.app/api/match';
 
   constructor(private http: HttpClient) {}
 

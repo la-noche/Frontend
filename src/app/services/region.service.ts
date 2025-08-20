@@ -8,7 +8,7 @@ import { RegionInterface } from '../interfaces/region.interface.js';
 })
 
 export class RegionService {
-  private apiUrl = 'http://localhost:3000/api/region';
+  private apiUrl = 'https://backend-production-0538.up.railway.app/api/region';
 
   constructor(private http: HttpClient) {}
 

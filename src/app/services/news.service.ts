@@ -8,7 +8,7 @@ import { NewsInterface } from '../interfaces/news.interface.js';
 })
 
 export class NewsService {
-  private apiUrl = 'http://localhost:3000/api/news';
+  private apiUrl = 'https://backend-production-0538.up.railway.app/api/news';
 
   constructor(private http: HttpClient) {}
 

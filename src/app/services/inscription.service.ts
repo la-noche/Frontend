@@ -7,7 +7,7 @@ import { inscriptionInterface } from '../interfaces/inscription.interface.js';
   providedIn: 'root',
 })
 export class InscriptionService {
-  private apiUrl = 'http://localhost:3000/api/inscription';
+  private apiUrl = 'https://backend-production-0538.up.railway.app/api/inscription';
 
   constructor(private http: HttpClient) {}
 

@@ -7,7 +7,7 @@ import { competitionInterface } from '../interfaces/competition.interface.js';
   providedIn: 'root',
 })
 export class CompetitionService {
-  private apiUrl = 'http://localhost:3000/api/competition';
+  private apiUrl = 'https://backend-production-0538.up.railway.app/api/competition';
 
   constructor(private http: HttpClient) {}
 

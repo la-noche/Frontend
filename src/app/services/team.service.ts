@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class TeamService {
-  private apiUrl = 'http://localhost:3000/api/team';
+  private apiUrl = 'https://backend-production-0538.up.railway.app/api/team';
 
   constructor(private http: HttpClient) {}
 
