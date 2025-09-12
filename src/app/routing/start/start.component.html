@@ -31,7 +31,7 @@
         <div class="border-1 border-primary overflow-hidden h-28rem border-round m-2 p-3">
           <div class="mb-1">
             <div class="relative mx-auto">
-              <img [src]="game?.imageUrl ? 'https://backend-production-0538.up.railway.app' + game?.imageUrl : 'images/no-image.jpg'" alt={{game.name}} class="w-full h-19rem border-round"/>
+              <img [src]="game?.imageUrl ? game.imageUrl : 'images/no-image.jpg'" alt={{game.name}} class="w-full h-19rem border-round"/>
             </div>
           </div>
           <div class="text-3xl mb-3 font-bold monospace-text">{{game.name}}</div>

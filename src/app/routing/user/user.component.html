@@ -1,7 +1,7 @@
 <body class="min-h-screen">
   <div class="surface-50 border-round p-5 flex justify-content-center h-full">
     <div class="w-29rem">
-      <img [src]="user?.iconUrl ? 'https://backend-production-0538.up.railway.app' + user?.iconUrl : 'images/user.png'"  class="border-circle border-2 border-primary w-25rem h-25rem m-5">
+      <img [src]="user?.iconUrl ? user?.iconUrl : 'images/user.png'"  class="border-circle border-2 border-primary w-25rem h-25rem m-5">
       <div class="monospace-text text-xl">
         <p> {{user?.name}} {{user?.lastName}}</p>
         <p-divider></p-divider>
