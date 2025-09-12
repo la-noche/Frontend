@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { gameInterface } from '../../interfaces/game.interface.js';
-import { GameService } from '../../services/game.service.js';
+import { gameInterface } from '../../interfaces/game.interface';
+import { GameService } from '../../services/game.service';
 import { MessageService } from 'primeng/api';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
-import { AuthService } from '../../services/auth.service.js';
+import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
