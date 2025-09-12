@@ -7,7 +7,7 @@
       <p-card header="{{ game.name }}" [style]="{ width: '360px', height: '27rem' }">
         <ng-template pTemplate="header">
           <a [routerLink]="['/game-details', game.id]" class="block">
-          <img alt="Card" [src]="game?.imageUrl ? 'http://localhost:3000' + game?.imageUrl : 'images/no-image.jpg'" class="w-full h-12rem border-round-top">
+          <img alt="Card" [src]="game?.imageUrl ? 'https://backend-production-0538.up.railway.app' + game?.imageUrl : 'images/no-image.jpg'" class="w-full h-12rem border-round-top">
           </a>
         </ng-template>
         <p class="white-space-nowrap overflow-hidden text-overflow-ellipsis">
