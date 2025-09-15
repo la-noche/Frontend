@@ -2,7 +2,7 @@
   <p-menubar [model]="items" *ngIf="isAuthenticated" styleClass="monospace-text menubar">
     <p-sidebar  [(visible)]="sidebarVisible" position="right">
         <div class="flex justify-content-center">
-          <img [src]="user?.iconUrl ? 'http://localhost:3000' + user?.iconUrl : 'images/user.png'"  class="border-circle border-2 border-primary w-7rem h-7rem m-2">
+          <img [src]="user?.iconUrl ? user?.iconUrl : 'images/user.png'"  class="border-circle border-2 border-primary w-7rem h-7rem m-2">
         </div>
         <div class="flex justify-content-center">
           <p class="text-color-secondary">{{user?.userName}} </p>
