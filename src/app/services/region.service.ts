@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RegionInterface } from '../interfaces/region.interface.js';
+import { environment } from '../../environments/environment.js';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class RegionService {
-  private apiUrl = 'https://backend-production-0538.up.railway.app/api/region';
+  private apiUrl = `${environment.apiUrl}/region`;
 
   constructor(private http: HttpClient) {}
 

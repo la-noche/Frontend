@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { inscriptionInterface } from '../interfaces/inscription.interface.js';
+import { environment } from '../../environments/environment.js';
 
 @Injectable({
   providedIn: 'root',
 })
 export class InscriptionService {
-  private apiUrl = 'https://backend-production-0538.up.railway.app/api/inscription';
+  private apiUrl = `${environment.apiUrl}/inscription`;
 
   constructor(private http: HttpClient) {}
 

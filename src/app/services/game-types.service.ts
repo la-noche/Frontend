@@ -2,12 +2,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { gameTypeInterface } from '../interfaces/gameType.interface.js';
+import { environment } from '../../environments/environment.js';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GameTypesService {
-  private apiUrl = 'https://backend-production-0538.up.railway.app/api/gameType';
+  private apiUrl = `${environment.apiUrl}/gameType`;
 
   constructor(private http: HttpClient) {}
 
