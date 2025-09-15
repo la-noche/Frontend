@@ -2,7 +2,7 @@ import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { competitionInterface } from '../interfaces/competition.interface.js';
-import { environment } from '../environments/environment.js';
+import { environment } from '../../environments/environment.js';
 
 @Injectable({
   providedIn: 'root',
