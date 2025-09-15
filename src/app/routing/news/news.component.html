@@ -7,7 +7,7 @@
             <ng-template pTemplate="item" let-news>
                 <div class="news-item">
                     <div class="image-container">
-                        <img [src]="news?.imageUrl ? 'http://localhost:3000' + news?.imageUrl : 'images/no-image.jpg'" [alt]="news.name"/>
+                        <img [src]="news?.imageUrl ? news.imageUrl : 'images/no-image.jpg'" [alt]="news.name"/>
                         <div class="overlay">
                             <h2 class="monospace-text">{{ news.title }}</h2>
                             <h3 class="monospace-text text-color-secondary">{{ news.date | date: 'yyyy-MM-dd' }}</h3>
@@ -31,7 +31,7 @@
                 </section>
             </div>
             <div class="col-12 md:col-6 overflow-hidden">
-                <img [src]="news?.imageUrl ? 'http://localhost:3000' + news?.imageUrl : 'images/no-image.jpg'" alt="Image" class="md:ml-auto block md:h-25rem"
+                <img [src]="news?.imageUrl ? 'https://backend-production-0538.up.railway.app' + news?.imageUrl : 'images/no-image.jpg'" alt="Image" class="md:ml-auto block md:h-25rem"
                     style="clip-path: polygon(8% 0, 100% 0%, 100% 100%, 0 100%)">
             </div>
         </div>
