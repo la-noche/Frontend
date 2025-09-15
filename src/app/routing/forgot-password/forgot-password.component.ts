@@ -29,7 +29,7 @@ export class ForgotPasswordComponent {
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
-        detail: 'Por favor, introduzca su dirección de correo electrónico.',
+        detail: 'Please enter your email address.',
       });
       return;
     }
@@ -39,8 +39,7 @@ export class ForgotPasswordComponent {
         this.messageService.add({
           severity: 'success',
           summary: 'Email Sent',
-          detail:
-            'Se ha enviado un enlace de restablecimiento de contraseña a su correo electrónico.',
+          detail: 'A password reset link has been sent to your email address.',
         });
         this.router.navigateByUrl('/login');
       },

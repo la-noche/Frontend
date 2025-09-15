@@ -2,12 +2,13 @@ import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { competitionInterface } from '../interfaces/competition.interface.js';
+import { environment } from '../environments/environment.js';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CompetitionService {
-  private apiUrl = 'https://backend-production-0538.up.railway.app/api/competition';
+  private apiUrl = `${environment.apiUrl}/competition`;
 
   constructor(private http: HttpClient) {}
 
